@@ -1,0 +1,20 @@
+body {
+  margin: 80px 0 0 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  background-color: rgb(95, 95, 95);
+}
+
+hr {
+  color: white;
+  width: 90%;
+  font-weight: 600;
+  box-shadow: 3px 3px 5px black;
+}
+
+@media (max-width:600px) {
+  body {
+    margin: 120px 0 0 0;
+  }
+}
+/*# sourceMappingURL=style.css.map */

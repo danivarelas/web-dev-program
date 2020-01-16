@@ -1,0 +1,100 @@
+@mixin font-size-regular {
+  font-size: 1rem;
+}
+@mixin font-size-large {
+  font-size: 1.5rem;
+}
+@mixin font-size-x-large {
+  font-size: 2rem;
+}
+
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-bold: 600;
+
+$font-family-text: 'Roboto', sans-serif;
+
+body {
+  margin: 80px 0 0 0;
+  font-family: $font-family-text;
+  font-weight: $font-weight-light;
+}
+
+.header {
+  display: flex;
+  height: 80px;
+  padding: 20px;
+  align-items: center;
+  box-shadow: 0 0 5px black;
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  box-sizing: border-box;
+  top: 0;
+
+  &__links {
+    flex-grow: 2;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__link {
+    display: block;
+  }
+
+  &__logo {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo-brand {
+    display: inline-block;
+  }
+
+  &__logo-icon {
+    
+  }
+
+}
+
+.column {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background-color: #F4F5F7;
+}
+
+.swimlanes {
+  display: flex;
+  flex-direction: column;
+}
+
+.swimlane { 
+  &__header {
+    @include font-size-large();
+    font-weight: $font-weight-bold;
+    padding: 1rem 0.5rem 0.5rem 0.5rem;
+  }
+
+  &__columns {
+    display: flex;
+  }
+}
+
+.ticket {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background-color: white;
+
+  &__title {
+    @include font-size-large();
+    border-bottom: solid thin black;
+    margin-bottom: 1rem;
+  }
+
+  &__assignee {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}

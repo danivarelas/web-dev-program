@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="bio.css">
+    <link rel="stylesheet" href="form.css">
+</head>
+
+<body>
+    <nav class="dark-nav">
+        <a class="active" href="form.html">Register</a>
+        <a href="bio.html">Home</a>
+    </nav>
+    <div class="content">
+        <h1>Create your account</h1>
+        <form>
+            <table>
+                <tr>
+                    <td class="form-label"><label for="name">Name</label></td>
+                    <td class="form-input"><input type="text" name="name" placeholder="John" required></td>
+                </tr>
+                <tr>
+                    <td class="form-label"><label for="last-name">Last Name</label></td>
+                    <td class="form-input"><input type="text" name="last-name" placeholder=Doe required></td class="form-input">
+                </tr>
+                <tr>
+                    <td class="form-label"><label for="email">Email</label></td>
+                    <td class="form-input"><input type="email" name="email" placeholder="example@mail.com" required></td class="form-input">
+                </tr>
+                <tr>
+                    <td class="form-label"><label for="password">Password</label></td>
+                    <td class="form-input"><input type="password" name="password" required></td class="form-input">
+                </tr>
+                <tr>
+                    <td class="form-label"><label for="gender">Gender</label></td>
+                    <td class="medium">
+                        <input type="radio" name="gender" value="male" id="male"><label for="male"><span></span>Male</label>
+                        <input type="radio" name="gender" value="female" id="female"><label for="female"><span></span>Female</label>
+                        <input type="radio" name="gender" value="other" id="other"><label for="other"><span></span>Other</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form-label"><label>Interests</label></td>
+                    <td class="medium">
+                        <input type="checkbox" name="sports" id="sports"><label for="sports"><span></span>Sports</label><br>
+                        <input type="checkbox" name="movies" id="movies"><label for="movies"><span></span>Movies</label><br>
+                        <input type="checkbox" name="programming" id="programming"><label for="programming"><span></span>Programming</label><br>
+                        <input type="checkbox" name="videogames" id="videogames"><label for="videogames"><span></span>Videogames</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form-label"><label for="region">Region</label></td>
+                    <td>
+                        <select class="medium" name="region">
+                            <option value="africa">Africa</option>
+                            <option value="america">America</option>
+                            <option value="asia">Asia</option>
+                            <option value="europe">Europe</option>
+                            <option value="oceania">Oceania</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </table>
+            <div class="login-options">
+                <button type="submit">Register</button>
+                <p class="small">Already have an account? <a href="login.html">Login</a>.</p>
+            </div>
+            
+        </form>
+    </div>
+
+    <script src="" async defer></script>
+</body>
+
+</html>

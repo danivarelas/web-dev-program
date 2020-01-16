@@ -1,0 +1,140 @@
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: auto auto;
+}
+
+.dark-nav {
+    background-color: #333;
+    margin: 0;
+    height: 50px;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.dark-nav a {
+    float: right;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.dark-nav a:hover {
+    background-color: #ddd;
+    color: black;
+    text-decoration: none;
+}
+  
+.dark-nav a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.content{
+    margin: auto 5%;
+}
+
+.jumbotron {
+    top: 50px;
+    height: 300px;
+    background-color: #ddd;
+    padding: 50px;
+}
+
+.jumbotron-text {
+    margin-top: 100px;
+}
+
+.jumbotron-text h1 {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.jumbotron-text p {
+    font-size: 1.5em;
+}
+
+.jumbotron a {
+    margin: 5px;
+    color: red;
+}
+
+.jumbotron a:hover {
+    margin: 5px;
+    color: darkred;
+}
+
+bio-container {
+    margin-top: 50px;
+}
+
+.container {
+    display: flex;
+}
+
+h3 {
+    font-size: 2.5em;
+    text-align: center;
+}
+
+.bio {
+    width: 75%;
+    display: block;
+    text-align: justify;
+    margin-right: 50px;
+}
+
+.bio-titles {
+    display: block;
+    width: 25%;
+    text-align: justify;
+    padding: 10px;
+    background-color: #ddd;
+}
+
+.bio-titles h3 {
+    font-size: 1.8em;
+    text-align: center;
+}
+
+.gallery-container {
+    margin: 50px auto;
+}
+
+.gallery {
+    display: flex;
+    height: auto;
+}
+
+.gallery img{
+    margin: 20px;
+    height: auto;
+    width: 33%;
+    transition: 0.5s;
+}
+
+.gallery img:hover {
+
+    transform: scale(1.2);
+    border-style: solid;
+    border-width: 1px;
+}
+
+.container a:hover {
+    font-size: 1.5em;
+}
+
+.additional-info{
+    margin: 20px;
+}
+
+a:hover {
+    color: darkred;
+}

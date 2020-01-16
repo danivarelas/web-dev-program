@@ -1,0 +1,23 @@
+.ticket {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: white;
+  }
+  
+  .ticket__title {
+    font-size: 1.5rem;
+    border-bottom: solid thin black;
+    margin-bottom: 1rem;
+  }
+  
+  .ticket__assignee {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }

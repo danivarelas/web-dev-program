@@ -12,6 +12,11 @@ public class Config {
     public Book book1() {
         return new Book();
     }
+
+    @Bean
+    public Magazine mag1() {
+        return new Magazine();
+    }
  
     @Bean
     public Bookstore store() {

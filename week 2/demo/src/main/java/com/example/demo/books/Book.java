@@ -1,6 +1,4 @@
-package com.example.demo;
-
-import org.springframework.beans.factory.annotation.Required;
+package com.example.demo.books;
 
 public class Book {
 
@@ -28,11 +26,8 @@ public class Book {
         return isbn;
     }
 
-    @Required
     public void setIsbn(int isbn) {
         this.isbn = isbn;
     }
 
-    
-    
 }

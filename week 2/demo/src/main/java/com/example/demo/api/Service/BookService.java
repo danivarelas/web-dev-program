@@ -1,6 +1,43 @@
 package com.example.demo.api.Service;
 
-public class BookService {
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
-    
+import com.example.demo.api.DAO.BookDao;
+import com.example.demo.api.Model.Book;
+
+public class BookService implements IBookService {
+
+    private BookDao bookDao;
+
+    public BookService(BookDao bookDao) {
+        this.bookDao = bookDao;
+    }
+
+    @Override
+    public int addBook(Book book) {
+        return bookDao.insertBook(book);
+    }
+
+    @Override
+    public List<Book> selectAllBooks() {
+        return bookDao.selectAllBooks();
+    }
+
+    @Override
+    public Optional<Book> selectBookById(UUID id) {
+        return bookDao.selectBookById(id);
+    }
+
+    @Override
+    public int deleteBook(UUID id) {
+        return bookDao.deleteBook(id);
+    }
+
+    @Override
+    public int updateBook(UUID id, Book book) {
+        return bookDao.updateBook(id, book);
+    }
+
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface IBookService {
 
-    public int addBook(Book author);
+    public int addBook(Book book);
 
     public List<Book> selectAllBooks();
 
@@ -19,6 +19,6 @@ public interface IBookService {
 
     public int deleteBook(UUID id);
 
-    public int updateBook(UUID id, Book author);
+    public int updateBook(UUID id, Book book);
 
 }

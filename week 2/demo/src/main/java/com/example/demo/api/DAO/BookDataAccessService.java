@@ -27,7 +27,6 @@ public class BookDataAccessService implements BookDao {
 
     @Override
     public Optional<Book> selectBookById(UUID id) {
-
         return booksRepository.stream().filter(book -> book.getId().equals(id)).findFirst();
     }
 

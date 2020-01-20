@@ -2,9 +2,9 @@ package com.example.demo.api.Controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import com.example.demo.api.Exception.ObjectNotFoundException;
 import com.example.demo.api.Model.User;
 import com.example.demo.api.Service.UserService;
 
@@ -25,10 +25,12 @@ import lombok.NonNull;
 public class UserController {
 
     private final UserService userService;
+    // private HttpServletRequest request;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, HttpServletRequest request) {
         this.userService = userService;
+        // this.request = request;
     }
 
     @PostMapping
@@ -42,17 +44,13 @@ public class UserController {
     }
 
     @GetMapping(path = "{username}")
-    public User getUserById(@PathVariable("username") String username) {
+    public User getUserByUsername(@PathVariable("username") String username) {
         return userService.selectUserById(username).orElse(null);
     }
 
     @DeleteMapping(path = "{username}")
     public void deleteUser(@PathVariable("username") String username) {
-        try {
-            userService.deleteUser(username);
-        } catch (ObjectNotFoundException e) {
-
-        }
+        userService.deleteUser(username);
     }
 
     @PutMapping(path = "{username}")

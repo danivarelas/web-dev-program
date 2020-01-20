@@ -15,6 +15,9 @@ public class UserDataAccessService implements UserDao {
 
     public UserDataAccessService() {
         usersRepository = new ArrayList<>();
+        insertUser("daniel", new User("daniel", "1234"));
+        insertUser("josue", new User("josue", "qwerty"));
+        insertUser("admin", new User("admin", "admin"));
     }
 
     @Override

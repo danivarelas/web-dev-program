@@ -34,7 +34,7 @@ public class BookDataAccessService implements BookDao {
     @Override
     public int deleteBook(UUID id) {
         Optional<Book> book = selectBookById(id);
-        if (book.isEmpty()) {
+        if (book.equals(null)) {
             return 0;
         }
         booksRepository.remove(book.get());

@@ -34,7 +34,7 @@ public class AuthorDataAccessService implements AuthorDao {
     @Override
     public int deleteAuthor(UUID id) {
         Optional<Author> author = selectAuthorById(id);
-        if (author.isEmpty()) {
+        if (author.equals(null)) {
             return 0;
         }
         authorsRepository.remove(author.get());

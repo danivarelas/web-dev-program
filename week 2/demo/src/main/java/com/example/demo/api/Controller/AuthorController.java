@@ -61,6 +61,8 @@ public class AuthorController {
         return null;
     }
 
+    // @RequestParam
+
     @GetMapping(path = "{id}")
     public Author getAuthorById(@PathVariable("id") UUID id) {
         try {

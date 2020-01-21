@@ -11,9 +11,13 @@ public class Book {
         super();
     }
 
-    public Book(UUID id, String name) {
-        this.id = id;
+    public Book(String name) {
         this.name = name;
+    }
+
+    public Book(UUID id, String name) {
+        this(name);
+        this.id = id;
     }
 
     public UUID getId() {

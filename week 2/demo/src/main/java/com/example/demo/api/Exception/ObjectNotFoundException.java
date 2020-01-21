@@ -14,10 +14,6 @@ public class ObjectNotFoundException extends RuntimeException {
         this.details = details;
     }
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-
     public String getMessage() {
         return message;
     }

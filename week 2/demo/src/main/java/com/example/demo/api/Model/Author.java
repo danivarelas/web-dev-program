@@ -18,14 +18,18 @@ public class Author {
         super();
     }
 
-    public Author(UUID id, String name) {
-        this.id = id;
+    public Author(String name) {
         this.name = name;
     }
 
-    public Author(UUID id, String name, LocalDate birthdDate, List<Book> books) {
+    public Author(UUID id, String name) {
+        this(name);
+        this.id = id;
+    }
+
+    public Author(UUID id, String name, LocalDate birthDate, List<Book> books) {
         this(id, name);
-        this.birthDate = birthdDate;
+        this.birthDate = birthDate;
         this.books = books;
     }
 

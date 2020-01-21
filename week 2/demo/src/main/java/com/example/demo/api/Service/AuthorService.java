@@ -25,31 +25,39 @@ public class AuthorService implements IAuthorService {
     }
 
     public int addAuthor(Author author) {
-        List<Book> books = author.getBooks();
-        if (books != null && !books.isEmpty()) {
-            books.forEach((book) -> {
-                Book dbBook = bookService.selectBookByName(book.getName()).orElse(null);
-                if (dbBook != null) {
-                    books.set(books.indexOf(book), dbBook);
-                } else {
-                    bookService.addBook(book);
-                }
-            });
+        if (author == null) {
+            return 0;
+        } else {
+            List<Book> books = author.getBooks();
+            if (books != null && !books.isEmpty()) {
+                books.forEach((book) -> {
+                    Book dbBook = bookService.selectBookByName(book.getName()).orElse(null);
+                    if (dbBook != null) {
+                        books.set(books.indexOf(book), dbBook);
+                    } else {
+                        bookService.addBook(book);
+                    }
+                });
+            }
+            return authorDao.insertAuthor(author);
         }
-        return authorDao.insertAuthor(author);
     }
 
     public List<Author> selectAllAuthors() {
         List<Author> authors = authorDao.selectAllAuthors();
-        authors.forEach((author) -> {
-            author.setBooks(getExistingBooks(author));
-        });
+        if (authors != null && !authors.isEmpty()) {
+            authors.forEach((author) -> {
+                author.setBooks(getExistingBooks(author));
+            });
+        }
         return authors;
     }
 
     public Optional<Author> selectAuthorById(UUID id) {
         Optional<Author> author = authorDao.selectAuthorById(id);
-        author.get().setBooks(getExistingBooks(author.get()));
+        if (author.isPresent()) {
+            author.get().setBooks(getExistingBooks(author.get()));
+        }
         return author;
     }
 
@@ -71,6 +79,9 @@ public class AuthorService implements IAuthorService {
     }
 
     public int updateAuthor(UUID id, Author author) {
-        return authorDao.updateAuthor(id, author);
+        if (author != null) {
+            return authorDao.updateAuthor(id, author);
+        }
+        return 0;
     }
 }

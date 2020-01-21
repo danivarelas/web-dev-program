@@ -17,6 +17,8 @@ public interface IBookService {
 
     public Optional<Book> selectBookById(UUID id);
 
+    public Optional<Book> selectBookByName(String name);
+
     public int deleteBook(UUID id);
 
     public int updateBook(UUID id, Book book);

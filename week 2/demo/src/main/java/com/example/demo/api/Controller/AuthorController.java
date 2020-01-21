@@ -34,10 +34,6 @@ public class AuthorController {
 
     private final static Logger LOGGER = Logger.getLogger(AuthorController.class.getName());
 
-    public void controlar() {
-        LOGGER.log(Level.INFO, "Proceso exitoso");
-    }
-
     @Autowired
     public AuthorController(AuthorService authorService, HttpServletRequest request) {
         this.authorService = authorService;

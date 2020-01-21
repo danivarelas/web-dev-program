@@ -6,7 +6,9 @@ import java.util.UUID;
 
 import com.example.demo.api.DAO.BookDao;
 import com.example.demo.api.Model.Book;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BookService implements IBookService {
 
     private BookDao bookDao;
@@ -28,6 +30,11 @@ public class BookService implements IBookService {
     @Override
     public Optional<Book> selectBookById(UUID id) {
         return bookDao.selectBookById(id);
+    }
+
+    @Override
+    public Optional<Book> selectBookByName(String name) {
+        return bookDao.selectBookByName(name);
     }
 
     @Override

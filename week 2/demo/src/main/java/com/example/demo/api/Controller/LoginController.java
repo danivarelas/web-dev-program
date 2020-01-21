@@ -26,7 +26,7 @@ public class LoginController {
     @PostMapping
     public ResponseEntity<String> login(@RequestBody User user) {
         User dbUser = userController.getUserByUsername(user.getUsername());
-        if (!dbUser.equals(null)) {
+        if (dbUser != null) {
             if (user.getPassword().equals(dbUser.getPassword())) {
                 UUID id = UUID.randomUUID();
                 DemoApplication.loggedUser = user.getUsername();

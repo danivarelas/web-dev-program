@@ -1,5 +1,6 @@
 package com.example.demo.api.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -7,6 +8,7 @@ import java.util.UUID;
 import com.example.demo.api.DAO.AuthorDao;
 import com.example.demo.api.Model.Author;
 import com.example.demo.api.Model.Book;
+import com.example.demo.api.Service.BookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +17,8 @@ import org.springframework.stereotype.Service;
 public class AuthorService implements IAuthorService {
 
     private final AuthorDao authorDao;
-    private BookService bookService;
+    private final BookService bookService;
 
-    @Autowired
     public AuthorService(AuthorDao authorDao, BookService bookService) {
         this.authorDao = authorDao;
         this.bookService = bookService;
@@ -25,11 +26,13 @@ public class AuthorService implements IAuthorService {
 
     public int addAuthor(Author author) {
         List<Book> books = author.getBooks();
-        if (books.equals(null) || books.isEmpty()) {
+        if (books != null && !books.isEmpty()) {
             books.forEach((book) -> {
-                Book dbBook = bookService.selectBookById(book.getId()).orElse(null);
+                Book dbBook = bookService.selectBookByName(book.getName()).orElse(null);
                 if (dbBook != null) {
-
+                    books.set(books.indexOf(book), dbBook);
+                } else {
+                    bookService.addBook(book);
                 }
             });
         }
@@ -37,11 +40,30 @@ public class AuthorService implements IAuthorService {
     }
 
     public List<Author> selectAllAuthors() {
-        return authorDao.selectAllAuthors();
+        List<Author> authors = authorDao.selectAllAuthors();
+        authors.forEach((author) -> {
+            author.setBooks(getExistingBooks(author));
+        });
+        return authors;
     }
 
     public Optional<Author> selectAuthorById(UUID id) {
-        return authorDao.selectAuthorById(id);
+        Optional<Author> author = authorDao.selectAuthorById(id);
+        author.get().setBooks(getExistingBooks(author.get()));
+        return author;
+    }
+
+    public List<Book> getExistingBooks(Author author) {
+        List<Book> books = author.getBooks();
+        if (books != null && !books.isEmpty()) {
+            books.forEach((book) -> {
+                Book dbBook = bookService.selectBookByName(book.getName()).orElse(null);
+                if (dbBook != null) {
+                    books.set(books.indexOf(book), dbBook);
+                }
+            });
+        }
+        return books;
     }
 
     public int deleteAuthor(UUID id) {

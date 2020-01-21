@@ -19,6 +19,8 @@ public interface BookDao {
 
     Optional<Book> selectBookById(UUID id);
 
+    Optional<Book> selectBookByName(String name);
+
     int deleteBook(UUID id);
 
     int updateBook(UUID id, Book book);

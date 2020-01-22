@@ -1,0 +1,22 @@
+<svg width="300" height="400" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>Layer 1</title>
+  <line fill="none" stroke="#000" stroke-width="5" x1="11.5" y1="366.4375" x2="126.5" y2="365.4375" id="svg_1" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line fill="none" stroke="#000" stroke-width="5" stroke-opacity="null" fill-opacity="null" x1="65.750334" y1="365.998548" x2="66.75033" y2="47.499812" id="svg_4" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line fill="none" stroke="#000" stroke-width="5" stroke-opacity="null" fill-opacity="null" x1="66.75033" y1="48.999806" x2="221.749715" y2="48.999806" id="svg_7" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line fill="none" stroke="#000" stroke-width="5" stroke-opacity="null" fill-opacity="null" x1="220.749719" y1="48.499808" x2="220.749719" y2="111.499558" id="svg_8" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <ellipse fill="none" stroke="#000" stroke-width="4" stroke-opacity="null" fill-opacity="null" cx="220.749719" cy="148.249412" id="svg_9" rx="38.499847" ry="37.249852"/>
+  <line fill="none" stroke-width="5" stroke-opacity="null" fill-opacity="null" x1="221.249717" y1="185.999263" x2="221.249717" y2="288.998854" id="svg_10" stroke-linejoin="null" stroke-linecap="null" stroke="#000"/>
+  <line stroke="#000" fill="none" stroke-width="5" stroke-opacity="null" fill-opacity="null" x1="220.749721" y1="205.99924" x2="179.749942" y2="245.499161" id="svg_11" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke="#000" fill="none" stroke-width="5" stroke-opacity="null" fill-opacity="null" x1="219.749714" y1="206.499248" x2="259.749509" y2="244.999155" id="svg_12" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke="#000" fill="none" stroke-width="5" stroke-opacity="null" fill-opacity="null" x1="220.249714" y1="284.998858" x2="192.749905" y2="341.49869" id="svg_14" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke="#000" fill="none" stroke-width="5" stroke-opacity="null" fill-opacity="null" x1="221.749714" y1="286.498862" x2="255.24955" y2="341.498663" id="svg_15" stroke-linejoin="null" stroke-linecap="null"/>
+  <line fill="none" stroke-width="3" stroke-opacity="null" fill-opacity="null" x1="200.71059" y1="134.068101" x2="213.710538" y2="146.068054" id="svg_19" stroke-linejoin="null" stroke-linecap="null" stroke="#000"/>
+  <line fill="none" stroke="#000" stroke-width="3" stroke-opacity="null" fill-opacity="null" x1="212.426227" y1="134.960256" x2="200.926273" y2="145.960213" id="svg_20" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke="#000" fill="none" stroke-width="3" stroke-opacity="null" fill-opacity="null" x1="225.073227" y1="134.175942" x2="238.073176" y2="147.175891" id="svg_21" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line fill="none" stroke="#000" stroke-width="3" stroke-opacity="null" fill-opacity="null" x1="237.965335" y1="134.783781" x2="226.465381" y2="146.283736" id="svg_22" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_3" y2="163.4375" x2="228.5" y1="163.4375" x1="209.5" fill-opacity="null" stroke-opacity="null" stroke-width="5" fill="none"/>
+ </g>
+</svg>

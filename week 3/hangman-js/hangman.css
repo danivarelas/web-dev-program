@@ -1,12 +1,29 @@
+nav {
+    height: 80px;
+    display: flex;
+    padding: 10px;
+    widows: 100%;
+    justify-content: space-around;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+}
+
+nav img {
+    display: block;
+    height: 50%;
+    color: white;
+}
+
 .container {
     box-sizing: border-box;
     margin: 0 20%;
+    background: url("images/fondo.jpeg");
 }
 
 .half-container {
     box-sizing: border-box;
     width: 50%;
-    padding: 20px;
+    padding: 10%;
 }
 
 .flex {
@@ -15,12 +32,13 @@
 
 #game-state {
     display: block;
-    width: 50%;
+    width: 60%;
     margin: 10px;
+    cursor: pointer;
 }
 
 .large-bold-text {
-    font-size: 20px;
+    font-size: 2em;
     font-weight: bold;
     margin: 1px;
     text-transform: uppercase;

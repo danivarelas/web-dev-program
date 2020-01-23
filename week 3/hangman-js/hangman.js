@@ -11,6 +11,7 @@ function crateNewGame() {
     hiddenWord.innerHTML = "";
     alphabetDiv.innerHTML = "";
     state.src = 'images/0.svg';
+    state.style.cursor = "pointer";
     state.addEventListener('click', startGame);
 }
 
@@ -18,6 +19,7 @@ crateNewGame();
 
 function startGame() {
     state.removeEventListener('click', startGame);
+    state.style.cursor = "default";
     state.src = 'images/1.svg';
     createLetterButtons();
     gameWord = chooseWord();
@@ -68,15 +70,11 @@ function failAttempt(callback) {
 }
 
 function win () {
-    setTimeout(() => {
         alert("Congratulations! You won the game!");
-    }, 100);
 }
 
 function lose () {
-    setTimeout(() => {
         alert("Too bad! You lost the game!");
-    }, 100);
 }
 
 function createLetterButtons() {

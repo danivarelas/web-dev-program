@@ -16,14 +16,14 @@ nav img {
 
 .container {
     box-sizing: border-box;
-    margin: 0 20%;
+    margin: 5% 10%;
     background: url("images/fondo.jpeg");
 }
 
 .half-container {
     box-sizing: border-box;
     width: 50%;
-    padding: 10%;
+    padding: 5%;
 }
 
 .flex {
@@ -53,9 +53,39 @@ nav img {
 }
 
 .hidden-word {
-    display: inline;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 2em 0;
+    align-self: flex-start;
 }
 
 .alphabet {
     align-self: flex-end;
+}
+
+.finish-text {
+    font-size: 2em;
+    font-weight: bold;
+    padding-bottom: 2em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.btn-view {
+    background-color: red;
+    color: white;
+    font-size: 1em;
+    border: 2px solid black;
+}
+
+.btn-play {
+    background-color: green;
+    color: white;
+    font-size: 1em;
+    border: 2px solid black;
+}
+
+.buttons-container {
+    text-align: center;
 }

@@ -18,13 +18,17 @@
         <div class="flex">
             <div class="half-container">
                 <img id="game-state" src="images/0.svg" alt="">
-                <div class="hidden-word"></div>
+                <div class="buttons-container">
+                    <button class="btn-view" id="btnPokemon" onclick="openWin()">View Pokemon</button>
+                    <button class="btn-play" id="btnPlay">Play Again</button>
+                </div>
             </div>
-            <div class="half-container flex">
+            <div class="half-container">
+                <div class="hidden-word"></div>
                 <div class="alphabet"></div>
             </div>
         </div>
-        
+        <p class="finish-text"></p>
     </div>
     <script src="hangman.js"></script>
 </body>

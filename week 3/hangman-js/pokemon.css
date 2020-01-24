@@ -1,0 +1,38 @@
+
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: red;
+    height: 80px;
+}
+
+.nav h1 {
+    color: white;
+    margin-left: 1em;
+    font-size: 2em;
+}
+
+main {
+    margin-top: 80px;
+    padding: 1em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div {
+    border: 2px solid black;
+    border-radius: 20%;
+    margin: 1em;
+    padding: 2em;
+    width: 200px;
+}
+
+ul {
+    list-style-type:none;
+}
+
+div h2, div.img {
+    text-align: center;
+}

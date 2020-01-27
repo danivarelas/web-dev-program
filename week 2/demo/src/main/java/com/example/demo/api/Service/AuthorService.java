@@ -28,17 +28,7 @@ public class AuthorService implements IAuthorService {
         if (author == null) {
             return 0;
         } else {
-            List<Book> books = author.getBooks();
-            if (books != null && !books.isEmpty()) {
-                books.forEach((book) -> {
-                    Book dbBook = bookService.selectBookByName(book.getName()).orElse(null);
-                    if (dbBook != null) {
-                        books.set(books.indexOf(book), dbBook);
-                    } else {
-                        bookService.addBook(book);
-                    }
-                });
-            }
+            author.setBooks(saveNewBooks(author));
             return authorDao.insertAuthor(author);
         }
     }
@@ -74,14 +64,31 @@ public class AuthorService implements IAuthorService {
         return books;
     }
 
+    public List<Book> saveNewBooks(Author author) {
+        List<Book> books = author.getBooks();
+        if (books != null && !books.isEmpty()) {
+            books.forEach((book) -> {
+                Book dbBook = bookService.selectBookByName(book.getName()).orElse(null);
+                if (dbBook != null) {
+                    books.set(books.indexOf(book), dbBook);
+                } else {
+                    bookService.addBook(book);
+                }
+            });
+        }
+        return books;
+    }
+
     public int deleteAuthor(UUID id) {
         return authorDao.deleteAuthor(id);
     }
 
     public int updateAuthor(UUID id, Author author) {
-        if (author != null) {
+        if (author == null) {
+            return 0;
+        } else {
+            author.setBooks(saveNewBooks(author));
             return authorDao.updateAuthor(id, author);
         }
-        return 0;
     }
 }

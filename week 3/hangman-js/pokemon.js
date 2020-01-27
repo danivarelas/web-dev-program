@@ -15,7 +15,7 @@ function getPokemonInfo(id) {
     pokemon.then(response => {
         return response.json()
     }).then(result => {
-        name.innerHTML = result.name;
+        name.innerHTML = result.name
         name.style.textTransform = "capitalize";
         number.innerHTML = result.id;
         height.innerHTML = result.height;

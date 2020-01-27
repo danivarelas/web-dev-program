@@ -41,53 +41,31 @@ public class BookController {
 
     @PostMapping
     public void addBook(@RequestBody Book book) {
-        try {
-            JWTGenerator.validateToken(request.getHeader("authorization"));
-            bookService.addBook(book);
-        } catch (SignatureException e) {
-            LOGGER.log(Level.INFO, "ERROR: " + e.getLocalizedMessage());
-        }
+        JWTGenerator.validateToken(request.getHeader("authorization"));
+        bookService.addBook(book);
     }
 
     @GetMapping
     public List<Book> getAllBooks() {
-        try {
-            JWTGenerator.validateToken(request.getHeader("authorization"));
-            return bookService.selectAllBooks();
-        } catch (SignatureException e) {
-            LOGGER.log(Level.INFO, "ERROR: " + e.getLocalizedMessage());
-        }
-        return null;
+        JWTGenerator.validateToken(request.getHeader("authorization"));
+        return bookService.selectAllBooks();
     }
 
     @GetMapping(path = "{id}")
     public Book getBookById(@PathVariable("id") UUID id) {
-        try {
-            JWTGenerator.validateToken(request.getHeader("authorization"));
-            return bookService.selectBookById(id).orElse(null);
-        } catch (SignatureException e) {
-            LOGGER.log(Level.INFO, "ERROR: " + e.getLocalizedMessage());
-        }
-        return null;
+        JWTGenerator.validateToken(request.getHeader("authorization"));
+        return bookService.selectBookById(id).orElse(null);
     }
 
     @DeleteMapping(path = "{id}")
     public void deleteBook(@PathVariable("id") UUID id) {
-        try {
-            JWTGenerator.validateToken(request.getHeader("authorization"));
-            bookService.deleteBook(id);
-        } catch (SignatureException e) {
-            LOGGER.log(Level.INFO, "ERROR: " + e.getLocalizedMessage());
-        }
+        JWTGenerator.validateToken(request.getHeader("authorization"));
+        bookService.deleteBook(id);
     }
 
     @PutMapping(path = "{id}")
     public void updateBook(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Book book) {
-        try {
-            JWTGenerator.validateToken(request.getHeader("authorization"));
-            bookService.updateBook(id, book);
-        } catch (SignatureException e) {
-            LOGGER.log(Level.INFO, "ERROR: " + e.getLocalizedMessage());
-        }
+        JWTGenerator.validateToken(request.getHeader("authorization"));
+        bookService.updateBook(id, book);
     }
 }

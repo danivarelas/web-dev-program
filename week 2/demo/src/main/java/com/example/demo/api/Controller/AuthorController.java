@@ -42,56 +42,34 @@ public class AuthorController {
 
     @PostMapping
     public void addAuthor(@RequestBody Author author) {
-        try {
-            JWTGenerator.validateToken(request.getHeader("authorization"));
-            authorService.addAuthor(author);
-        } catch (SignatureException e) {
-            LOGGER.log(Level.INFO, "Error: " + e.getLocalizedMessage());
-        }
+        JWTGenerator.validateToken(request.getHeader("authorization"));
+        authorService.addAuthor(author);
     }
 
     @GetMapping
     public List<Author> getAllAuthors() {
-        try {
-            JWTGenerator.validateToken(request.getHeader("authorization"));
-            return authorService.selectAllAuthors();
-        } catch (SignatureException e) {
-            LOGGER.log(Level.INFO, "Error: " + e.getLocalizedMessage());
-        }
-        return null;
+        JWTGenerator.validateToken(request.getHeader("authorization"));
+        return authorService.selectAllAuthors();
     }
 
     // @RequestParam
 
     @GetMapping(path = "{id}")
     public Author getAuthorById(@PathVariable("id") UUID id) {
-        try {
-            JWTGenerator.validateToken(request.getHeader("authorization"));
-            return authorService.selectAuthorById(id).orElse(null);
-        } catch (SignatureException e) {
-            LOGGER.log(Level.INFO, "Error: " + e.getLocalizedMessage());
-        }
-        return null;
+        JWTGenerator.validateToken(request.getHeader("authorization"));
+        return authorService.selectAuthorById(id).orElse(null);
     }
 
     @DeleteMapping(path = "{id}")
     public void deleteAuthor(@PathVariable("id") UUID id) {
-        try {
-            JWTGenerator.validateToken(request.getHeader("authorization"));
-            authorService.deleteAuthor(id);
-        } catch (ObjectNotFoundException e) {
-            LOGGER.log(Level.INFO, "Error: " + e.getLocalizedMessage());
-        }
+        JWTGenerator.validateToken(request.getHeader("authorization"));
+        authorService.deleteAuthor(id);
     }
 
     @PutMapping(path = "{id}")
     public void updateAuthor(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Author author) {
-        try {
-            JWTGenerator.validateToken(request.getHeader("authorization"));
-            authorService.updateAuthor(id, author);
-        } catch (ObjectNotFoundException e) {
-            LOGGER.log(Level.INFO, "Error: " + e.getLocalizedMessage());
-        }
+        JWTGenerator.validateToken(request.getHeader("authorization"));
+        authorService.updateAuthor(id, author);
     }
     
 }

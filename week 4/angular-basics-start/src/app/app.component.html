@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark mb-4">
+  <div class="navbar-brand"><img src="/assets/images/bs-logo.png" alt=""></div>
+
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/home']">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/characters']">Characters</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

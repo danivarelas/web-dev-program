@@ -1,0 +1,60 @@
+<div class="card">
+    <div class="card-header">
+        {{ title }}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">
+                Filter by:
+            </div>
+            <div class="col-md-4">
+                <input type="text" [(ngModel)]="listFilter">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Filtered by: {{ listFilter }}</h4>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table" *ngIf="characters && characters.length">
+                <thead>
+                    <tr>
+                        <th>
+                            <button class="btn btn-primary" 
+                                (click)="toggleImage()">
+                                {{ showImage ? 'Hide' : 'Show' }} Image
+                            </button>
+                        </th>
+                        <th>Name</th>
+                        <th>Birth Year</th>
+                        <th>Gender</th>
+                        <th>Created</th>
+                        <th>Strength</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let c of filteredCharacters" 
+                    [ngClass]="['character-row']">
+                        <td> <img *ngIf="showImage" 
+                            [src]="c.imageUrl" 
+                            [title]="c.name"
+                            [style.width.px]="imageWidth"
+                            [style.margin.px]="imageMargin"></td>
+                        <td>
+                            <a [routerLink]="['/characters', c.id]">{{ c.name}}</a>
+                        </td>
+                        <td>{{ c.birth_year }}</td>
+                        <td>{{ c.gender | formatGender | uppercase }}</td>
+                        <td>{{ c.created | date:'dd MMM y' | uppercase }}</td>
+                        <td><app-bar [bar]="c.strength" 
+                            (barClicked)="onBarClicked($event)"></app-bar></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p *ngIf="!characters || !characters.length">
+                There are no characters.
+            </p>
+        </div>
+    </div>
+</div>

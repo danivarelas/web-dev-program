@@ -1,10 +1,10 @@
 import React from 'react';
 
-function TableHeader() {
-    const headers = this.props.headers;
+function TableHeader(props) {
+    const { header } = props;
     return (
         <tr>
-            {headers.map((header) => {
+            {header.map((header) => {
                 return(<th>{header}</th>);
             })
             }

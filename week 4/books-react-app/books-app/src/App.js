@@ -22,26 +22,40 @@ function App() {
     //     </header>
     //   </div>
     // );
-    let headers = {
-        h1: 'Id',
-        h2: 'Name',
-        h3: 'Author',
-        h4: 'Year'
-    }
-    let books = {
-        book1: {
+    let headers = [
+        'Id',
+        'Name',
+        'Author',
+        'Year'
+    ]
+    
+    let books = [
+        {
             id: '1',
             name: 'Harry Potter',
             author: 'J.K. Rowling',
             published: 1997
         },
-        book2: {
+        {
             id: '2',
             name: 'The Lord Of The Rings',
-            author: 'J.K. Rowling',
+            author: 'J.R.R. Tolkien',
             published: 1954
+        },
+        {
+            id: '3',
+            name: 'The Diary of a Young Girl',
+            author: 'Anne Frank',
+            published: 1947
+        },
+        {
+            id: '4',
+            name: 'The German Girl',
+            author: 'Armando Lucas Correa',
+            published: 2016
         }
-    }
+    ]
+
     return (
         <BooksListComponent headers={headers} data={books}></BooksListComponent>
     );

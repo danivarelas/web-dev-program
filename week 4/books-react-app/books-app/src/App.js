@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.scss';
-import BooksListComponent from './pages/Books/BooksListComponent';
+import BooksList from './pages/BooksList';
 
 function App() {
     // return (
@@ -23,7 +23,7 @@ function App() {
     //   </div>
     // );
     let headers = [
-        'Id',
+        'Select',
         'Name',
         'Author',
         'Year'
@@ -34,30 +34,30 @@ function App() {
             id: '1',
             name: 'Harry Potter',
             author: 'J.K. Rowling',
-            published: 1997
+            year: 1997
         },
         {
             id: '2',
             name: 'The Lord Of The Rings',
             author: 'J.R.R. Tolkien',
-            published: 1954
+            year: 1954
         },
         {
             id: '3',
             name: 'The Diary of a Young Girl',
             author: 'Anne Frank',
-            published: 1947
+            year: 1947
         },
         {
             id: '4',
             name: 'The German Girl',
             author: 'Armando Lucas Correa',
-            published: 2016
+            year: 2016
         }
     ]
 
     return (
-        <BooksListComponent headers={headers} data={books}></BooksListComponent>
+        <BooksList headers={headers} data={books}></BooksList>
     );
 }
 

@@ -9,7 +9,7 @@ function BooksList(props) {
             <div className="row">
                 <h1 className="mx-auto m-1">List of Books</h1>
             </div>
-            <SearchBook></SearchBook>
+            <SearchBook />
             <div className="row">
                 <Table headers={headers} rows={data}></Table>
             </div>

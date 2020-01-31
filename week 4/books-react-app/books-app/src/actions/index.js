@@ -1,6 +1,5 @@
 
-export const selectBooks = (searchText, books) => ({
+export const selectBooks = (searchText) => ({
     type: 'SEARCH_TEXT',
-    searchText,
-    books
-})
+    searchText
+});

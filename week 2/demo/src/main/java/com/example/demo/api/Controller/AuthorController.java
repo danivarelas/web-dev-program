@@ -13,18 +13,12 @@ import com.example.demo.api.Service.AuthorService;
 import com.example.demo.api.Util.JWTGenerator;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.jsonwebtoken.SignatureException;
 import lombok.NonNull;
 
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 @RequestMapping("api/v1/author")
 @RestController
 public class AuthorController {
@@ -42,13 +36,13 @@ public class AuthorController {
 
     @PostMapping
     public void addAuthor(@RequestBody Author author) {
-        JWTGenerator.validateToken(request.getHeader("authorization"));
+        //JWTGenerator.validateToken(request.getHeader("authorization"));
         authorService.addAuthor(author);
     }
 
     @GetMapping
     public List<Author> getAllAuthors() {
-        JWTGenerator.validateToken(request.getHeader("authorization"));
+        //JWTGenerator.validateToken(request.getHeader("authorization"));
         return authorService.selectAllAuthors();
     }
 
@@ -56,19 +50,19 @@ public class AuthorController {
 
     @GetMapping(path = "{id}")
     public Author getAuthorById(@PathVariable("id") UUID id) {
-        JWTGenerator.validateToken(request.getHeader("authorization"));
+        //JWTGenerator.validateToken(request.getHeader("authorization"));
         return authorService.selectAuthorById(id).orElse(null);
     }
 
     @DeleteMapping(path = "{id}")
     public void deleteAuthor(@PathVariable("id") UUID id) {
-        JWTGenerator.validateToken(request.getHeader("authorization"));
+        //JWTGenerator.validateToken(request.getHeader("authorization"));
         authorService.deleteAuthor(id);
     }
 
     @PutMapping(path = "{id}")
     public void updateAuthor(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Author author) {
-        JWTGenerator.validateToken(request.getHeader("authorization"));
+        //JWTGenerator.validateToken(request.getHeader("authorization"));
         authorService.updateAuthor(id, author);
     }
     

@@ -11,7 +11,8 @@ public class Author {
     private UUID id;
     @NotBlank
     private String name;
-    private LocalDate birthDate;
+    private String country;
+    private int age;
     private List<Book> books;
 
     public Author() {
@@ -27,10 +28,27 @@ public class Author {
         this.id = id;
     }
 
-    public Author(UUID id, String name, LocalDate birthDate, List<Book> books) {
+    public Author(UUID id, String name, String country, int age, List<Book> books) {
         this(id, name);
-        this.birthDate = birthDate;
+        this.country = country;
+        this.age = age;
         this.books = books;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public UUID getId() {
@@ -47,14 +65,6 @@ public class Author {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
     }
 
     public List<Book> getBooks() {

@@ -16,7 +16,13 @@ public class AuthorDataAccessService implements AuthorDao {
 
     @Override
     public int insertAuthor(UUID id, Author author) {
-        authorsRepository.add(new Author(id, author.getName(), author.getBirthDate(), author.getBooks()));
+        authorsRepository.add(new Author(
+                id,
+                author.getName(),
+                author.getCountry(),
+                author.getAge(),
+                author.getBooks())
+        );
         return 1;
     }
 

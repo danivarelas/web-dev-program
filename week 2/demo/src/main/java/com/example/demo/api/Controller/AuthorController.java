@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import io.jsonwebtoken.SignatureException;
 import lombok.NonNull;
 
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RequestMapping("api/v1/author")
 @RestController
 public class AuthorController {

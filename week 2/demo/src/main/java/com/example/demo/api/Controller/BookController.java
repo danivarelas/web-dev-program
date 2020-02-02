@@ -12,18 +12,12 @@ import com.example.demo.api.Service.BookService;
 import com.example.demo.api.Util.JWTGenerator;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.jsonwebtoken.SignatureException;
 import lombok.NonNull;
 
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RequestMapping("api/v1/book")
 @RestController
 public class BookController {
@@ -41,31 +35,31 @@ public class BookController {
 
     @PostMapping
     public void addBook(@RequestBody Book book) {
-        JWTGenerator.validateToken(request.getHeader("authorization"));
+        //JWTGenerator.validateToken(request.getHeader("authorization"));
         bookService.addBook(book);
     }
 
     @GetMapping
     public List<Book> getAllBooks() {
-        JWTGenerator.validateToken(request.getHeader("authorization"));
+        //JWTGenerator.validateToken(request.getHeader("authorization"));
         return bookService.selectAllBooks();
     }
 
     @GetMapping(path = "{id}")
     public Book getBookById(@PathVariable("id") UUID id) {
-        JWTGenerator.validateToken(request.getHeader("authorization"));
+        //JWTGenerator.validateToken(request.getHeader("authorization"));
         return bookService.selectBookById(id).orElse(null);
     }
 
     @DeleteMapping(path = "{id}")
     public void deleteBook(@PathVariable("id") UUID id) {
-        JWTGenerator.validateToken(request.getHeader("authorization"));
+        //JWTGenerator.validateToken(request.getHeader("authorization"));
         bookService.deleteBook(id);
     }
 
     @PutMapping(path = "{id}")
     public void updateBook(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Book book) {
-        JWTGenerator.validateToken(request.getHeader("authorization"));
+        //JWTGenerator.validateToken(request.getHeader("authorization"));
         bookService.updateBook(id, book);
     }
 }

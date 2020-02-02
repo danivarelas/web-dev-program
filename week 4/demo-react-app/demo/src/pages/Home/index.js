@@ -1,31 +1,21 @@
 import React from 'react';
-import axios from 'axios';
-import Table from '../../components/Table';
-import { Link } from 'react-router-dom';
+import logo from '../../logo.svg';
 
-class Home extends React.Component{
+function Home() {
 
-    state = {
-        authors: []
-    }
-
-    componentDidMount() {
-        axios.get("http://localhost:8081/api/v1/author")
-            .then(res => {
-                const authors = res.data;
-                this.setState({ authors });
-        })
-    }
-    render() {
-        const headers = ['Name', 'Country', 'Age', 'Books']
-        return (
-            <div className="container  m-3 ">
-                <h1 className="mx-auto">Authors List</h1>
-                <Link className="btn btn-primary" to="/author">Add Author</Link>
-                <Table headers={headers} rows={this.state.authors} emptyMessage="There are no authors available."></Table>
-            </div>
-        );
-    }
+    return(
+        <div className="App">
+            <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo" />
+                <p>
+                    Edit <code>src/App.js</code> and save to reload.
+                </p>
+                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
+                    Learn React
+                </a>
+            </header>
+        </div>
+    );
 }
 
 export default Home;

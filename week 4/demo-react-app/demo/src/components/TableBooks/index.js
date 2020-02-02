@@ -1,20 +1,20 @@
 import React from 'react';
 import TableHeader from '../TableHeader';
-import TableRow from '../TableRow';
 
-function Table(props) {
-
-    const {headers, rows, emptyMessage} = props;
-    if (rows && rows.length) {
+function TableBooks(props) {
+    const {headers, author, emptyMessage} = props;
+    if (author.books && author.books.length) {
         return (
-            <table className="table table-hover my-3">
+            <table className="table table-hover m-1">
                 <thead className="thead-dark">
                     <TableHeader header={headers}></TableHeader>
                 </thead>
                 <tbody>
-                    {rows.map((row) => {
+                    {author.books.map((book) => {
                         return (
-                            <TableRow row={row}></TableRow>
+                            <tr>
+                                <td>{book.name}</td>
+                            </tr>
                         );}
                     )}
                 </tbody>
@@ -23,8 +23,8 @@ function Table(props) {
     } else {
         return (
         <p>{emptyMessage}</p>
-        )
+        );
     }
 }
 
-export default Table;
+export default TableBooks;

@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 
 class AddAuthor extends React.Component {
+
     state = {
         name: "",
         country: "",
@@ -24,41 +24,49 @@ class AddAuthor extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
         const { history } = this.props;
-        const user = {
+        const author = {
             name: this.state.name,
             country: this.state.country,
             age: this.state.age
         };
-        console.log(user);
-        axios.post(`http://localhost:8081/api/v1/author`, user)
+        console.log(author);
+        axios.post(`http://localhost:8081/api/v1/author`, author)
         .then(res => {
-            console.log(this.props);
+            console.log(res);
             history.goBack();
         })
     }
 
-  render() {
-        return (
-        <div className="container">
-            <h1>Add Author</h1>
-            <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                    <label for="name" >Name</label>
-                    <input type="text" name="name" className="form-control" onChange={this.handleNameChange} />
-                </div>
-                <div className="form-group">
-                    <label for="name" >Country</label>
-                    <input type="text" name="name" className="form-control" onChange={this.handleCountryChange} />
-                </div>
-                <div className="form-group">
-                    <label for="name">Age</label>
-                    <input type="number" min="0" max="120" className="form-control" onChange={this.handleAgeChange}/>
-                </div>
-                <button type="submit" className="btn btn-success">Add</button>
-            </form>
-        </div>
-    )
-  }
+    handleBack = event => {
+        event.preventDefault();
+        this.props.history.goBack();
+    }
+
+    render() {
+            return (
+            <div className="container">
+                <h1>Add Author</h1>
+                <form onSubmit={this.handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="name" >Name</label>
+                        <input type="text" name="name" className="form-control" onChange={this.handleNameChange} required/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="country" >Country</label>
+                        <input type="text" name="country" className="form-control" onChange={this.handleCountryChange} required/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="age">Age</label>
+                        <input type="number" name="age" min="0" max="120" className="form-control" onChange={this.handleAgeChange} required/>
+                    </div>
+                    <div className="float-right">
+                        <button type="submit" className="btn btn-success m-1">Add</button>
+                        <button type="cancel" className="btn btn-danger m-1" onChange={this.handleBack}>Cancel</button>
+                    </div>
+                </form>
+            </div>
+        )
+    }
 }
 
 export default AddAuthor;

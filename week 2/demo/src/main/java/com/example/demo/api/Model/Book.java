@@ -6,6 +6,8 @@ public class Book {
 
     private UUID id;
     private String name;
+    private int year;
+    private int pages;
 
     public Book() {
         super();
@@ -18,6 +20,12 @@ public class Book {
     public Book(UUID id, String name) {
         this(name);
         this.id = id;
+    }
+
+    public Book(UUID id, String name, int year, int pages) {
+        this(id,name);
+        this.year = year;
+        this.pages = pages;
     }
 
     public UUID getId() {
@@ -36,4 +44,19 @@ public class Book {
         this.name = name;
     }
 
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
+    }
 }

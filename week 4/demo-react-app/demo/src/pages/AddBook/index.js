@@ -1,27 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import FormSubmitButtons from '../../components/FormSubmitButtons';
 
 function AddBook(props) {
 
     let { authorId } = useParams();
     const [author, setAuthor] = useState("");
     const [bookName, setBookName] = useState("");
+    const [bookYear, setBookYear] = useState("");
+    const [bookPages, setBookPages] = useState("");
 
     const handleNameChange = event => {
         setBookName(event.target.value);
     }
 
-    const handleBack = event => {
-        event.preventDefault();
-        props.history.goBack();
+    const handleYearChange = event => {
+        setBookYear(event.target.value);
+    }
+
+    const handlePagesChange = event => {
+        setBookPages(event.target.value);
     }
 
     const handleSubmit = event => {
         event.preventDefault();
         const { history } = props;
         const book = {
-            name: bookName
+            name: bookName,
+            year: bookYear,
+            pages: bookPages
         };
         let author2 = author;
         if (author2.books) {
@@ -60,20 +68,25 @@ function AddBook(props) {
             unsubscribe = true;
             source.cancel("Cancelling in cleanup");
         }
-    });
+    }, [authorId]);
 
     return (
-    <div className="container">
-        <h1>Add Book</h1>
+    <div className="container mt-5">
+        <h1 className="text-center my-2">Add Book</h1>
         <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <label htmlFor="name" >Name</label>
                 <input type="text" name="name" className="form-control" onChange={handleNameChange} required/>
             </div>
-            <div className="float-right">
-                <button type="submit" className="btn btn-success m-1">Add</button>
-                <button type="cancel" className="btn btn-danger m-1" onClick={handleBack}>Cancel</button>
+            <div className="form-group">
+                <label htmlFor="year">Year</label>
+                <input type="number" name="year" min="0" max="2020" className="form-control" onChange={handleYearChange} required/>
             </div>
+            <div className="form-group">
+                <label htmlFor="pages">Pages</label>
+                <input type="number" name="pages" min="1" max="10000" className="form-control" onChange={handlePagesChange} required/>
+            </div>
+            <FormSubmitButtons history={props.history}></FormSubmitButtons>
         </form>
     </div>
     )

@@ -1,21 +1,38 @@
 import React from 'react';
-import { Link, useRouteMatch, Switch, Route } from 'react-router-dom';
-import AuthorInfo from '../../pages/AuthorInfo';
+import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
 function TableRow(props) {
 
-        const { url } = useRouteMatch();
-    
-        const { id, name, country, age, books } = props.row;
+    if(props.authors){
+        const { id, name, books } = props.row;
+        const handleDelete = () => {
+
+            if ( books && (books.length > 0) ) {
+                alert(`You can't delete an author with registered books.`);
+            } else {
+                Axios.delete(`http://localhost:8081/api/v1/author/${id}`)
+                .then(res => {
+                    console.log(res);
+                });
+            }
+        }
         return (
             <tr>
-                <td><Link to={`${url}/${id}`}>{name}</Link></td>
-                <td>{country}</td>
-                <td>{age}</td>
-                <td>{books? books.length : 'No books registered'}</td>
+                <td className="align-middle"><Link to={`/author/${id}`}>{name}</Link></td>
+                <td className="align-middle">{( books && (books.length > 0) ) ? books.length : 'No books registered'}</td>
+                <td><button className="btn btn-secondary" onClick={() => handleDelete()}><i className="fas fa-trash"></i></button></td>
             </tr>
         );
-
+    } else {
+        const { id, name } = props.row;
+        return (
+            <tr>
+                <td className="align-middle"><Link to={`/book/${id}`}>{name}</Link></td>
+            </tr>
+        );
+    }
+    
 }
 
 export default TableRow;

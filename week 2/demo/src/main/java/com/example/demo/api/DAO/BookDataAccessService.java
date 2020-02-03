@@ -16,7 +16,7 @@ public class BookDataAccessService implements BookDao {
 
     @Override
     public int insertBook(UUID id, Book book) {
-        booksRepository.add(new Book(id, book.getName()));
+        booksRepository.add(new Book(id, book.getName(), book.getYear(), book.getPages()));
         return 1;
     }
 

@@ -4,17 +4,17 @@ import TableRow from '../TableRow';
 
 function Table(props) {
 
-    const {headers, rows, emptyMessage} = props;
+    const {headers, rows, authors, emptyMessage} = props;
     if (rows && rows.length) {
         return (
-            <table className="table table-hover my-3">
-                <thead className="thead-dark">
+            <table className="table table-hover table-striped my-3">
+                <thead className="thead-dark text-center">
                     <TableHeader header={headers}></TableHeader>
                 </thead>
-                <tbody>
+                <tbody className="text-center">
                     {rows.map((row) => {
                         return (
-                            <TableRow row={row}></TableRow>
+                            <TableRow row={row} authors={authors}></TableRow>
                         );}
                     )}
                 </tbody>

@@ -1,33 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import FormSubmitButtons from '../../components/FormSubmitButtons';
 
-class AddAuthor extends React.Component {
+function AddAuthor(props) {
 
-    state = {
-        name: "",
-        country: "",
-        age: 0
+    const [authorName, setAuthorName] = useState("");
+    const [authorCountry, setAuthorCountry] = useState("");
+    const [authorAge, setAuthorAge] = useState(0);
+
+    const handleNameChange = event => {
+        setAuthorName(event.target.value);
     }
 
-    handleNameChange = event => {
-        this.setState({ name: event.target.value });
-    }
-
-    handleCountryChange = event => {
-        this.setState({ country: event.target.value });
+    const handleCountryChange = event => {
+        setAuthorCountry(event.target.value);
     }
     
-    handleAgeChange = event => {
-        this.setState({ age: event.target.value });
+    const handleAgeChange = event => {
+        setAuthorAge(event.target.value);
     }
 
-    handleSubmit = event => {
+    const handleSubmit = event => {
         event.preventDefault();
-        const { history } = this.props;
+        const { history } = props;
         const author = {
-            name: this.state.name,
-            country: this.state.country,
-            age: this.state.age
+            name: authorName,
+            country: authorCountry,
+            age: authorAge
         };
         console.log(author);
         axios.post(`http://localhost:8081/api/v1/author`, author)
@@ -37,36 +36,26 @@ class AddAuthor extends React.Component {
         })
     }
 
-    handleBack = event => {
-        event.preventDefault();
-        this.props.history.goBack();
-    }
-
-    render() {
-            return (
-            <div className="container">
-                <h1>Add Author</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="name" >Name</label>
-                        <input type="text" name="name" className="form-control" onChange={this.handleNameChange} required/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="country" >Country</label>
-                        <input type="text" name="country" className="form-control" onChange={this.handleCountryChange} required/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="age">Age</label>
-                        <input type="number" name="age" min="0" max="120" className="form-control" onChange={this.handleAgeChange} required/>
-                    </div>
-                    <div className="float-right">
-                        <button type="submit" className="btn btn-success m-1">Add</button>
-                        <button type="cancel" className="btn btn-danger m-1" onClick={this.handleBack}>Cancel</button>
-                    </div>
-                </form>
-            </div>
-        )
-    }
+    return (
+        <div className="container mt-5">
+            <h1 className="text-center my-2">Add Author</h1>
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor="name" >Name</label>
+                    <input type="text" name="name" className="form-control" onChange={handleNameChange} required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="country" >Country</label>
+                    <input type="text" name="country" className="form-control" onChange={handleCountryChange} required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="age">Age</label>
+                    <input type="number" name="age" min="0" max="120" className="form-control" onChange={handleAgeChange} required/>
+                </div>
+                <FormSubmitButtons history={props.history}></FormSubmitButtons>
+            </form>
+        </div>
+    )
 }
 
 export default AddAuthor;

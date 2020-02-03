@@ -61,7 +61,7 @@ class AddAuthor extends React.Component {
                     </div>
                     <div className="float-right">
                         <button type="submit" className="btn btn-success m-1">Add</button>
-                        <button type="cancel" className="btn btn-danger m-1" onChange={this.handleBack}>Cancel</button>
+                        <button type="cancel" className="btn btn-danger m-1" onClick={this.handleBack}>Cancel</button>
                     </div>
                 </form>
             </div>

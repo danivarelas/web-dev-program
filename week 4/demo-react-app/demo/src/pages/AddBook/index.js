@@ -72,7 +72,7 @@ function AddBook(props) {
             </div>
             <div className="float-right">
                 <button type="submit" className="btn btn-success m-1">Add</button>
-                <button type="cancel" className="btn btn-danger m-1" onChange={handleBack}>Cancel</button>
+                <button type="cancel" className="btn btn-danger m-1" onClick={handleBack}>Cancel</button>
             </div>
         </form>
     </div>

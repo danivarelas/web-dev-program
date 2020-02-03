@@ -32,7 +32,7 @@ function AuthorInfo() {
         }
     });
 
-    const headers = ['Name']
+    const headers = ['Name'];
     return (
         <div className="jumbotron">
             <h2 className="mx-auto">{author.name}</h2>
@@ -45,7 +45,7 @@ function AuthorInfo() {
                 </div>
             </div>
             <div className="row justify-content-start">
-                <div className="col-1">
+                <div className="col-2">
                     <label>Country:</label>
                 </div>
                 <div className="col-2">

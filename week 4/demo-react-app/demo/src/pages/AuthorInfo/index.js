@@ -36,7 +36,7 @@ function AuthorInfo(props) {
             unsubscribe = true;
             source.cancel("Cancelling in cleanup");
         }
-    }, [authorId]);
+    }, [authorId, author]);
 
     const headers = ['Name', 'Remove'];
     return (

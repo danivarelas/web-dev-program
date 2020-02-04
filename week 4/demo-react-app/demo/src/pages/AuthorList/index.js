@@ -29,7 +29,7 @@ function AuthorList() {
             unsubscribe = true;
             source.cancel("Cancelling in cleanup");
         }
-    }, []);
+    }, [authors]);
 
     return (
         <div className="container mt-5">

@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.scss';
+import './HomeMenuItem.scss';
 import { Link } from 'react-router-dom';
 
 function HomeMenuItem(props) {
@@ -9,7 +9,7 @@ function HomeMenuItem(props) {
     return (
         <div className="mt-5">
             <div className="card-body">
-                <h4 className="card-title">{title} <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModalCenter">
+                <h4 className="card-title">{title} <button type="button" className="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModalCenter">
                 <i className="fas fa-plus "></i>
             </button></h4>
                 <hr></hr>

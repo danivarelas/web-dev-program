@@ -1,0 +1,64 @@
+.bg {
+    /* The image used */
+    background-image: url('../../images/run.jpg');
+    display: block;
+    height: 100%;
+    opacity: 0.8;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .home-container {
+        padding: 3em 4em;
+        height: 100%;
+    
+        .home-content {
+            height: 100%;
+            position: relative;
+            box-sizing: border-box;
+
+            .home-content-background {
+                height: 100%;
+                background-color: black;
+                opacity: 0.8;
+            }
+
+            .home-content-text {
+                position: absolute;
+                top: 50%;
+                width: 100%;
+                text-align: center;
+            }
+            
+        }
+
+        h1, p {
+            color: white;
+        }
+
+        .btn {
+            background-color: black;
+            color: white;
+            border-radius: 0;
+            font-size: 1.5em;
+        }
+    }
+}
+
+@media (max-width:599px) {
+    .bg {
+        .home-container {
+            padding: 2em;
+        }
+    }
+    
+}
+
+@media (min-width:600px) and (max-width:899px) {
+    .bg {
+        .home-container {
+            padding: 3em;
+        }
+    }
+}

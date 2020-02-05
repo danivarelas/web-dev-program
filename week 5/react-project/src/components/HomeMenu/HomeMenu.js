@@ -1,6 +1,6 @@
 import React from 'react';
-import './style.scss';
-import HomeMenuItem from '../HomeMenuItem';
+import './HomeMenu.scss';
+import HomeMenuItem from '../HomeMenuItem/HomeMenuItem';
 
 function HomeMenu() {
 

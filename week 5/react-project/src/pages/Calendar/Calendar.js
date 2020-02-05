@@ -1,9 +1,11 @@
 import React from 'react';
+import NavBar from '../../components/NavBar/NavBar';
 
 function Calendar() {
   
     return (
-        <div className="container">
+        <div>
+            <NavBar></NavBar>
         </div>
     );
 }

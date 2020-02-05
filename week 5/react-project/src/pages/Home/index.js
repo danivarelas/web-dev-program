@@ -1,12 +1,13 @@
 import React from 'react';
-import Slider from '../../components/Slider';
+import './style.scss';
 
 function Home() {
-  
+
     return (
-        <div className="container">
-            <Slider></Slider>
+        <div className="bg">
+            <img alt=""/>
         </div>
+
     );
 }
 

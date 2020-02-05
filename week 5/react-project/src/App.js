@@ -9,7 +9,9 @@ import {
   } from "react-router-dom";
 import Calendar from './pages/Calendar';
 import Races from './pages/Races';
+import Records from './pages/Records';
 import Goals from './pages/Goals';
+import Dashboard from './pages/Dashboard';
 
 function App() {
     return (
@@ -17,18 +19,9 @@ function App() {
             <div>
                 <NavBar></NavBar>
                 <Switch>
-                    <Route path="/calendar">
-                        <Calendar />
-                    </Route>
-                    <Route path="/events">
-                        <Races />
-                    </Route>
-                    <Route path="/goals">
-                        <Goals />
-                    </Route>
-                    <Route path="/">
-                        <Home />
-                    </Route>
+                    <Route path="/dashboard" component={Dashboard} />
+                    <Route path="/calendar" component={Calendar}/>
+                    <Route path="/" component={Home}/>
                 </Switch>
             </div>
         </Router>

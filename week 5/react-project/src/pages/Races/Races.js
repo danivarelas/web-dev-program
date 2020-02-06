@@ -8,7 +8,7 @@ function Races() {
 
     const [name, setName] = useState("");
     const [distance, setDistance] = useState(0);
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState("");
     const [type, setType] = useState("");
 
     const { addRace } = useContext(RacesContext);

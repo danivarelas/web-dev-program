@@ -104,9 +104,10 @@ header {
 
 .calendar .days {
     text-transform: uppercase;
-    font-weight: 400;
+    font-weight: bold;
     color: gray;
-    font-size: 70%;
+    font-size: 1em;
+    text-align: center;
     padding: .75em 0;
     border-bottom: 1px solid lightgray;
 }

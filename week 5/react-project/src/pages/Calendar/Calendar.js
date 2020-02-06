@@ -42,13 +42,12 @@ function Calendar() {
     };
 
     const daysOfWeek = () => {
-        const dateFormat = "DDD";
+        const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
         const days = [];
-        let startDate = startOfWeek(currentDate);
         for (let i = 0; i < 7; i++) {
             days.push(
-                <div className="column col-center" key={i}>
-                    {format(addDays(startDate, i), dateFormat)}
+                <div className="column col-center day-title" key={i}>
+                    {daysOfWeek[i]}
                 </div>
             );
         }

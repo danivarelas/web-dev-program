@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../../images/podium.png'
 import './Home.scss';
 import { Link } from 'react-router-dom';
 
@@ -12,7 +13,8 @@ function Home() {
 
                     </div>
                     <div className="home-content-text">
-                        <h1>Training App</h1>
+                        <img src={logo} alt="logo"/>
+                        <h1>Road To Podium</h1>
                         <p>Create plans, track your progress and log your results.</p>
                         <Link className="btn" to="/dashboard/races">View Dashboard</Link>
                     </div>

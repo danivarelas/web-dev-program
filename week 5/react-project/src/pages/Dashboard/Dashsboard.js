@@ -11,22 +11,22 @@ function Dashboard() {
 
     return (
         <RacesContextProvider>
-            <div className="full">
+            <div className="">
                 <NavBar></NavBar>
                 <div className="container main-container">
                     <div className="row">
                         <div className="col">
                             <div className="container">
                                 <div>
-                                    <ul className="list-group">
+                                    <ul className="list-group list-group-flush">
                                         <li className="list-group-item d-flex justify-content-between align-items-center">
-                                            <Link to="/dashboard/races">Races</Link>
+                                            <Link className="link" to="/dashboard/races">Races</Link>
                                         </li>
                                         <li className="list-group-item d-flex justify-content-between align-items-center">
-                                            <Link to="/dashboard/records">Records</Link>
+                                            <Link className="link" to="/dashboard/records">Records</Link>
                                         </li>
                                         <li className="list-group-item d-flex justify-content-between align-items-center">
-                                            <Link to="/dashboard/goals">Goals</Link>
+                                            <Link className="link" to="/dashboard/goals">Goals</Link>
                                         </li>
                                     </ul>
                                 </div>

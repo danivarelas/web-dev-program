@@ -8,7 +8,7 @@ function Races() {
 
     const [name, setName] = useState("");
     const [distance, setDistance] = useState(0);
-    const [date, setDate] = useState("");
+    const [date, setDate] = useState(new Date());
     const [type, setType] = useState("");
 
     const { addRace } = useContext(RacesContext);
@@ -43,7 +43,6 @@ function Races() {
                 <h4 className="card-title">Races<button type="button" className="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModalLong">
                     <i className="fas fa-plus "></i>
                 </button></h4>
-                <hr></hr>
                 <RaceList/>
             </div>
             <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

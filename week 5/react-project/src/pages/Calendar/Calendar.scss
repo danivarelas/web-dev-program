@@ -128,7 +128,8 @@ header {
 }
 
 .calendar .body .selected {
-    border-left: 10px solid transparent;
+    border: 1px solid rgba(4,34,82,1);
+    border-right: 10px solid transparent;
     border-image: linear-gradient(180deg, rgba(4,34,82,1) 0%, rgba(42,114,144,1) 48%, rgba(1,138,166,1) 100%);
     border-image-slice: 1;
 }
@@ -157,21 +158,19 @@ header {
     pointer-events: none;
 }
 
-.calendar .body .cell .bg {
-    font-weight: 700;
+.calendar .body .cell .number-bg {
+    font-weight: bold;
     line-height: 1;
-    color: #1affa0;
+    color: rgba(42,114,144,1);
     opacity: 0;
-    font-size: 5em;
-    position: absolute;
-    top: -.2em;
-    right: -.05em;
+    font-size: 2em;
+    margin: .1em;
     transition: .25s ease-out;
     letter-spacing: -.07em;
 }
 
-.calendar .body .cell:hover .bg, .calendar .body .selected .bg  {
-    opacity: 0.2;
+.calendar .body .cell:hover .number-bg, .calendar .body .selected .number-bg  {
+    opacity: 0.8;
     transition: .5s ease-in;
 }
 

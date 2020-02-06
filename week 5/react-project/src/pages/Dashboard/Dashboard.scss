@@ -1,23 +1,16 @@
 
-.container {
+.main-container {
+    padding: 2em 2em;
+    height: 100%;
+    margin: 2em auto;
 
-    &.main-container {
-        background-color: #eee;
-        padding: 2em 2em;
-        height: 100%;
-        margin: 2em auto;
-    }
+    .col {
+        text-align: center;
 
-    .list-group {
-
-        .list-group-item {
-            border-radius: 0.5em;
-            border: 0;
-            margin: 0.2em;
-
-            .link {
-                font-size: 2em;
-            }
+        .link {
+            font-weight: bold;
+            font-size: 1.8em;
+            color: black;
         }
     }
 }

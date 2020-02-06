@@ -21,11 +21,10 @@
     opacity: 0;
 }
 
-
 .navbar {
     font-size: 1.2rem;
-    color: black;
     background-image: linear-gradient(90deg, rgba(4,34,82,1) 0%, rgba(42,114,144,1) 48%, rgba(1,138,166,1) 100%);
+    border-bottom: 0.1em solid rgb(231, 85, 0);
     transition: background-color 0.5s ease;
 
     &:hover {

@@ -4,7 +4,6 @@ import {
     addMonths,
     subMonths,
     format,
-    parse,
     startOfWeek,
     startOfMonth,
     endOfWeek,
@@ -66,17 +65,17 @@ function Calendar() {
         while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
                 formattedDate = format(day, dateFormat);
-                const cloneDay = day; 
+                const cloneDay = day;
                 days.push(
                     <div
                         className={`column cell ${!isSameMonth(day, monthStart)
                             ? "disabled" : isSameDay(day, selectedDate)
                                 ? "selected" : ""}`}
                         key={day}
-                        //onClick={() => onDateClick(parse(cloneDay))}
+                        onClick={() => onDateClick(cloneDay)}
                     >
                         <span className="number">{formattedDate}</span>
-                        <span className="bg">{formattedDate}</span>
+                        <span className="number-bg">{formattedDate}</span>
                     </div>
                 );
                 day = addDays(day, 1);

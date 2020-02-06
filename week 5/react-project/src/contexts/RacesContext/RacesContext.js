@@ -9,23 +9,27 @@ class RacesContextProvider extends Component {
     };
 
     addRace = (name, type, date, distance) => {
-        this.setState( {races: [...this.state.races, {
-            name: name,
-            type: type,
-            date: date,
-            distance: distance
-        }]})
-    }
+        this.setState({
+            races: [...this.state.races, {
+                name: name,
+                type: type,
+                date: date,
+                distance: distance
+            }]
+        })
+    };
 
     getRaces = () => {
         return this.state.races;
     }
 
     render() {
-        return(
-            <RacesContext.Provider value={ {...this.state, 
-                                            addRace:this.addRace, 
-                                            getRaces:this.getRaces} }>
+        return (
+            <RacesContext.Provider value={{
+                ...this.state,
+                addRace: this.addRace,
+                getRaces: this.getRaces
+            }}>
                 {this.props.children}
             </RacesContext.Provider>
         );

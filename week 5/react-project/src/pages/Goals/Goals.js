@@ -1,6 +1,6 @@
 import React from 'react';
 import './Goals.scss'
-import Modal from '../../components/Modal/Modal';
+import AddGoal from '../AddGoal/AddGoal';
 
 function Goals() {
   
@@ -14,10 +14,7 @@ function Goals() {
                 <p className="card-text">Test</p>
             </div>
             <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                <Modal title="Set a new goal">
-                    <p>Modal</p>
-                    <p>Data</p>
-                </Modal>
+                <AddGoal></AddGoal>
             </div>
         </div>
     );

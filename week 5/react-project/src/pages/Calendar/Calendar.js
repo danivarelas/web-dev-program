@@ -64,6 +64,7 @@ function Calendar() {
         let formattedDate = "";
         while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
+                console.log(day);
                 formattedDate = format(day, dateFormat);
                 const cloneDay = day;
                 days.push(
@@ -75,7 +76,6 @@ function Calendar() {
                         onClick={() => onDateClick(cloneDay)}
                     >
                         <span className="number">{formattedDate}</span>
-                        <span className="number-bg">{formattedDate}</span>
                         <span class="badge badge-pill badge-primary">Primary</span>
                         <span class="badge badge-pill badge-secondary">Primary</span>
                         <span class="badge badge-pill badge-danger">Primary</span>

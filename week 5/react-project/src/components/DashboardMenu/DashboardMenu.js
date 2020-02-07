@@ -16,9 +16,6 @@ function DashboardMenu() {
                 <div className="col">
                     <Link className="link" to="/dashboard/goals">Goals</Link>
                 </div>
-                <div className="col">
-                    <Link className="link" to="/dashboard/workouts">Workouts</Link>
-                </div>
             </div>
             <hr />
         </div>

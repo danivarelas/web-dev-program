@@ -1,0 +1,21 @@
+.goal-item {
+    margin: 1em;
+
+    .btn-check {
+        border-radius: 50%;
+        width: 2em;
+        height: 2em;
+        padding: 0;
+    }
+    
+    .goal-text {
+        margin: 0 1em;
+        font-size: 1em;
+
+        &-completed {
+            margin: 0 1em;
+            font-size: 1em;
+            text-decoration: line-through;
+        }
+    }
+}

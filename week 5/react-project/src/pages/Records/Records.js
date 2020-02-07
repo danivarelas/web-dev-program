@@ -8,8 +8,8 @@ function Records() {
     return (
         <div className="card">
             <div className="card-body">
-                <h4 className="card-title">Records<button type="button" className="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModalLong">
-                    <i className="fas fa-plus "></i>
+                <h4 className="card-title">Records<button type="button" className="btn btn-primary btn-add float-right" data-toggle="modal" data-target="#exampleModalLong">
+                    <i className="fas fa-plus"></i>
                 </button></h4>
                 <hr></hr>
                 <RecordList></RecordList>

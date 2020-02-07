@@ -8,9 +8,12 @@ function AddGoal() {
     const [description, setDescription] = useState("");
 
     const context = useContext(GoalsContext);
+    const uuidv4 = require('uuid/v4');
+
 
     const addGoal = () => {
-        context.addGoal(date, description, false);
+        let id = uuidv4();
+        context.addGoal(id, date, description, false);
     };
 
     const handleDateChange = event => {

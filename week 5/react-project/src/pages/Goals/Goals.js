@@ -8,18 +8,24 @@ function Goals() {
     return (
         <div className="card">
             <div className="card-body">
-                <h4 className="card-title">Goals<button type="button" className="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModalLong">
-                    <i className="fas fa-plus "></i>
-                </button></h4>
+                <h4 className="card-title">
+                    Goals
+                    <button type="button" className="btn btn-primary btn-add float-right" data-toggle="modal" data-target="#exampleModalLong">
+                        <i className="fas fa-plus"></i>
+                    </button>
+                </h4>
                 <hr></hr>
                 <div className="row">
                     <div className="col">
-                        <h5>Pending</h5>
-                        <GoalList isCompleted={false}></GoalList>
+                        <h5 className="goals-title">Pending</h5>
+                        <hr></hr>
+                        <GoalList isCompleted={false} emptyText="You haven't set any goals yet.
+                        Click on '+' to set a new goal."></GoalList>
                     </div>
                     <div className="col">
-                        <h5>Completed</h5>
-                        <GoalList isCompleted={true}></GoalList>
+                        <h5 className="goals-title">Completed</h5>
+                        <hr></hr>
+                        <GoalList isCompleted={true} emptyText="You haven't completed any goals."></GoalList>
                     </div>
                 </div>
             </div>

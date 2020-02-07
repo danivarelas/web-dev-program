@@ -1,30 +1,39 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './GoalList.scss';
 import { GoalsContext } from '../../contexts/GoalsContext/GoalsContext';
+import GoalListItem from '../GoalListItem/GoalListItem';
 
 function GoalList(props) {
 
-    const { pending, completed } = useContext(GoalsContext);
-    const { isCompleted } = props;
-    const [goals,setGoals] = useState([]);
+    const { allGoals } = useContext(GoalsContext);
+    const { isCompleted, emptyText } = props;
+    const [goals, setGoals] = useState([]);
 
     useEffect(() => {
         if (isCompleted) {
-            setGoals(completed);
+            setGoals(allGoals.filter(goal => {
+                return goal.completed === true;
+            }));
         } else {
-            setGoals(pending);
+            setGoals(allGoals.filter(goal => {
+                return goal.completed === false;
+            }));
         }
-    }, [pending, completed, goals, isCompleted]);
+    }, [allGoals, isCompleted]);
 
     if (goals && goals.length) {
         return (
-            <div>{goals.map(goal => {
-                return (<div>{goal.description}</div>)
-            })}</div>
+            <div className="goal-list">
+                {goals.map(goal => {
+                    return (
+                        <GoalListItem goal={goal}></GoalListItem>
+                    )
+                })}
+            </div>
         );
     } else {
         return (
-            <div>No goals yet.</div>
+            <div>{emptyText}</div>
         );
     }
 }

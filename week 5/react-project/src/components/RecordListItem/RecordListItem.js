@@ -1,38 +1,45 @@
-import React, { useContext, useEffect } from 'react';
-import './RecordList.scss';
-import { RecordsContext } from '../../contexts/RecordsContext/RecordsContext';
+import React from 'react';
+import './RecordListItem.scss';
 
-function RecordListItem() {
+function RecordListItem(props) {
 
-    const { records } = useContext(RecordsContext);
+    const { activity, records } = props;
 
-    useEffect(() => {
+    const getRecords = () => {
+        if (records && records.length) {
+            return records.map(record => {
+                return (
+                    <p>
+                        <span className="record-distance">{record.distance}: </span>{record.time}
+                    </p>
+                );
+            });
+        } else {
+            return (
+                <p>You haven't logged any records yet.</p>
+            );
+        }
+    }
 
-    }, [records]);
+    const allRecords = getRecords();
 
     return (
-        <div></div>
+        <div className="card">
+            <div className="card-header" id="headingTwo">
+                <h5 className="mb-0">
+                    <button className="btn btn-link collapsed" data-toggle="collapse" data-target={`#${activity}Collapse`} aria-expanded="false" aria-controls={`${activity}Collapse`}>
+                        {activity} Records
+                    </button>
+                </h5>
+            </div>
+            <div id={`${activity}Collapse`} className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div className="card-body">
+                    {allRecords}
+                </div>
+            </div>
+        </div>
     );
 
-    /*return (
-        <table className="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Distance</th>
-                </tr>
-            </thead>
-            <tbody>
-                {records.map((race) => {
-                    return (
-                        <RaceListItem race={race}></RaceListItem>
-                    );
-                })}
-            </tbody>
-        </table>
-    );*/
 }
 
 export default RecordListItem;

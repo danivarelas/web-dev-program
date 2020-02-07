@@ -18,25 +18,32 @@
             position: relative;
             box-sizing: border-box;
 
+
             .home-content-background {
                 height: 100%;
-                background-color: lightgrey;
-                opacity: 0.8;
-            }
+                background-color: rgba(199, 199, 199, 0.7);
 
-            .home-content-text {
-                position: absolute;
-                top: 0;
-                margin: 0;
-                width: 100%;
-                text-align: center;
+                .home-content-text {
+                    text-align: center;
+                    width: 100%;
 
-                img {
-                    width: 10em;
-                    color: wihte;
-                    margin: 1em;
+                    &.vertical-center {
+                        margin: 0;
+                        position: absolute;
+                        top: 50%;
+                        -ms-transform: translateY(-50%);
+                        transform: translateY(-50%);
+                    }
+    
+                    img {
+                        width: 10em;
+                        color: wihte;
+                        margin: 1em;
+                    }
                 }
             }
+
+            
             
         }
 

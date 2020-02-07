@@ -9,15 +9,15 @@ function Home() {
         <div className="bg">
             <div className="home-container">
                 <div className="home-content">
-                    <div className="home-content-background">
-
-                    </div>
-                    <div className="home-content-text">
+                    <div className="home-content-background ">
+                    <div className="home-content-text vertical-center">
                         <img src={logo} alt="logo"/>
                         <h1>Road To Podium</h1>
                         <p>Create plans, track your progress and log your results.</p>
                         <Link className="btn" to="/dashboard/races">View Dashboard</Link>
                     </div>
+                    </div>
+                    
                 </div>
                 
                 

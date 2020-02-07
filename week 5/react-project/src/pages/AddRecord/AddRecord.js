@@ -1,25 +1,51 @@
 import React, { useState, useContext } from 'react';
 import Modal from '../../components/Modal/Modal';
 import { RecordsContext } from '../../contexts/RecordsContext/RecordsContext';
+import {
+    activityTypes,
+    runningDistances,
+    swimmingDistances,
+    cyclingDistances,
+    triathlonDistances
+} from '../../utils/variables';
 
 function AddRecord() {
 
-    const [activity, setActivity] = useState("");
+    const [activity, setActivity] = useState("Cycling");
     const [date, setDate] = useState("");
-    const [distance, setDistance] = useState(0);
+    const [distance, setDistance] = useState(cyclingDistances[0]);
     const [time, setTime] = useState(0);
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
+    const [customDistances, setCustomDistances] = useState(cyclingDistances);
 
     const context = useContext(RecordsContext);
 
     const addRecord = () => {
+        let totalSeconds = ( hours * 3600 ) + ( minutes * 60 ) + seconds;
+        setTime(totalSeconds);
         context.addRecord(activity, date, distance, time);
     };
 
     const handleActivityChange = event => {
-        setActivity(event.target.value);
+        let value = event.target.value;
+        setActivity(value);
+        switch(value) {
+            case 'Running':
+                setCustomDistances(runningDistances);
+                break;
+            case 'Swimming':
+                setCustomDistances(swimmingDistances);
+                break;
+            case 'Cycling':
+                setCustomDistances(cyclingDistances);
+                break;
+            case 'Triathlon':
+                setCustomDistances(triathlonDistances);
+                break;
+            default:
+        }
     };
 
     const handleDateChange = event => {
@@ -48,11 +74,9 @@ function AddRecord() {
                 <div className="form-group">
                     <label htmlFor="activity">Activity</label>
                     <select className="form-control" id="activity" onChange={handleActivityChange}>
-                        <option>Bike</option>
-                        <option>Swim</option>
-                        <option>Run</option>
-                        <option>Triathlon</option>
-                        <option>Duathlon</option>
+                        {activityTypes.map(type => {
+                            return <option>{type}</option>;
+                        })}
                     </select>
                 </div>
                 <div className="form-group">
@@ -62,16 +86,9 @@ function AddRecord() {
                 <div className="form-group">
                     <label htmlFor="distance">Distance</label>
                     <select className="form-control" id="distance" onChange={handleDistanceChange}>
-                        <option>100m</option>
-                        <option>200m</option>
-                        <option>1/4 mile</option>
-                        <option>1/2 mile</option>
-                        <option>1k</option>
-                        <option>1 milw</option>
-                        <option>5k</option>
-                        <option>10k</option>
-                        <option>Half marathon</option>
-                        <option>Marathon</option>
+                        {customDistances.map(elem => {
+                            return <option>{elem}</option>;
+                        })}
                     </select>
                 </div>
                 <div className="form-group">

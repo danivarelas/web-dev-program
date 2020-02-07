@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-//import './HomeMenu.scss';
+import './DashboardMenu.scss';
 
 function DashboardMenu() {
 
     return (
         <div>
-            <hr />
-            <div className="row">
+            <div className="row row-menu">
                 <div className="col">
                     <Link className="link" to="/dashboard/races">Races</Link>
                 </div>

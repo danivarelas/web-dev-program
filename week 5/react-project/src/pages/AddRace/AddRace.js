@@ -47,7 +47,7 @@ function AddRace() {
                     <label htmlFor="type">Type:</label>
                     <select className="form-control" id="type" onChange={handleTypeChange}>
                         {activityTypes.map(type => {
-                            return <option>type</option>;
+                            return <option>{type}</option>;
                         })}
                     </select>
                 </div>

@@ -14,8 +14,9 @@ function Dashboard() {
         <GlobalContextProvider>
             <div className="">
                 <NavBar/>
+                <DashboardMenu/>
                 <div className="container main-container">
-                    <DashboardMenu/>
+                    
                     <div className="row">
                         <Switch>
                             <Route path="/dashboard/races" component={Races} />

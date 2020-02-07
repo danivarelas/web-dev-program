@@ -1,0 +1,24 @@
+.row-menu {
+    margin-top: 1em;
+    
+    .col {
+        text-align: center;
+
+        .link {
+            font-weight: bold;
+            font-size: 1.8em;
+            color: black;
+        }
+    }
+}
+
+@media (max-width:599px) {
+    .row-menu {
+        .col {
+            .link {
+                font-size: 1.4em;
+            }
+        }
+    }
+    
+}

@@ -64,118 +64,129 @@ header {
     background: white;
     height: 100%;
     margin: 3em auto;
-}
 
-.calendar .header {
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 115%;
-    padding: 1.5em 0;
-    border-bottom: 1px solid lightgray;
+    .header {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 115%;
+        padding: 1.5em 0;
+        border-bottom: 1px solid lightgray;
+    
+        .column {
+            text-align: center;
+    
+            &.col-center {
+                font-size: 1.5em;
+            }
+        }
 
-    .column {
-        text-align: center;
-
-        &.col-center {
+        .icon {
+            cursor: pointer;
             font-size: 1.5em;
+            transition: .15s ease-out;
+
+            &:hover {
+                transform: scale(1.75);
+                transition: .25s ease-out;
+                color: dodgerblue;
+            }
+
+            &:first-of-type {
+                margin-left: 1em;
+            }
+
+            &:last-of-type {
+                margin-right: 1em;
+            }
         }
     }
-}
 
-.calendar .header .icon {
-    cursor: pointer;
-    font-size: 1.5em;
-    transition: .15s ease-out;
-}
+    .days {
+        text-transform: uppercase;
+        font-weight: bold;
+        color: gray;
+        font-size: 1em;
+        text-align: center;
+        padding: .75em 0;
+        border-bottom: 1px solid lightgray;
+    }
 
-.calendar .header .icon:hover {
-    transform: scale(1.75);
-    transition: .25s ease-out;
-    color: dodgerblue;
-}
+    .body {
 
-.calendar .header .icon:first-of-type {
-    margin-left: 1em;
-}
+        .cell {
+            position: relative;
+            height: 6em;
+            border-right: 1px solid lightgray;
+            overflow: hidden;
+            cursor: pointer;
+            background: white;
+            transition: 0.25s ease-out;
 
-.calendar .header .icon:last-of-type {
-    margin-right: 1em;
-}
+            &:hover {
+                background: whitesmoke;
+                transition: 0.5s ease-out;
 
-.calendar .days {
-    text-transform: uppercase;
-    font-weight: bold;
-    color: gray;
-    font-size: 1em;
-    text-align: center;
-    padding: .75em 0;
-    border-bottom: 1px solid lightgray;
-}
+                .number  {
+                    visibility:hidden;
+                }
 
-.calendar .body .cell {
-    position: relative;
-    height: 6em;
-    border-right: 1px solid lightgray;
-    overflow: hidden;
-    cursor: pointer;
-    background: white;
-    transition: 0.25s ease-out;
-}
+                .number-bg  {
+                    opacity: 0.8;
+                    transition: .5s ease-in;
+                }
+            }
 
-.calendar .body .cell:hover {
-    background: whitesmoke;
-    transition: 0.5s ease-out;
-}
+            .number {
+                position: absolute;
+                font-size: 82.5%;
+                line-height: 1;
+                top: .75em;
+                right: .75em;
+                font-weight: 700;
+            }
 
-.calendar .body .selected {
-    border: 1px solid rgba(4,34,82,1);
-    border-right: 10px solid transparent;
-    border-image: linear-gradient(180deg, rgba(4,34,82,1) 0%, rgba(42,114,144,1) 48%, rgba(1,138,166,1) 100%);
-    border-image-slice: 1;
-}
+            .number-bg {
+                font-weight: bold;
+                line-height: 1;
+                color: rgba(42,114,144,1);
+                opacity: 0;
+                font-size: 2em;
+                margin: .1em;
+                transition: .25s ease-out;
+                letter-spacing: -.07em;
+            }
+        }
 
-.calendar .body .row {
-    border-left: 1px solid lightgray;
-    border-bottom: 1px solid lightgray;
-}
+        .selected {
+            border: 1px solid rgba(4,34,82,1);
+            border-right: 10px solid transparent;
+            border-image: linear-gradient(180deg, rgba(4,34,82,1) 0%, rgba(42,114,144,1) 48%, rgba(1,138,166,1) 100%);
+            border-image-slice: 1;
 
+            .number   {
+                visibility:hidden;
+            }
 
-.calendar .body .cell .number {
-    position: absolute;
-    font-size: 82.5%;
-    line-height: 1;
-    top: .75em;
-    right: .75em;
-    font-weight: 700;
-}
+            .number-bg  {
+                opacity: 0.8;
+                transition: .5s ease-in;
+            }
+        }
 
-.calendar .body .cell:hover .number, .calendar .body .selected .number   {
-    visibility:hidden;
-}
+        .row {
+            border-left: 1px solid lightgray;
+            border-bottom: 1px solid lightgray;
+        }
 
-.calendar .body .disabled {
-    color: lightgray;
-    pointer-events: none;
-}
+        .disabled {
+            color: lightgray;
+            pointer-events: none;
+        }
 
-.calendar .body .cell .number-bg {
-    font-weight: bold;
-    line-height: 1;
-    color: rgba(42,114,144,1);
-    opacity: 0;
-    font-size: 2em;
-    margin: .1em;
-    transition: .25s ease-out;
-    letter-spacing: -.07em;
-}
-
-.calendar .body .cell:hover .number-bg, .calendar .body .selected .number-bg  {
-    opacity: 0.8;
-    transition: .5s ease-in;
-}
-
-.calendar .body .column {
-    flex-grow: 0;
-    flex-basis: calc(100%/7);
-    width: calc(100%/7);
+        .column {
+            flex-grow: 0;
+            flex-basis: calc(100%/7);
+            width: calc(100%/7);
+        }
+    }
 }

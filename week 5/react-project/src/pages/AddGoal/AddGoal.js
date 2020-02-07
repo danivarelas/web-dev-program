@@ -10,7 +10,7 @@ function AddGoal() {
     const context = useContext(GoalsContext);
 
     const addGoal = () => {
-        context.addGoal(date, description);
+        context.addGoal(date, description, false);
     };
 
     const handleDateChange = event => {

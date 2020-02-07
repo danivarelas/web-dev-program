@@ -76,6 +76,10 @@ function Calendar() {
                     >
                         <span className="number">{formattedDate}</span>
                         <span className="number-bg">{formattedDate}</span>
+                        <span class="badge badge-pill badge-primary">Primary</span>
+                        <span class="badge badge-pill badge-secondary">Primary</span>
+                        <span class="badge badge-pill badge-danger">Primary</span>
+                        <span class="badge badge-pill badge-success">Primary</span>
                     </div>
                 );
                 day = addDays(day, 1);

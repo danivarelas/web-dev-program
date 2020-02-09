@@ -5,33 +5,30 @@ export const RecordsContext = createContext();
 class RecordsContextProvider extends Component {
 
     state = {
-        runningRecords: [],
-        swimmingRecords: [],
-        cyclingRecords: [],
-        triathlonRecords: []
+        runningRecords: JSON.parse(localStorage.getItem('runningRecords')),
+        swimmingRecords: JSON.parse(localStorage.getItem('swimmingRecords')),
+        cyclingRecords: JSON.parse(localStorage.getItem('cyclingRecords')),
+        triathlonRecords: JSON.parse(localStorage.getItem('triathlonRecords'))
     };
     
     addRecord = (activity, date, distance, time) => {
+        let records = [];
         switch (activity) {
             case 'Running':
-                this.setState({
-                    runningRecords: this.updateRecord(distance, date, time, this.state.runningRecords)
-                });
+                records = JSON.parse(localStorage.getItem('runningRecords'));
+                this.setState({ runningRecords: this.updateRecord(distance, date, time, records) });
                 break;
             case 'Swimming':
-                this.setState({
-                    swimmingRecords: this.updateRecord(distance, date, time, this.state.swimmingRecords)
-                });
+                records = JSON.parse(localStorage.getItem('swimmingRecords'));
+                this.setState({ swimmingRecords: this.updateRecord(distance, date, time, records) });
                 break;
             case 'Cycling':
-                this.setState({
-                    cyclingRecords: this.updateRecord(distance, date, time, this.state.cyclingRecords)
-                });
+                records = JSON.parse(localStorage.getItem('cyclingRecords'));
+                this.setState({ cyclingRecords: this.updateRecord(distance, date, time, records) });
                 break;
             case 'Triathlon':
-                this.setState({
-                    triathlonRecords: this.updateRecord(distance, date, time, this.state.triathlonRecords)
-                });
+                records = JSON.parse(localStorage.getItem('triathlonRecords'));
+                this.setState({ triathlonRecords: this.updateRecord(distance, date, time, records) });
                 break;
             default:
         }
@@ -39,25 +36,25 @@ class RecordsContextProvider extends Component {
 
     updateRecord = (distance, date, time, records) => {
         let found = false;
-        const oldRecords = records.map(record => {
-            if(record.distance === distance) {
-                record.date = date;
-                record.time = time;
-                found = true;
-            }
-            return record;
-        });
+        let newRecords = [];
+        if (records) {
+            newRecords = records.map(record => {
+                if(record.distance === distance) {
+                    record.date = date;
+                    record.time = time;
+                    found = true;
+                }
+                return record;
+            });
+        }
         if (!found) {
-            const newRecords = [...oldRecords, {
+            newRecords = [...newRecords, {
                 date: date,
                 distance: distance,
                 time: time
             }];
-            console.log(newRecords + " new records")
-            return newRecords;
         }
-        console.log(oldRecords + " old records")
-        return oldRecords;
+        return newRecords;
     };
 
     render() {

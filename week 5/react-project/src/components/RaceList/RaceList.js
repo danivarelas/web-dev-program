@@ -5,31 +5,39 @@ import RaceListItem from '../RaceListItem/RaceListItem';
 
 function RaceList() {
 
-    const { races } = useContext(RacesContext);
+    const { allRaces } = useContext(RacesContext);
 
     useEffect(() => {
 
-    }, [races]);
+    }, [allRaces]);
 
-    return (
-        <table className="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Distance</th>
-                </tr>
-            </thead>
-            <tbody>
-                {races.map((race) => {
-                    return (
-                        <RaceListItem race={race}></RaceListItem>
-                    );
-                })}
-            </tbody>
-        </table>
-    );
+    if (allRaces && allRaces.length) {
+        return (
+            <table className="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Distance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {allRaces.map((race) => {
+                        return (
+                            <RaceListItem race={race}></RaceListItem>
+                        );
+                    })}
+                </tbody>
+            </table>
+        );
+    } else {
+        return (
+            <div>
+                No races added yet.
+            </div>
+        );
+    }
 }
 
 export default RaceList;

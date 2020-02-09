@@ -5,29 +5,46 @@ export const GoalsContext = createContext();
 class GoalsContextProvider extends Component {
 
     state = {
-        allGoals: []
+        allGoals: JSON.parse(localStorage.getItem('allGoals'))
     };
 
+    getGoals = () => {
+        return JSON.parse(localStorage.getItem('allGoals'));
+    }
+
     addGoal = (id, date, description, completed) => {
-        this.setState({
-            allGoals: [...this.state.allGoals, {
+        let goals = JSON.parse(localStorage.getItem('allGoals'));
+        let newGoals = [];
+        if (goals) {
+            newGoals = [...goals, {
+                id: id,
+                date: date,
+                description: description,
+                completed: completed
+            }];
+        } else {
+            newGoals = [...newGoals, {
                 id: id,
                 date: date,
                 description: description,
                 completed: completed
             }]
-        });
+        }
+        this.setState({ allGoals: newGoals });
+        localStorage.setItem('allGoals', JSON.stringify(newGoals));
     };
 
     toggleComplete = (id) => {
-        const newGoals = this.state.allGoals.map(goal => {
-            if(goal.id === id) {
-                console.log(goal.completed);
+        let goals = JSON.parse(localStorage.getItem('allGoals'));
+        const newGoals = goals.map(goal => {
+            if (goal.id === id) {
                 goal.completed = !goal.completed;
+                console.log("completed")
             }
             return goal;
         });
-        this.setState({allGoals: newGoals});
+        this.setState({ allGoals: newGoals });
+        localStorage.setItem('allGoals', JSON.stringify(newGoals));
     };
 
     render() {

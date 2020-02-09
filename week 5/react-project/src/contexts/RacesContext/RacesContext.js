@@ -5,23 +5,34 @@ export const RacesContext = createContext();
 class RacesContextProvider extends Component {
 
     state = {
-        races: []
+        allRaces: JSON.parse(localStorage.getItem('allRaces'))
     };
 
+    getRaces = () => {
+        return JSON.parse(localStorage.getItem('allRaces'));
+    }
+
     addRace = (name, type, date, distance) => {
-        this.setState({
-            races: [...this.state.races, {
+        let races = JSON.parse(localStorage.getItem('allRaces'));
+        let newRaces = []
+        if (races) {
+            newRaces = [...races, {
                 name: name,
                 type: type,
                 date: date,
                 distance: distance
             }]
-        })
+        } else {
+            newRaces = [...newRaces, {
+                name: name,
+                type: type,
+                date: date,
+                distance: distance
+            }]
+        }
+        this.setState({ allRaces: newRaces });
+        localStorage.setItem('allRaces', JSON.stringify(newRaces));
     };
-
-    getRaces = () => {
-        return this.state.races;
-    }
 
     render() {
         return (

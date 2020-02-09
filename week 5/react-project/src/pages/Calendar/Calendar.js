@@ -13,6 +13,7 @@ import {
 } from 'date-fns';
 import "./Calendar.scss";
 import NavBar from '../../components/NavBar/NavBar';
+import CalendarSubheader from "../../components/CalendarSubheader/CalendarSubheader";
 
 function Calendar() {
 
@@ -38,19 +39,6 @@ function Calendar() {
                 </div>
             </div>
         );
-    };
-
-    const daysOfWeek = () => {
-        const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
-        const days = [];
-        for (let i = 0; i < 7; i++) {
-            days.push(
-                <div className="column col-center day-title" key={i}>
-                    {daysOfWeek[i]}
-                </div>
-            );
-        }
-        return <div className="days row">{days}</div>;
     };
 
     const cells = () => {
@@ -108,7 +96,7 @@ function Calendar() {
             <NavBar></NavBar>
             <div className="calendar">
                 <div>{header()}</div>
-                <div>{daysOfWeek()}</div>
+                <CalendarSubheader></CalendarSubheader>
                 <div>{cells()}</div>
             </div>
         </div>

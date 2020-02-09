@@ -1,4 +1,8 @@
 @import 'bootstrap/scss/bootstrap.scss';
+
+body {
+  background-color: rgb(230, 234, 236);
+}
 .App, .full{
   height: 100%;
 }
@@ -13,6 +17,7 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 
 .App-header {
   background-color: #282c34;

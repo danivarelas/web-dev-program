@@ -34,10 +34,10 @@ function AddRace() {
 
     return (
         <Modal title="Add new race">
-            <form>
+            <form >
                 <div className="form-group">
                     <label htmlFor="name">Name:</label>
-                    <input type="text" className="form-control" id="name" placeholder="Race" onChange={handleNameChange} />
+                    <input type="text" className="form-control" id="name" placeholder="Race" onChange={handleNameChange}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="date">Date:</label>
@@ -67,7 +67,7 @@ function AddRace() {
                 </div>
                 <div className="modal-footer">
                     <button type="cancel" className="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" onClick={addRace} className="btn btn-primary" data-dismiss="modal">Add</button>
+                    <button type="submit" className="btn btn-primary" data-dismiss="modal" onClick={addRace}>Add</button>
                 </div>
             </form>
         </Modal>

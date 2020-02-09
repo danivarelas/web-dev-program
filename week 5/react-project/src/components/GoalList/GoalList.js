@@ -1,36 +1,44 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './GoalList.scss';
-import { GoalsContext } from '../../contexts/GoalsContext/GoalsContext';
 import GoalListItem from '../GoalListItem/GoalListItem';
+import { GoalsContext } from '../../contexts/GoalsContext/GoalsContext';
 
 function GoalList(props) {
 
-    const { allGoals } = useContext(GoalsContext);
     const { isCompleted, emptyText } = props;
-    const [goals, setGoals] = useState([]);
+    const { allGoals } = useContext(GoalsContext);
 
     useEffect(() => {
-        if (isCompleted) {
-            setGoals(allGoals.filter(goal => {
-                return goal.completed === true;
-            }));
-        } else {
-            setGoals(allGoals.filter(goal => {
-                return goal.completed === false;
-            }));
-        }
-    }, [allGoals, isCompleted]);
 
-    if (goals && goals.length) {
-        return (
-            <div className="goal-list">
-                {goals.map(goal => {
-                    return (
-                        <GoalListItem goal={goal}></GoalListItem>
-                    )
-                })}
-            </div>
-        );
+    }, [allGoals]);
+
+    if (allGoals && allGoals.length) {
+        if (isCompleted) {
+            return (
+                <div className="goal-list">
+                    {allGoals.map(goal => {
+                        if (goal.completed) {
+                            return (
+                                <GoalListItem key={goal.id} goal={goal}></GoalListItem>
+                            )
+                        }
+                    })}
+                </div>
+            );
+        } else {
+            return (
+                <div className="goal-list">
+                    {allGoals.map(goal => {
+                        if (!goal.completed) {
+                            return (
+                                <GoalListItem key={goal.id} goal={goal}></GoalListItem>
+                            )
+                        }
+                    })}
+                </div>
+            );
+        }
+        
     } else {
         return (
             <div>{emptyText}</div>

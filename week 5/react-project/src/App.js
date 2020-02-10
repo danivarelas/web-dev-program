@@ -8,17 +8,20 @@ import {
   } from "react-router-dom";
 import Calendar from './pages/Calendar/Calendar';
 import Dashboard from './pages/Dashboard/Dashboard';
+import GlobalContextProvider from './contexts/GlobalContext/GlobalContext';
 
 function App() {
     return (
         <Router>
-            <div className="App">
-                <Switch>
-                    <Route path="/dashboard" component={Dashboard} />
-                    <Route path="/calendar" component={Calendar}/>
-                    <Route path="/" component={Home}/>
-                </Switch>
-            </div>
+            <GlobalContextProvider>
+                <div className="App">
+                    <Switch>
+                        <Route path="/dashboard" component={Dashboard} />
+                        <Route path="/calendar" component={Calendar}/>
+                        <Route path="/" component={Home}/>
+                    </Switch>
+                </div>
+            </GlobalContextProvider>
         </Router>
     );
 }

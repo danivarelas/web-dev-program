@@ -36,8 +36,8 @@ function AddGoal() {
                     <textarea className="form-control" id="description" placeholder="Enter goal description here" onChange={handleDescriptionChange} />
                 </div>
                 <div className="modal-footer">
-                    <button type="cancel" className="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" onClick={addGoal} className="btn btn-primary" data-dismiss="modal">Add</button>
+                    <button type="cancel" className="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="submit" onClick={addGoal} className="btn btn-success" data-dismiss="modal">Add</button>
                 </div>
             </form>
         </Modal>

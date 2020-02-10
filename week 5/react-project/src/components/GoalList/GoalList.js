@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import './GoalList.scss';
 import GoalListItem from '../GoalListItem/GoalListItem';
 import { GoalsContext } from '../../contexts/GoalsContext/GoalsContext';
@@ -12,8 +12,8 @@ function GoalList(props) {
 
     }, [allGoals]);
 
-    if (allGoals && allGoals.length) {
-        if (isCompleted) {
+    if (isCompleted) {
+        if (allGoals && allGoals.length) {
             return (
                 <div className="goal-list">
                     {allGoals.map(goal => {
@@ -27,6 +27,12 @@ function GoalList(props) {
             );
         } else {
             return (
+                <div>{emptyText}</div>
+            );
+        }
+    } else {
+        if (allGoals && allGoals.length) {
+            return (
                 <div className="goal-list">
                     {allGoals.map(goal => {
                         if (!goal.completed) {
@@ -37,12 +43,11 @@ function GoalList(props) {
                     })}
                 </div>
             );
+        } else {
+            return (
+                <div>{emptyText}</div>
+            );
         }
-        
-    } else {
-        return (
-            <div>{emptyText}</div>
-        );
     }
 }
 

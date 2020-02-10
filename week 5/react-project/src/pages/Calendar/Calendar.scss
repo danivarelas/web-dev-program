@@ -56,10 +56,30 @@ header {
     max-width: 100%;
 }
 
+.card-flex {
+    background-color: white;
+    border-radius: 0.5em;
+    margin: 2em;
+    padding: 1em;
+    text-align: center;
+
+    h5 {
+        margin: 0.5em;
+        text-align: center;
+        font-weight: bold;
+        font-size: 2em;
+    }
+
+    .badge {
+        margin: 0.5em;
+    }
+}
+
 /* Calendar */
 .calendar {
     display: block;
     position: relative;
+    border-radius: 0.3em 0.3em 0 0;
     width: 90%;
     background: white; 
     height: 100%;
@@ -68,10 +88,11 @@ header {
 
     .header {
         text-transform: uppercase;
+        border-radius: 0.3em 0.3em 0 0;
         font-weight: 700;
         font-size: 115%;
         padding: 1.5em 0;
-        background-image: linear-gradient(90deg, rgba(4,34,82,1) 0%, rgba(42,114,144,1) 48%, rgba(1,138,166,1) 100%);
+        background: rgba(42,114,144,1);
         border-bottom: 1px solid lightgray;
         color: white;
     
@@ -110,7 +131,7 @@ header {
     .days {
         text-transform: uppercase;
         font-weight: bold;
-        color: gray;
+        color: black;
         font-size: 1em;
         text-align: center;
         padding: .75em 0;
@@ -150,13 +171,22 @@ header {
                 font-weight: 700;
                 transition: .25s ease-in-out;
             }
+
+            .badge {
+                word-wrap: break-word;
+                width: auto;
+                height: auto;
+                overflow: none;
+                display: inline-block;
+            }
         }
 
         .selected {
-            border: 1px solid rgba(4,34,82,1);
+            border: 1px solid rgba(42,114,144,1);
             border-top: 10px solid transparent;
-            border-image: linear-gradient(90deg, rgba(4,34,82,1) 0%, rgba(42,114,144,1) 48%, rgba(1,138,166,1) 100%);
+            border-image: linear-gradient(90deg, rgba(42,114,144,1), rgba(42,114,144,1) 100%);
             border-image-slice: 1;
+            cursor: auto;
 
             .number   {
                 font-weight: bold;

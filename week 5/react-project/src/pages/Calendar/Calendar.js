@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
     addDays,
     addMonths,
@@ -14,11 +14,16 @@ import {
 import "./Calendar.scss";
 import NavBar from '../../components/NavBar/NavBar';
 import CalendarSubheader from "../../components/CalendarSubheader/CalendarSubheader";
+import { RacesContext } from "../../contexts/RacesContext/RacesContext";
+import { GoalsContext } from "../../contexts/GoalsContext/GoalsContext";
+import MenuHeader from "../../components/MenuHeader/MenuHeader";
 
 function Calendar() {
 
-    const [currentDate, setCurrentDate] = useState(new Date())
-    const [selectedDate, setSelectedDate] = useState(new Date())
+    const [currentDate, setCurrentDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const { allRaces } = useContext(RacesContext);
+    const { allGoals } = useContext(GoalsContext);
 
     const header = () => {
         const dateFormat = "MMM yyyy";
@@ -52,26 +57,23 @@ function Calendar() {
         let formattedDate = "";
         while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
-                console.log(day);
                 formattedDate = format(day, dateFormat);
                 const cloneDay = day;
+                const newDate = format(day, 'yyyy-MM-dd')
+                const races = renderRaceBadges(newDate);
+                const goals = renderGoalBadges(newDate);
                 days.push(
-                    <div
-                        className={`column cell ${!isSameMonth(day, monthStart)
-                            ? "disabled" : isSameDay(day, selectedDate)
-                                ? "selected" : ""}`}
+                    <div className={`column cell ${!isSameMonth(day, monthStart) ? "disabled" : isSameDay(day, selectedDate) ? "selected" : ""}`}
                         key={day}
-                        onClick={() => onDateClick(cloneDay)}
-                    >
+                        onClick={() => onDateClick(cloneDay)} >
                         <span className="number">{formattedDate}</span>
-                        <span class="badge badge-pill badge-primary">Primary</span>
-                        <span class="badge badge-pill badge-secondary">Primary</span>
-                        <span class="badge badge-pill badge-danger">Primary</span>
-                        <span class="badge badge-pill badge-success">Primary</span>
+                        {races}
+                        {goals}
                     </div>
                 );
                 day = addDays(day, 1);
-            } rows.push(
+            }
+            rows.push(
                 <div className="row" key={day}> {days} </div>
             );
             days = [];
@@ -91,16 +93,67 @@ function Calendar() {
         setSelectedDate(day);
     }
 
+    const renderRaceBadges = currentDate => {
+        if (allRaces && allRaces.length) {
+            return allRaces.map( race => {
+                if (currentDate === race.date) {
+                    switch(race.type) {
+                        case 'Running':
+                            return (
+                                <span className="badge badge-pill badge-info">{race.name}</span>
+                            );
+                        case 'Cycling':
+                            return (
+                                <span className="badge badge-pill badge-warning">{race.name}</span>
+                            );
+                        case 'Swimming':
+                            return (
+                                <span className="badge badge-pill badge-primary">{race.name}</span>
+                            );
+                        case 'Triathlon':
+                            return (
+                                <span className="badge badge-pill badge-danger">{race.name}</span>
+                            );
+                        default:
+                            break;
+                    }
+                }
+            })
+        }
+    }
+
+    const renderGoalBadges = currentDate => {
+        if (allGoals && allGoals.length) {
+            return allGoals.map( goal => {
+                if (currentDate === goal.date) {
+                    return (
+                        <span className="badge badge-pill badge-success" >Goal</span>
+                    );
+                }
+            })
+        }
+    }
+
     return (
         <div>
             <NavBar></NavBar>
+            <MenuHeader title="Calendar"/>
             <div className="calendar">
                 <div>{header()}</div>
                 <CalendarSubheader></CalendarSubheader>
                 <div>{cells()}</div>
             </div>
+            <div className="container">
+                <div className="card-flex">
+                    <h5>Labels</h5>
+                    <span className="badge badge-pill badge-success">Goals</span>
+                    <span className="badge badge-pill badge-info">Running Races</span>
+                    <span className="badge badge-pill badge-warning">Cycling Races</span>
+                    <span className="badge badge-pill badge-primary">Swimming Races</span>
+                    <span className="badge badge-pill badge-danger">Triathlon Races</span>
+                </div>
+            </div>
         </div>
-
     );
 }
 

@@ -13,8 +13,8 @@ function Home() {
                     <div className="home-content-text vertical-center">
                         <img src={logo} alt="logo"/>
                         <h1>Road To Podium</h1>
-                        <p>Create plans, track your progress and log your results.</p>
-                        <Link className="btn" to="/dashboard/races">View Dashboard</Link>
+                        <p>The place where you can plan your races, track your progress and log your results.</p>
+                        <Link className="btn" to="/dashboard">View Dashboard</Link>
                     </div>
                     </div>
                     

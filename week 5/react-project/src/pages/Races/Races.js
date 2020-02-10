@@ -6,7 +6,7 @@ import AddRace from '../AddRace/AddRace';
 function Races() {
 
     return (
-        <div className="card">
+        <div className="card card-section">
             <div className="card-header section-header">
                 <h4 className="card-title">
                 Races
@@ -14,8 +14,7 @@ function Races() {
                     <i className="fas fa-plus "></i>
                 </button></h4>
             </div>
-            <div className="card-body">
-                
+            <div className="card-body">  
                 <RaceList/>
             </div>
             <div className="modal fade" id="racesModal" tabIndex="-1" role="dialog" aria-labelledby="racesModalTitle" aria-hidden="true">

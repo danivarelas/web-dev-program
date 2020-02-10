@@ -1,3 +1,17 @@
-.goals-title {
-    text-align: center;
+.col-lg-6 {
+    margin-bottom: 1.5em;
+
+    .col-goals {
+        background-color: #eee;
+        margin: 0.5em;
+        box-sizing: border-box;
+        min-height: 100%;
+        border-radius: 0.3em 0.3em 0 0;
+        padding: 1.5em 1em;
+    
+        .goals-title {
+            text-align: center;
+            font-size: 1.5em;
+        }
+    }
 }

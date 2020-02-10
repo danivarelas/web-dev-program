@@ -1,5 +1,6 @@
 .goal-item {
-    margin: 1em;
+    margin: 0.5em;
+    display: flex;
 
     .btn-check {
         border-radius: 50%;
@@ -10,11 +11,13 @@
     
     .goal-text {
         margin: 0 1em;
-        font-size: 1em;
+        font-size: 1.2em;
+        align-self: center;
 
         &-completed {
+            align-self: center;
             margin: 0 1em;
-            font-size: 1em;
+            font-size: 1.2em;
             text-decoration: line-through;
         }
     }

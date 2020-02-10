@@ -9,20 +9,24 @@ function GoalListItem(props) {
     const buttonGoal = () => {
         if (goal.completed) {
             return (
-                <div>
-                    <button className="btn btn-danger btn-check" onClick={() => toggleComplete(goal.id)}>
-                        <i className="fas fa-times"></i>
-                    </button>
-                    <span className="goal-text-completed">{goal.description}</span>
+                <div className="row">
+                    <div className="col goal-item">
+                        <button className="btn btn-danger btn-check" onClick={() => toggleComplete(goal.id)}>
+                            <i className="fas fa-times"></i>
+                        </button>
+                        <span className="goal-text-completed">{goal.description}</span>
+                    </div>
                 </div>
             );
         } else {
             return (
-                <div>
-                    <button className="btn btn-success btn-check" onClick={() => toggleComplete(goal.id)}>
-                        <i className="fas fa-check"></i>
-                    </button>
-                    <span className="goal-text">{goal.description}</span>
+                <div className="row">
+                    <div className="col goal-item">
+                        <button className="btn btn-success btn-check" onClick={() => toggleComplete(goal.id)}>
+                            <i className="fas fa-check"></i>
+                        </button>
+                        <span className="goal-text">{goal.description}</span>
+                    </div>
                 </div>
             );
         }

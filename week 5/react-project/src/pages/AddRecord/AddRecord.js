@@ -23,7 +23,7 @@ function AddRecord() {
     const context = useContext(RecordsContext);
 
     const addRecord = () => {
-        let totalSeconds = ( hours * 3600 ) + ( minutes * 60 ) + seconds;
+        let totalSeconds = (hours * 3600) + (minutes * 60) + (seconds * 1);
         setTime(totalSeconds);
         context.addRecord(activity, date, distance, time);
     };
@@ -109,8 +109,8 @@ function AddRecord() {
                     </div>
                 </div>
                 <div className="modal-footer">
-                    <button type="cancel" className="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" onClick={addRecord} className="btn btn-primary" data-dismiss="modal">Add</button>
+                    <button type="cancel" className="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="submit" onClick={addRecord} className="btn btn-success" data-dismiss="modal">Add</button>
                 </div>
             </form>
         </Modal>

@@ -52,22 +52,12 @@ function AddRace() {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="distance">Distance</label>
-                    <div className="form-row">
-                        <div className="form-group col-md-9">
-                            <input type="number" className="form-control" id="distance" placeholder="1" onChange={handleDistanceChange} />
-                        </div>
-                        <div className="form-group col-md-3">
-                            <select className="form-control" >
-                                <option>km</option>
-                                <option>mi</option>
-                            </select>
-                        </div>
-                    </div>
+                    <label htmlFor="distance">Distance in km:</label>
+                    <input type="number" className="form-control" id="distance" placeholder="1" onChange={handleDistanceChange} />
                 </div>
                 <div className="modal-footer">
-                    <button type="cancel" className="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" className="btn btn-primary" data-dismiss="modal" onClick={addRace}>Add</button>
+                    <button type="cancel" className="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="submit" className="btn btn-success" data-dismiss="modal" onClick={addRace}>Add</button>
                 </div>
             </form>
         </Modal>

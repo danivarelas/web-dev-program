@@ -29,7 +29,7 @@
 
     &:hover {
         background-color: white;
-        border-bottom: 0.1em solid black;
+        border-bottom: 0.1em solid rgba(42,114,144,1);;
 
         .navbar-brand {
             color: black;
@@ -49,7 +49,7 @@
             font-weight: bold;
     
             &:hover {
-                color: rgba(42,114,144,1);
+                color: rgb(231, 85, 0);;
             }
         }
     }

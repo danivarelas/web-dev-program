@@ -16,16 +16,20 @@ function Goals() {
             </div>
             <div className="card-body">
                 <div className="row">
-                    <div className="col">
-                        <h5 className="goals-title">Pending</h5>
-                        <hr></hr>
-                        <GoalList isCompleted={false} emptyText="You haven't set any goals yet.
-                        Click on '+' to set a new goal."></GoalList>
+                    <div className="col-lg-6">
+                        <div className="col-goals">
+                            <h5 className="goals-title">Pending</h5>
+                            <hr></hr>
+                            <GoalList isCompleted={false} emptyText="You haven't set any goals yet.
+                            Click on '+' to set a new goal."></GoalList>
+                        </div>
                     </div>
-                    <div className="col">
-                        <h5 className="goals-title">Completed</h5>
-                        <hr></hr>
-                        <GoalList isCompleted={true} emptyText="You haven't completed any goals."></GoalList>
+                    <div className="col-lg-6 ">
+                        <div className="col-goals">
+                            <h5 className="goals-title">Completed</h5>
+                            <hr></hr>
+                            <GoalList isCompleted={true} emptyText="You haven't completed any goals."></GoalList>
+                        </div>
                     </div>
                 </div>
             </div>

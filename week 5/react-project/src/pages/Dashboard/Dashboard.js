@@ -1,32 +1,26 @@
 import React from 'react';
 import './Dashboard.scss';
-import { Switch, Route } from 'react-router-dom';
 import Races from '../Races/Races';
 import Records from '../Records/Records';
 import Goals from '../Goals/Goals';
 import NavBar from '../../components/NavBar/NavBar';
-import GlobalContextProvider from '../../contexts/GlobalContext/GlobalContext';
-import DashboardMenu from '../../components/DashboardMenu/DashboardMenu';
+import MenuHeader from '../../components/MenuHeader/MenuHeader';
 
 function Dashboard() {
 
     return (
-        <GlobalContextProvider>
-            <div className="">
-                <NavBar/>
-                <DashboardMenu/>
-                <div className="container main-container">
-                    
-                    <div className="row">
-                        <Switch>
-                            <Route path="/dashboard/races" component={Races} />
-                            <Route path="/dashboard/records" component={Records} />
-                            <Route path="/dashboard/goals" component={Goals} />
-                        </Switch>
-                    </div>
+        <div>
+            <NavBar/>
+            <MenuHeader title="Dashboard"/>
+            <div className="container main-container">
+                
+                <div className="row">
+                    <Races></Races>
+                    <Records></Records>
+                    <Goals></Goals>
                 </div>
             </div>
-        </GlobalContextProvider>
+        </div>
     );
 }
 

@@ -6,7 +6,7 @@ import RecordList from '../../components/RecordList/RecordList';
 function Records() {
 
     return (
-        <div className="card">
+        <div className="card card-section">
             <div className="card-header section-header">
                 <h4 className="card-title">
                 Records

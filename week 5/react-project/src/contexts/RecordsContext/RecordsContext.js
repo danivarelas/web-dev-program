@@ -16,19 +16,27 @@ class RecordsContextProvider extends Component {
         switch (activity) {
             case 'Running':
                 records = JSON.parse(localStorage.getItem('runningRecords'));
-                this.setState({ runningRecords: this.updateRecord(distance, date, time, records) });
+                records = this.updateRecord(distance, date, time, records);
+                this.setState({ runningRecords: records });
+                localStorage.setItem('runningRecords', JSON.stringify(records));
                 break;
             case 'Swimming':
                 records = JSON.parse(localStorage.getItem('swimmingRecords'));
-                this.setState({ swimmingRecords: this.updateRecord(distance, date, time, records) });
+                records = this.updateRecord(distance, date, time, records);
+                this.setState({ swimmingRecords: records });
+                localStorage.setItem('swimmingRecords', JSON.stringify(records));
                 break;
             case 'Cycling':
                 records = JSON.parse(localStorage.getItem('cyclingRecords'));
-                this.setState({ cyclingRecords: this.updateRecord(distance, date, time, records) });
+                records = this.updateRecord(distance, date, time, records);
+                this.setState({ cyclingRecords: records });
+                localStorage.setItem('cyclingRecords', JSON.stringify(records));
                 break;
             case 'Triathlon':
                 records = JSON.parse(localStorage.getItem('triathlonRecords'));
-                this.setState({ triathlonRecords: this.updateRecord(distance, date, time, records) });
+                records = this.updateRecord(distance, date, time, records);
+                this.setState({ triathlonRecords: records });
+                localStorage.setItem('triathlonRecords', JSON.stringify(records));
                 break;
             default:
         }

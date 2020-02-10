@@ -59,7 +59,7 @@ function Calendar() {
             for (let i = 0; i < 7; i++) {
                 formattedDate = format(day, dateFormat);
                 const cloneDay = day;
-                const newDate = format(day, 'yyyy-MM-dd')
+                const newDate = format(day, 'yyyy-MM-dd');
                 const races = renderRaceBadges(newDate);
                 const goals = renderGoalBadges(newDate);
                 days.push(
@@ -100,24 +100,25 @@ function Calendar() {
                     switch(race.type) {
                         case 'Running':
                             return (
-                                <span className="badge badge-pill badge-info">{race.name}</span>
+                                <span key={race.name} className="badge badge-pill badge-info">{race.name}</span>
                             );
                         case 'Cycling':
                             return (
-                                <span className="badge badge-pill badge-warning">{race.name}</span>
+                                <span key={race.name} className="badge badge-pill badge-warning">{race.name}</span>
                             );
                         case 'Swimming':
                             return (
-                                <span className="badge badge-pill badge-primary">{race.name}</span>
+                                <span key={race.name} className="badge badge-pill badge-primary">{race.name}</span>
                             );
                         case 'Triathlon':
                             return (
-                                <span className="badge badge-pill badge-danger">{race.name}</span>
+                                <span key={race.name} className="badge badge-pill badge-danger">{race.name}</span>
                             );
                         default:
                             break;
                     }
                 }
+                return(null);
             })
         }
     }
@@ -126,10 +127,17 @@ function Calendar() {
         if (allGoals && allGoals.length) {
             return allGoals.map( goal => {
                 if (currentDate === goal.date) {
-                    return (
-                        <span className="badge badge-pill badge-success" >Goal</span>
-                    );
+                    if (goal.completed) {
+                        return (
+                            <span key={goal.description} className="badge badge-pill badge-success" >{goal.description}</span>
+                        );
+                    } else {
+                        return (
+                            <span key={goal.description} className="badge badge-pill badge-danger" >{goal.description}</span>
+                        );
+                    }
                 }
+                return(null);
             })
         }
     }
@@ -143,16 +151,16 @@ function Calendar() {
                 <CalendarSubheader></CalendarSubheader>
                 <div>{cells()}</div>
             </div>
-            <div className="container">
                 <div className="card-flex">
-                    <h5>Labels</h5>
-                    <span className="badge badge-pill badge-success">Goals</span>
+                    <h5>Labels Description</h5>
+                    <span className="badge badge-pill badge-success">Completed Goals</span>
+                    <span className="badge badge-pill badge-danger">Pending Goals</span>
+                    <span className="badge badge-pill badge-warning">Records</span>
                     <span className="badge badge-pill badge-info">Running Races</span>
-                    <span className="badge badge-pill badge-warning">Cycling Races</span>
+                    <span className="badge badge-pill badge-purple">Cycling Races</span>
                     <span className="badge badge-pill badge-primary">Swimming Races</span>
-                    <span className="badge badge-pill badge-danger">Triathlon Races</span>
+                    <span className="badge badge-pill badge-dark">Triathlon Races</span>
                 </div>
-            </div>
         </div>
     );
 }

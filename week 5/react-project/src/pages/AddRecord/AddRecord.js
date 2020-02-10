@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import Modal from '../../components/Modal/Modal';
 import { RecordsContext } from '../../contexts/RecordsContext/RecordsContext';
 import {
     activityTypes,
@@ -8,13 +7,15 @@ import {
     cyclingDistances,
     triathlonDistances
 } from '../../utils/variables';
+import NavBar from '../../components/NavBar/NavBar';
+import MenuHeader from '../../components/MenuHeader/MenuHeader';
+import { format } from 'date-fns';
 
-function AddRecord() {
+function AddRecord(props) {
 
     const [activity, setActivity] = useState("Cycling");
-    const [date, setDate] = useState("");
+    const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd'));
     const [distance, setDistance] = useState(cyclingDistances[0]);
-    const [time, setTime] = useState(0);
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
@@ -23,26 +24,34 @@ function AddRecord() {
     const context = useContext(RecordsContext);
 
     const addRecord = () => {
-        let totalSeconds = (hours * 3600) + (minutes * 60) + (seconds * 1);
-        setTime(totalSeconds);
-        context.addRecord(activity, date, distance, time);
+        const totalSeconds = (hours * 3600) + (minutes * 60) + (seconds * 1);
+        context.addRecord(activity, date, distance, totalSeconds);
+        props.history.push("/dashboard");
+    };
+
+    const goBack = () => {
+        props.history.push("/dashboard");
     };
 
     const handleActivityChange = event => {
         let value = event.target.value;
         setActivity(value);
-        switch(value) {
+        switch (value) {
             case 'Running':
                 setCustomDistances(runningDistances);
+                setDistance(runningDistances[0]);
                 break;
             case 'Swimming':
                 setCustomDistances(swimmingDistances);
+                setDistance(swimmingDistances[0]);
                 break;
             case 'Cycling':
                 setCustomDistances(cyclingDistances);
+                setDistance(cyclingDistances[0]);
                 break;
             case 'Triathlon':
                 setCustomDistances(triathlonDistances);
+                setDistance(triathlonDistances[0]);
                 break;
             default:
         }
@@ -69,51 +78,65 @@ function AddRecord() {
     };
 
     return (
-        <Modal title="Add new personal record">
-            <form>
-                <div className="form-group">
-                    <label htmlFor="activity">Activity</label>
-                    <select className="form-control" id="activity" onChange={handleActivityChange}>
-                        {activityTypes.map(type => {
-                            return <option>{type}</option>;
-                        })}
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="date">Date</label>
-                    <input type="date" className="form-control" id="date" onChange={handleDateChange} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="distance">Distance</label>
-                    <select className="form-control" id="distance" onChange={handleDistanceChange}>
-                        {customDistances.map(elem => {
-                            return <option>{elem}</option>;
-                        })}
-                    </select>
-                </div>
-                <div className="form-group">
+        <div>
+            <NavBar></NavBar>
+            <MenuHeader title="Log a new record"></MenuHeader>
+            <div className="container">
+                <div className="card card-form">
+                    <form onSubmit={addRecord}>
+                        <div className="form-group">
+                            <label htmlFor="activity">Activity</label>
+                            <select className="form-control" id="activity" onChange={handleActivityChange}>
+                                {activityTypes.map((type, index) => {
+                                    if (index === 0) {
+                                        return <option key={type} selected>{type}</option>;
+                                    } else {
+                                        return <option key={type}>{type}</option>;
+                                    }
+                                })}
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="date">Date</label>
+                            <input required type="date" value={date} className="form-control" id="date" onChange={handleDateChange} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="distance">Distance</label>
+                            <select className="form-control" id="distance" onChange={handleDistanceChange}>
+                                {customDistances.map(dist => {
+                                    return <option key={dist}>{dist}</option>;
+                                })}
+                            </select>
+                        </div>
+                        <div className="form-group">
 
-                    <div className="form-row">
-                        <div className="form-group col-md-4">
-                            <label htmlFor="hours">Hours</label>
-                            <input type="number" className="form-control" id="hours" placeholder="00" onChange={handleHoursChange} />
+                            <div className="form-row">
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="hours">Hours</label>
+                                    <input type="number" min="0" className="form-control" id="hours" placeholder="00" onChange={handleHoursChange} />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="minutes">Minutes</label>
+                                    <input type="number" min="0" max="59" className="form-control" id="minutes" placeholder="00" onChange={handleMinutesChange} />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="seconds">Seconds</label>
+                                    <input type="number" min="0" max="59" className="form-control" id="seconds" placeholder="00" onChange={handleSecondsChange} />
+                                </div>
+                            </div>
                         </div>
-                        <div className="form-group col-md-4">
-                            <label htmlFor="minutes">Minutes</label>
-                            <input type="number" className="form-control" id="minutes" placeholder="00" onChange={handleMinutesChange} />
+                        <div className="modal-footer">
+                            <button type="cancel" onClick={goBack} className="btn btn-danger btn-check-form">
+                                <i className="fas fa-times"></i>
+                            </button>
+                            <button type="submit" className="btn btn-success btn-check-form">
+                                <i className="fas fa-check"></i>
+                            </button>
                         </div>
-                        <div className="form-group col-md-4">
-                            <label htmlFor="seconds">Seconds</label>
-                            <input type="number" className="form-control" id="seconds" placeholder="00" onChange={handleSecondsChange} />
-                        </div>
-                    </div>
+                    </form>
                 </div>
-                <div className="modal-footer">
-                    <button type="cancel" className="btn btn-danger" data-dismiss="modal">Cancel</button>
-                    <button type="submit" onClick={addRecord} className="btn btn-success" data-dismiss="modal">Add</button>
-                </div>
-            </form>
-        </Modal>
+            </div>
+        </div>
     );
 }
 

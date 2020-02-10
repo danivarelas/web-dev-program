@@ -6,19 +6,19 @@ function RecordListItem(props) {
     const { activity, records } = props;
 
     const formatTime = timeInSeconds => {
-        console.log(timeInSeconds);
         let hours = 0;
         let minutes = 0;
         let seconds = 0;
         if (timeInSeconds >= 3600) {
             hours = Math.floor(timeInSeconds / 3600);
-            console.log(hours);
             minutes = timeInSeconds - (hours * 3600);
             minutes = Math.floor(minutes / 60);
             seconds = timeInSeconds - (hours * 3600) - (minutes * 60);
-        } if (timeInSeconds >= 60 && timeInSeconds < 3600) {
+        } else if (timeInSeconds >= 60 && timeInSeconds < 3600) {
             minutes = Math.floor(timeInSeconds / 60);
             seconds = timeInSeconds - (minutes * 60);
+        } else if (timeInSeconds < 60) {
+            seconds = timeInSeconds;
         }
         return (
             <span>{hours} h {minutes} min {seconds} s</span>
@@ -30,9 +30,9 @@ function RecordListItem(props) {
             return records.map(record => {
                 const time = formatTime(record.time);
                 return (
-                    <div className="col-lg-3 col-md-6">
+                    <div key={record.distance} className="col-lg-3 col-md-6">
                         <div className="record-element">
-                        <p className="record-distance"><i class="fas fa-medal"></i> {record.distance}</p>
+                        <p className="record-distance"><i className="fas fa-medal record-icon"></i> {record.distance}</p>
                         {time}
                     </div>
                     </div>

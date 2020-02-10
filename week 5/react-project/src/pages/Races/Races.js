@@ -1,7 +1,7 @@
 import React from 'react';
 import './Races.scss';
 import RaceList from '../../components/RaceList/RaceList';
-import AddRace from '../AddRace/AddRace';
+import { Link } from 'react-router-dom';
 
 function Races() {
 
@@ -9,16 +9,14 @@ function Races() {
         <div className="card card-section">
             <div className="card-header section-header">
                 <h4 className="card-title">
-                Races
-                <button type="button" className="btn btn-primary btn-add float-right" data-toggle="modal" data-target="#racesModal">
-                    <i className="fas fa-plus "></i>
-                </button></h4>
+                    Races
+                    <Link to="/dashboard/addRace" className="btn btn-primary btn-add float-right">
+                        <i className="fas fa-plus "></i>
+                    </Link>
+                </h4>
             </div>
             <div className="card-body">  
                 <RaceList/>
-            </div>
-            <div className="modal fade" id="racesModal" tabIndex="-1" role="dialog" aria-labelledby="racesModalTitle" aria-hidden="true">
-                <AddRace></AddRace>
             </div>
         </div>
     );

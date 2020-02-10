@@ -34,6 +34,10 @@
         .navbar-brand {
             color: black;
 
+            &:hover {
+                color: rgb(231, 85, 0);
+            }
+
             .logo {
                 content: url('../../images/podium.png');
             }

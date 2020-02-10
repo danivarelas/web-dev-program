@@ -14,9 +14,9 @@ function RaceList() {
     if (allRaces && allRaces.length) {
         return (
             <div className="row">
-                {allRaces.map((race) => {
+                {allRaces.map((race, index) => {
                     return (
-                        <RaceListItem race={race}></RaceListItem>
+                        <RaceListItem key={race.name + index} race={race}></RaceListItem>
                     );
                 })}
             </div>

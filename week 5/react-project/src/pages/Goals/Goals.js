@@ -1,7 +1,7 @@
 import React from 'react';
 import './Goals.scss'
-import AddGoal from '../AddGoal/AddGoal';
 import GoalList from '../../components/GoalList/GoalList';
+import { Link } from 'react-router-dom';
 
 function Goals() {
 
@@ -9,10 +9,11 @@ function Goals() {
         <div className="card">
             <div className="card-header section-header">
                 <h4 className="card-title">
-                Goals
-                <button type="button" className="btn btn-primary btn-add float-right" data-toggle="modal" data-target="#goalsModal">
-                    <i className="fas fa-plus "></i>
-                </button></h4>
+                    Goals
+                    <Link to="/dashboard/addGoal" className="btn btn-primary btn-add float-right">
+                        <i className="fas fa-plus"></i>
+                    </Link>
+                </h4>
             </div>
             <div className="card-body">
                 <div className="row">
@@ -20,8 +21,7 @@ function Goals() {
                         <div className="col-goals">
                             <h5 className="goals-title">Pending</h5>
                             <hr></hr>
-                            <GoalList isCompleted={false} emptyText="You haven't set any goals yet.
-                            Click on '+' to set a new goal."></GoalList>
+                            <GoalList isCompleted={false} emptyText="You don't have any goals yet."></GoalList>
                         </div>
                     </div>
                     <div className="col-lg-6 ">
@@ -32,9 +32,6 @@ function Goals() {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="modal fade" id="goalsModal" tabIndex="-1" role="dialog" aria-labelledby="goalsModalTitle" aria-hidden="true">
-                <AddGoal></AddGoal>
             </div>
         </div>
     );

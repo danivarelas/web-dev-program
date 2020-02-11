@@ -104,7 +104,7 @@ function Calendar() {
                             );
                         case 'Cycling':
                             return (
-                                <span key={race.name} className="badge badge-pill badge-warning">{race.name}</span>
+                                <span key={race.name} className="badge badge-pill badge-purple">{race.name}</span>
                             );
                         case 'Swimming':
                             return (
@@ -112,7 +112,7 @@ function Calendar() {
                             );
                         case 'Triathlon':
                             return (
-                                <span key={race.name} className="badge badge-pill badge-danger">{race.name}</span>
+                                <span key={race.name} className="badge badge-pill badge-dark">{race.name}</span>
                             );
                         default:
                             break;

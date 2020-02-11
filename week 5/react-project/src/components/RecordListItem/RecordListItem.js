@@ -50,9 +50,10 @@ function RecordListItem(props) {
     return (
         <div className="card card-accordion">
             <div className="card-header" id="headingTwo">
-                <h5 className="mb-0">
-                    <button className="btn btn-open collapsed" data-toggle="collapse" data-target={`#${activity}Collapse`} aria-expanded="false" aria-controls={`${activity}Collapse`}>
-                        {activity} Records
+                <h5 className="accordion-title">
+                    <span className="font-weight-bold align-middle">{activity} Records</span>
+                    <button className="btn btn-open collapsed float-right" data-toggle="collapse" data-target={`#${activity}Collapse`} aria-expanded="false" aria-controls={`${activity}Collapse`}>
+                    <i className="fas fa-chevron-circle-up"></i>
                     </button>
                 </h5>
             </div>

@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './RecordListItem.scss';
 
 function RecordListItem(props) {
 
     const { activity, records } = props;
+    const [selected, setSelected] = useState(false);
+    const [buttonClass, setButtonClass] = useState("");
+
+    useEffect(() => {
+        selected ? setButtonClass("btn btn-open collapsed selected float-right") : setButtonClass("btn btn-open collapsed float-right");
+    }, [buttonClass, selected]);
 
     const formatTime = timeInSeconds => {
         let hours = 0;
@@ -49,15 +55,15 @@ function RecordListItem(props) {
 
     return (
         <div className="card card-accordion">
-            <div className="card-header" id="headingTwo">
+            <div className="card-header" id={`${activity}Heading`}>
                 <h5 className="accordion-title">
                     <span className="font-weight-bold align-middle">{activity} Records</span>
-                    <button className="btn btn-open collapsed float-right" data-toggle="collapse" data-target={`#${activity}Collapse`} aria-expanded="false" aria-controls={`${activity}Collapse`}>
-                    <i className="fas fa-chevron-circle-up"></i>
+                    <button onClick={ () => {setSelected(!selected)}} className={buttonClass} data-toggle="collapse" data-target={`#${activity}Collapse`} aria-expanded="false" aria-controls={`${activity}Collapse`}>
+                        <i className="fas fa-chevron-circle-up"></i>
                     </button>
                 </h5>
             </div>
-            <div id={`${activity}Collapse`} className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div id={`${activity}Collapse`} className="collapse" aria-labelledby={`${activity}Heading`} data-parent={`#accordion${activity}`}>
                 <div className="card-body">
                     <div className="row">
                         {allRecords}

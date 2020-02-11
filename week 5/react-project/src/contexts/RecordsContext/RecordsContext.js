@@ -16,25 +16,25 @@ class RecordsContextProvider extends Component {
         switch (activity) {
             case 'Running':
                 records = JSON.parse(localStorage.getItem('runningRecords'));
-                records = this.updateRecord(distance, date, time, records);
+                records = this.updateRecord(activity, date, distance, time, records);
                 this.setState({ runningRecords: records });
                 localStorage.setItem('runningRecords', JSON.stringify(records));
                 break;
             case 'Swimming':
                 records = JSON.parse(localStorage.getItem('swimmingRecords'));
-                records = this.updateRecord(distance, date, time, records);
+                records = this.updateRecord(activity, date, distance, time, records);
                 this.setState({ swimmingRecords: records });
                 localStorage.setItem('swimmingRecords', JSON.stringify(records));
                 break;
             case 'Cycling':
                 records = JSON.parse(localStorage.getItem('cyclingRecords'));
-                records = this.updateRecord(distance, date, time, records);
+                records = this.updateRecord(activity, date, distance, time, records);
                 this.setState({ cyclingRecords: records });
                 localStorage.setItem('cyclingRecords', JSON.stringify(records));
                 break;
             case 'Triathlon':
                 records = JSON.parse(localStorage.getItem('triathlonRecords'));
-                records = this.updateRecord(distance, date, time, records);
+                records = this.updateRecord(activity, date, distance, time, records);
                 this.setState({ triathlonRecords: records });
                 localStorage.setItem('triathlonRecords', JSON.stringify(records));
                 break;
@@ -42,7 +42,7 @@ class RecordsContextProvider extends Component {
         }
     };
 
-    updateRecord = (distance, date, time, records) => {
+    updateRecord = (activity, date, distance, time, records) => {
         let found = false;
         let newRecords = [];
         if (records) {
@@ -57,6 +57,7 @@ class RecordsContextProvider extends Component {
         }
         if (!found) {
             newRecords = [...newRecords, {
+                activity: activity,
                 date: date,
                 distance: distance,
                 time: time

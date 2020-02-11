@@ -5,6 +5,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
+    Redirect,
   } from "react-router-dom";
 import Calendar from './pages/Calendar/Calendar';
 import Dashboard from './pages/Dashboard/Dashboard';
@@ -24,7 +25,8 @@ function App() {
                         <Route path="/dashboard/addGoal" component={AddGoal} />
                         <Route path="/dashboard" component={Dashboard} />
                         <Route path="/calendar" component={Calendar}/>
-                        <Route path="/" component={Home}/>
+                        <Route exact path="/" component={Home}/>
+                        <Redirect to="/dashboard"/>
                     </Switch>
                 </div>
             </GlobalContextProvider>

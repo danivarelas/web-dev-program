@@ -1,20 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import './RaceList.scss';
-import { RacesContext } from '../../contexts/RacesContext/RacesContext';
 import RaceListItem from '../RaceListItem/RaceListItem';
 
-function RaceList() {
+function RaceList(props) {
 
-    const { allRaces } = useContext(RacesContext);
+    const { races } = props;
 
-    useEffect(() => {
-
-    }, [allRaces]);
-
-    if (allRaces && allRaces.length) {
+    if (races && races.length) {
         return (
             <div className="row">
-                {allRaces.map((race, index) => {
+                {races.map((race, index) => {
                     return (
                         <RaceListItem key={race.name + index} race={race}></RaceListItem>
                     );
@@ -24,7 +19,7 @@ function RaceList() {
     } else {
         return (
             <div className="empty-message">
-                No races added yet.
+                No races found.
             </div>
         );
     }

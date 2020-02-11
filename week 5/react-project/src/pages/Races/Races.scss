@@ -17,13 +17,19 @@
             font-size: 2em;
             margin: 0.5em;
             color: white;
+            align-items: center;
         }
 
         .btn-add {
             border-radius: 50%;
-            font-size: 1.3rem;
             background-color: rgb(231, 85, 0);
             border: none;
+            transition: transform 0.1s ease-in-out;
+
+            &:hover {
+                transform: scale(1.2);
+                background-color: rgb(211, 77, 0);
+            }
         }
     }
 
@@ -33,3 +39,8 @@
         max-height: 30em;
     }
 }
+
+.input-group {
+    margin: 0 0 2em 0;
+}
+

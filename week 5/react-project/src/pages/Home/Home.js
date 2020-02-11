@@ -14,7 +14,7 @@ function Home() {
                         <img src={logo} alt="logo"/>
                         <h1>Road To Podium</h1>
                         <p>The place where you can plan your races, track your progress and log your results.</p>
-                        <Link className="btn" to="/dashboard">View Dashboard</Link>
+                        <Link className="btn btn-home" to="/dashboard">View Dashboard</Link>
                     </div>
                     </div>
                     

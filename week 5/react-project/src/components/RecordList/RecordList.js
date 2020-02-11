@@ -16,11 +16,19 @@ function RecordList() {
     }, [runningRecords, swimmingRecords, cyclingRecords, triathlonRecords]);
 
     return (
-        <div id="accordion">
-            <RecordListItem activity={activityTypes[0]} records={cyclingRecords}></RecordListItem>
-            <RecordListItem activity={activityTypes[1]} records={runningRecords}></RecordListItem>
-            <RecordListItem activity={activityTypes[2]} records={swimmingRecords}></RecordListItem>
-            <RecordListItem activity={activityTypes[3]} records={triathlonRecords}></RecordListItem>
+        <div>
+            <div id="accordionCycling">
+                <RecordListItem activity={activityTypes[0]} records={cyclingRecords}></RecordListItem>
+            </div>
+            <div id="accordionRunning">
+                <RecordListItem activity={activityTypes[1]} records={runningRecords}></RecordListItem>
+            </div>
+            <div id="accordionSwimming">
+                <RecordListItem activity={activityTypes[2]} records={swimmingRecords}></RecordListItem>
+            </div>
+            <div id="accordionTriathlon">
+                <RecordListItem activity={activityTypes[3]} records={triathlonRecords}></RecordListItem>
+            </div>
         </div>
     );
 }

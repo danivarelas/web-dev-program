@@ -1,5 +1,6 @@
 import React from 'react';
 import './RaceListItem.scss';
+import { format } from 'date-fns';
 
 function RaceListItem(props) {
 
@@ -40,7 +41,7 @@ function RaceListItem(props) {
                 {icon}
                 <p className="race-title">{race.name}</p>
                 <div className="race-info">
-                    <p><strong>Date:</strong> {race.date}</p>
+                    <p><strong>Date:</strong> {format(new Date(race.date), "MM/dd/yyyy")}</p>
                     <p><strong>Distance:</strong> {race.distance} km</p>
                 </div>
             </div>

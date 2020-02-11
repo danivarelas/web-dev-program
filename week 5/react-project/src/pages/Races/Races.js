@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import './Races.scss';
 import RaceList from '../../components/RaceList/RaceList';
 import { Link } from 'react-router-dom';
+import { RacesContext } from '../../contexts/RacesContext/RacesContext';
 
 function Races() {
+
+    const { allRaces, filterRaces } = useContext(RacesContext);
+
+    const [ races, setRaces ] = useState(allRaces);
+
+    const handleSearchChange = event => {
+        if (event.target.value === "") {
+            setRaces(allRaces);
+        } else {
+            const filteredRaces = filterRaces(event.target.value);
+            setRaces(filteredRaces);
+        }
+    };
 
     return (
         <div className="card card-section">
@@ -15,8 +29,14 @@ function Races() {
                     </Link>
                 </h4>
             </div>
-            <div className="card-body">  
-                <RaceList/>
+            <div className="card-body">
+                <div className="input-group">
+                    <div className="input-group-prepend">
+                        <div className="input-group-text"><i className="fas fa-search search-icon"></i></div>
+                    </div>
+                    <input type="text" className="form-control" onChange={handleSearchChange} placeholder="Search for races..."></input>
+                </div>
+                <RaceList races={races}/>
             </div>
         </div>
     );

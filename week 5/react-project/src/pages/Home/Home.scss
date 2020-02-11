@@ -40,6 +40,13 @@
                         color: wihte;
                         margin: 1em;
                     }
+
+                    p {
+                        font-size: 1.3em;
+                        font-weight: bold;
+                        width: 80%;
+                        margin: 1em auto;
+                    }
                 }
             }
 
@@ -52,10 +59,16 @@
         }
 
         .btn {
+            border-radius: 1em;
             background-color: black;
             color: white;
-            border-radius: 0;
+            opacity: 0.8;
+            padding: 0.2em 1em;
             font-size: 1.5em;
+
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 }

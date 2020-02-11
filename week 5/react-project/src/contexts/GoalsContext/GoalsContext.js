@@ -39,7 +39,6 @@ class GoalsContextProvider extends Component {
         const newGoals = goals.map(goal => {
             if (goal.id === id) {
                 goal.completed = !goal.completed;
-                console.log("completed")
             }
             return goal;
         });

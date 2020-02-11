@@ -61,26 +61,6 @@ header {
     color: white;
 }
 
-.card-flex {
-    width: 90%;
-    background-color: white;
-    border-radius: 0.5em;
-    margin: 2em auto;
-    padding: 1em;
-    text-align: center;
-
-    h5 {
-        margin: 0.5em;
-        text-align: center;
-        font-weight: bold;
-        font-size: 2em;
-    }
-
-    .badge {
-        margin: 0.5em;
-    }
-}
-
 /* Calendar */
 .calendar {
     display: block;
@@ -150,10 +130,14 @@ header {
             position: relative;
             height: 6em;
             border-right: 1px solid lightgray;
-            overflow: hidden;
+            overflow-y: scroll;
             cursor: pointer;
             background: white;
             transition: 0.25s ease-out;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
 
             &:hover {
                 background: whitesmoke;
@@ -163,7 +147,7 @@ header {
                     font-weight: bold;
                     line-height: 1;
                     color: rgba(42,114,144,1);
-                    font-size: 2em;
+                    font-size: 1.5em;
                     margin: .2em;
                     transition: .25s ease-in-out;
                     letter-spacing: -.07em;
@@ -198,7 +182,7 @@ header {
                 font-weight: bold;
                 line-height: 1;
                 color: rgba(42,114,144,1);
-                font-size: 2em;
+                font-size: 1.5em;
                 margin: .2em;
                 transition: .25s ease-in-out;
                 letter-spacing: -.07em;

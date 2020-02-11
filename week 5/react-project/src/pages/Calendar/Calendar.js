@@ -17,6 +17,8 @@ import CalendarSubheader from "../../components/CalendarSubheader/CalendarSubhea
 import { RacesContext } from "../../contexts/RacesContext/RacesContext";
 import { GoalsContext } from "../../contexts/GoalsContext/GoalsContext";
 import MenuHeader from "../../components/MenuHeader/MenuHeader";
+import { RecordsContext } from "../../contexts/RecordsContext/RecordsContext";
+import CalendarFooter from "../../components/CalendarFooter/CalendarFooter";
 
 function Calendar() {
 
@@ -24,6 +26,10 @@ function Calendar() {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const { allRaces } = useContext(RacesContext);
     const { allGoals } = useContext(GoalsContext);
+    const { runningRecords,
+        swimmingRecords,
+        cyclingRecords,
+        triathlonRecords } = useContext(RecordsContext);
 
     const header = () => {
         const dateFormat = "MMM yyyy";
@@ -62,6 +68,7 @@ function Calendar() {
                 const newDate = format(day, 'yyyy-MM-dd');
                 const races = renderRaceBadges(newDate);
                 const goals = renderGoalBadges(newDate);
+                const records = renderRecordBadges(newDate);
                 days.push(
                     <div className={`column cell ${!isSameMonth(day, monthStart) ? "disabled" : isSameDay(day, selectedDate) ? "selected" : ""}`}
                         key={day}
@@ -69,6 +76,7 @@ function Calendar() {
                         <span className="number">{formattedDate}</span>
                         {races}
                         {goals}
+                        {records}
                     </div>
                 );
                 day = addDays(day, 1);
@@ -95,9 +103,9 @@ function Calendar() {
 
     const renderRaceBadges = currentDate => {
         if (allRaces && allRaces.length) {
-            return allRaces.map( race => {
+            return allRaces.map(race => {
                 if (currentDate === race.date) {
-                    switch(race.type) {
+                    switch (race.type) {
                         case 'Running':
                             return (
                                 <span key={race.name} className="badge badge-pill badge-info">{race.name}</span>
@@ -118,14 +126,14 @@ function Calendar() {
                             break;
                     }
                 }
-                return(null);
+                return (null);
             })
         }
     }
 
     const renderGoalBadges = currentDate => {
         if (allGoals && allGoals.length) {
-            return allGoals.map( goal => {
+            return allGoals.map(goal => {
                 if (currentDate === goal.date) {
                     if (goal.completed) {
                         return (
@@ -137,30 +145,47 @@ function Calendar() {
                         );
                     }
                 }
-                return(null);
+                return (null);
+            })
+        }
+    }
+
+    const renderRecordBadges = currentDate => {
+        let records = [];
+        if (runningRecords) {
+            records = [...records, ...runningRecords];
+        }
+        if (cyclingRecords) {
+            records = [...records, ...cyclingRecords];
+        }
+        if (swimmingRecords) {
+            records = [...records, ...swimmingRecords];
+        }
+        if (triathlonRecords) {
+            records = [...records, ...triathlonRecords];
+        }
+        if (records && records.length) {
+            return records.map(record => {
+                if (currentDate === record.date) {
+                    return (
+                        <span key={record.activity + record.distance} className="badge badge-pill badge-warning" >{record.activity + ": " + record.distance}</span>
+                    );
+                }
+                return (null);
             })
         }
     }
 
     return (
         <div>
-            <NavBar></NavBar>
-            <MenuHeader title="Calendar"/>
+            <NavBar/>
+            <MenuHeader title="Calendar" />
             <div className="calendar">
                 <div>{header()}</div>
-                <CalendarSubheader></CalendarSubheader>
+                <CalendarSubheader/>
                 <div>{cells()}</div>
             </div>
-                <div className="card-flex">
-                    <h5>Labels Description</h5>
-                    <span className="badge badge-pill badge-success">Completed Goals</span>
-                    <span className="badge badge-pill badge-danger">Pending Goals</span>
-                    <span className="badge badge-pill badge-warning">Records</span>
-                    <span className="badge badge-pill badge-info">Running Races</span>
-                    <span className="badge badge-pill badge-purple">Cycling Races</span>
-                    <span className="badge badge-pill badge-primary">Swimming Races</span>
-                    <span className="badge badge-pill badge-dark">Triathlon Races</span>
-                </div>
+            <CalendarFooter/>
         </div>
     );
 }

@@ -8,6 +8,8 @@ import MenuHeader from '../../components/MenuHeader/MenuHeader';
 
 function Dashboard() {
 
+    window.scrollTo( 0, 0 );
+
     return (
         <div>
             <NavBar/>

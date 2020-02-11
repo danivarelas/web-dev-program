@@ -11,7 +11,7 @@ function AddRace(props) {
     const [name, setName] = useState("");
     const [distance, setDistance] = useState(0);
     const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd'));
-    const [type, setType] = useState("");
+    const [type, setType] = useState("Cycling");
 
     const context = useContext(RacesContext);
 

@@ -4,6 +4,11 @@
     margin-bottom: 1.5em;
     background-color: #eee;
     text-align: center;
+    transition: transform 0.25s ease-in-out;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 
     .race-title {
         font-size: 1.5em;
@@ -11,10 +16,10 @@
     }
 
     .race-icon {
-        font-size: 3em;
+        font-size: 2.8em;
 
         &-tri {
-            font-size: 3em;
+            font-size: 2.8em;
             margin: auto 0.1em;
         }
     }

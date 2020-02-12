@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class Book {
 
-    private UUID id;
+    private Long id;
     private String name;
     private int year;
     private int pages;
@@ -17,22 +17,22 @@ public class Book {
         this.name = name;
     }
 
-    public Book(UUID id, String name) {
+    public Book(Long id, String name) {
         this(name);
         this.id = id;
     }
 
-    public Book(UUID id, String name, int year, int pages) {
+    public Book(Long id, String name, int year, int pages) {
         this(id,name);
         this.year = year;
         this.pages = pages;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -19,7 +19,7 @@ public class BookService implements IBookService {
 
     @Override
     public int addBook(Book book) {
-        return bookDao.insertBook(book);
+        return 1;//bookDao.insertBook(book);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public Optional<Book> selectBookById(UUID id) {
+    public Optional<Book> selectBookById(long id) {
         return bookDao.selectBookById(id);
     }
 
@@ -38,12 +38,12 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public int deleteBook(UUID id) {
+    public int deleteBook(long id) {
         return bookDao.deleteBook(id);
     }
 
     @Override
-    public int updateBook(UUID id, Book book) {
+    public int updateBook(long id, Book book) {
         return bookDao.updateBook(id, book);
     }
 

@@ -15,12 +15,12 @@ public interface IBookService {
 
     public List<Book> selectAllBooks();
 
-    public Optional<Book> selectBookById(UUID id);
+    public Optional<Book> selectBookById(long id);
 
     public Optional<Book> selectBookByName(String name);
 
-    public int deleteBook(UUID id);
+    public int deleteBook(long id);
 
-    public int updateBook(UUID id, Book book);
+    public int updateBook(long id, Book book);
 
 }

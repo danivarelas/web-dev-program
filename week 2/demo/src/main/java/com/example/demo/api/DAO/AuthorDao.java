@@ -2,24 +2,23 @@ package com.example.demo.api.DAO;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
-import com.example.demo.api.Model.Author;
+import com.example.demo.api.DTO.AuthorDTO;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AuthorDao {
+public interface AuthorDao extends JpaRepository<AuthorDTO, Long> {
 
-    int insertAuthor(UUID id, Author author);
+//    int insertAuthor(AuthorDTO authorDTO);
 
-    default int insertAuthor(Author author) {
-        UUID id = UUID.randomUUID();
-        return insertAuthor(id, author);
-    }
+    List<AuthorDTO> findByName(String name);
 
-    List<Author> selectAllAuthors();
+    AuthorDTO findById(long id);
 
-    Optional<Author> selectAuthorById(UUID id);
-
-    int deleteAuthor(UUID id);
-
-    int updateAuthor(UUID id, Author author);
+//    List<AuthorDTO> selectAllAuthors();
+//
+//    Optional<AuthorDTO> selectAuthorById(long id);
+//
+//    int deleteAuthor(long id);
+//
+//    int updateAuthor(long id, AuthorDTO authorDTO);
 }

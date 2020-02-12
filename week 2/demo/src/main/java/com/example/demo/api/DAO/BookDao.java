@@ -4,24 +4,21 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.example.demo.api.DTO.BookDTO;
 import com.example.demo.api.Model.Book;
+import org.springframework.data.repository.CrudRepository;
 
 public interface BookDao {
 
-    int insertBook(UUID id, Book book);
-
-    default int insertBook(Book book) {
-        UUID id = UUID.randomUUID();
-        return insertBook(id, book);
-    }
+    int insertBook(long id, Book book);
 
     List<Book> selectAllBooks();
 
-    Optional<Book> selectBookById(UUID id);
+    Optional<Book> selectBookById(long id);
 
     Optional<Book> selectBookByName(String name);
 
-    int deleteBook(UUID id);
+    int deleteBook(long id);
 
-    int updateBook(UUID id, Book book);
+    int updateBook(long id, Book book);
 }

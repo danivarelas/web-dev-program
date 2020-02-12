@@ -15,7 +15,7 @@ public class BookDataAccessService implements BookDao {
     private static List<Book> booksRepository = new ArrayList<>();
 
     @Override
-    public int insertBook(UUID id, Book book) {
+    public int insertBook(long id, Book book) {
         booksRepository.add(new Book(id, book.getName(), book.getYear(), book.getPages()));
         return 1;
     }
@@ -26,7 +26,7 @@ public class BookDataAccessService implements BookDao {
     }
 
     @Override
-    public Optional<Book> selectBookById(UUID id) {
+    public Optional<Book> selectBookById(long id) {
         return booksRepository.stream().filter(book -> book.getId().equals(id)).findFirst();
     }
 
@@ -36,7 +36,7 @@ public class BookDataAccessService implements BookDao {
     }
 
     @Override
-    public int deleteBook(UUID id) {
+    public int deleteBook(long id) {
         Optional<Book> book = selectBookById(id);
         if (book.equals(null)) {
             return 0;
@@ -46,7 +46,7 @@ public class BookDataAccessService implements BookDao {
     }
 
     @Override
-    public int updateBook(UUID id, Book book) {
+    public int updateBook(long id, Book book) {
         return selectBookById(id).map(p -> {
             int indexOfBook = booksRepository.indexOf(p);
             if (indexOfBook >= 0) {

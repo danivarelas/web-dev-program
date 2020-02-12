@@ -1,14 +1,12 @@
 package com.example.demo.api.Model;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import javax.validation.constraints.NotBlank;
 
 public class Author {
 
-    private UUID id;
+    private Long id;
     @NotBlank
     private String name;
     private String country;
@@ -23,16 +21,16 @@ public class Author {
         this.name = name;
     }
 
-    public Author(UUID id, String name) {
+    public Author(Long id, String name) {
         this(name);
         this.id = id;
     }
 
-    public Author(UUID id, String name, String country, int age, List<Book> books) {
+    public Author(Long id, String name, String country, int age) {
         this(id, name);
         this.country = country;
         this.age = age;
-        this.books = books;
+        //this.books = books;
     }
 
     public String getCountry() {
@@ -51,11 +49,11 @@ public class Author {
         this.age = age;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

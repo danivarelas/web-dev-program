@@ -45,21 +45,21 @@ public class BookController {
         return bookService.selectAllBooks();
     }
 
-    @GetMapping(path = "{id}")
-    public Book getBookById(@PathVariable("id") UUID id) {
-        //JWTGenerator.validateToken(request.getHeader("authorization"));
-        return bookService.selectBookById(id).orElse(null);
-    }
-
-    @DeleteMapping(path = "{id}")
-    public void deleteBook(@PathVariable("id") UUID id) {
-        //JWTGenerator.validateToken(request.getHeader("authorization"));
-        bookService.deleteBook(id);
-    }
-
-    @PutMapping(path = "{id}")
-    public void updateBook(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Book book) {
-        //JWTGenerator.validateToken(request.getHeader("authorization"));
-        bookService.updateBook(id, book);
-    }
+//    @GetMapping(path = "{id}")
+//    public Book getBookById(@PathVariable("id") UUID id) {
+//        //JWTGenerator.validateToken(request.getHeader("authorization"));
+//        return bookService.selectBookById(id).orElse(null);
+//    }
+//
+//    @DeleteMapping(path = "{id}")
+//    public void deleteBook(@PathVariable("id") UUID id) {
+//        //JWTGenerator.validateToken(request.getHeader("authorization"));
+//        bookService.deleteBook(id);
+//    }
+//
+//    @PutMapping(path = "{id}")
+//    public void updateBook(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Book book) {
+//        //JWTGenerator.validateToken(request.getHeader("authorization"));
+//        bookService.updateBook(id, book);
+//    }
 }

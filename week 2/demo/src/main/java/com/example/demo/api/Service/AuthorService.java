@@ -1,11 +1,9 @@
 package com.example.demo.api.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import com.example.demo.api.DAO.AuthorDao;
+import com.example.demo.api.DTO.AuthorDTO;
 import com.example.demo.api.Model.Author;
 import com.example.demo.api.Model.Book;
 import com.example.demo.api.Service.BookService;
@@ -24,32 +22,48 @@ public class AuthorService implements IAuthorService {
         this.bookService = bookService;
     }
 
-    public int addAuthor(Author author) {
+    public Author addAuthor(Author author) {
         if (author == null) {
-            return 0;
+            return null;
         } else {
-            author.setBooks(saveNewBooks(author));
-            return authorDao.insertAuthor(author);
+            AuthorDTO authorDTO = authorDao.save(new AuthorDTO(author.getName(), author.getCountry(), author.getAge()));
+            //author.setBooks(saveNewBooks(author));
+            return new Author(authorDTO.getId(),authorDTO.getName(),authorDTO.getCountry(),authorDTO.getAge());
         }
     }
 
     public List<Author> selectAllAuthors() {
-        List<Author> authors = authorDao.selectAllAuthors();
-        if (authors != null && !authors.isEmpty()) {
-            authors.forEach((author) -> {
-                author.setBooks(getExistingBooks(author));
-            });
-        }
+//        List<AuthorDTO> authors = authorDao.selectAllAuthors();
+//        if (authors != null && !authors.isEmpty()) {
+//            authors.forEach((author) -> {
+//                author.setBooks(getExistingBooks(author));
+//            });
+//        }
+        List<Author> authors = new ArrayList<>();
         return authors;
     }
 
-    public Optional<Author> selectAuthorById(UUID id) {
-        Optional<Author> author = authorDao.selectAuthorById(id);
-        if (author.isPresent()) {
-            author.get().setBooks(getExistingBooks(author.get()));
-        }
-        return author;
-    }
+//    public Optional<Author> selectAuthorById(Long id) {
+//        Optional<AuthorDTO> author = authorDao.selectAuthorById(id);
+//        if (author.isPresent()) {
+//            author.get().setBooks(getExistingBooks(author.get()));
+//        }
+//        Optional<Author> author = new Optional<Author>().get();
+//        return author;
+//    }
+
+//    public int deleteAuthor(Long id) {
+//        return authorDao.deleteAuthor(id);
+//    }
+//
+//    public int updateAuthor(Long id, AuthorDTO authorDTO) {
+//        if (authorDTO == null) {
+//            return 0;
+//        } else {
+//            //author.setBooks(saveNewBooks(author));
+//            return authorDao.updateAuthor(id, authorDTO);
+//        }
+//    }
 
     public List<Book> getExistingBooks(Author author) {
         List<Book> books = author.getBooks();
@@ -79,16 +93,4 @@ public class AuthorService implements IAuthorService {
         return books;
     }
 
-    public int deleteAuthor(UUID id) {
-        return authorDao.deleteAuthor(id);
-    }
-
-    public int updateAuthor(UUID id, Author author) {
-        if (author == null) {
-            return 0;
-        } else {
-            author.setBooks(saveNewBooks(author));
-            return authorDao.updateAuthor(id, author);
-        }
-    }
 }

@@ -40,30 +40,30 @@ public class AuthorController {
         authorService.addAuthor(author);
     }
 
-    @GetMapping
-    public List<Author> getAllAuthors() {
-        //JWTGenerator.validateToken(request.getHeader("authorization"));
-        return authorService.selectAllAuthors();
-    }
-
-    // @RequestParam
-
-    @GetMapping(path = "{id}")
-    public Author getAuthorById(@PathVariable("id") UUID id) {
-        //JWTGenerator.validateToken(request.getHeader("authorization"));
-        return authorService.selectAuthorById(id).orElse(null);
-    }
-
-    @DeleteMapping(path = "{id}")
-    public void deleteAuthor(@PathVariable("id") UUID id) {
-        //JWTGenerator.validateToken(request.getHeader("authorization"));
-        authorService.deleteAuthor(id);
-    }
-
-    @PutMapping(path = "{id}")
-    public void updateAuthor(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Author author) {
-        //JWTGenerator.validateToken(request.getHeader("authorization"));
-        authorService.updateAuthor(id, author);
-    }
+//    @GetMapping
+//    public List<Author> getAllAuthors() {
+//        //JWTGenerator.validateToken(request.getHeader("authorization"));
+//        return authorService.selectAllAuthors();
+//    }
+//
+//    // @RequestParam
+//
+//    @GetMapping(path = "{id}")
+//    public Author getAuthorById(@PathVariable("id") UUID id) {
+//        //JWTGenerator.validateToken(request.getHeader("authorization"));
+//        return authorService.selectAuthorById(id).orElse(null);
+//    }
+//
+//    @DeleteMapping(path = "{id}")
+//    public void deleteAuthor(@PathVariable("id") UUID id) {
+//        //JWTGenerator.validateToken(request.getHeader("authorization"));
+//        authorService.deleteAuthor(id);
+//    }
+//
+//    @PutMapping(path = "{id}")
+//    public void updateAuthor(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Author author) {
+//        //JWTGenerator.validateToken(request.getHeader("authorization"));
+//        authorService.updateAuthor(id, author);
+//    }
     
 }

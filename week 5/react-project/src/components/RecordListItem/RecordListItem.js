@@ -57,7 +57,7 @@ function RecordListItem(props) {
         <div className="card card-accordion">
             <div className="card-header" id={`${activity}Heading`}>
                 <h5 className="accordion-title">
-                    <span className="font-weight-bold align-middle">{activity} Records</span>
+                    <span className="font-weight-bold align-middle">{activity}</span>
                     <button onClick={ () => {setSelected(!selected)}} className={buttonClass} data-toggle="collapse" data-target={`#${activity}Collapse`} aria-expanded="false" aria-controls={`${activity}Collapse`}>
                         <i className="fas fa-chevron-circle-up"></i>
                     </button>

@@ -7,6 +7,8 @@
         width: 2em;
         height: 2em;
         padding: 0;
+        margin-right: 0.5em;
+        align-self: center;
         transition: transform 0.25s ease-in-out;
 
         &:hover {
@@ -15,15 +17,47 @@
     }
     
     .goal-text {
-        margin: 0 1em;
-        font-size: 1.5em;
+        width: 80%;
+        word-wrap: break-word;
+        margin: 0;
+        font-size: 1.3em;
         align-self: center;
 
         &-completed {
+            width: 80%;
+            word-wrap: break-word;
+            margin: 0;
+            font-size: 1.3em;
             align-self: center;
-            margin: 0 1em;
-            font-size: 1.5em;
             text-decoration: line-through;
+        }
+    }
+}
+
+@media (max-width:599px) {
+    .goal-item {
+        margin: 0.2em 0;
+        display: flex;
+    
+        .btn-check {
+            border-radius: 50%;
+            width: 2em;
+            height: 2em;
+            padding: 0.5em;
+            padding-top: 0.2em;
+            margin-right: 0.5em;
+            align-self: center;
+
+            &.btn-danger {
+                padding: 0.5em;
+                padding-top: 0.2em;
+            }
+        }
+        
+        .goal-text, .goal-text-completed {
+            width: 90%;
+            font-size: 1.1em;
+            align-self: center;
         }
     }
 }

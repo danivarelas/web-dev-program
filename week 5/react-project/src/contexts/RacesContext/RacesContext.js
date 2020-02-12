@@ -37,8 +37,9 @@ class RacesContextProvider extends Component {
 
     filterRaces = (filterText) => {
         const races = JSON.parse(localStorage.getItem('allRaces'));
+        const text = filterText.toLowerCase()
         const newRaces = races.filter((race) => {
-            return race.name.toLowerCase().includes(filterText);
+            return race.name.toLowerCase().includes(text);
         });
         return newRaces;
     }

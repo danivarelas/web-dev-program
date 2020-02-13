@@ -33,13 +33,16 @@ public class AuthorService implements IAuthorService {
     }
 
     public List<Author> selectAllAuthors() {
-//        List<AuthorDTO> authors = authorDao.selectAllAuthors();
+        List<AuthorDTO> authorsDTO = authorDao.findAll();
+        List<Author> authors = new ArrayList<>();
 //        if (authors != null && !authors.isEmpty()) {
 //            authors.forEach((author) -> {
 //                author.setBooks(getExistingBooks(author));
 //            });
 //        }
-        List<Author> authors = new ArrayList<>();
+        authorsDTO.forEach((authorDTO) -> {
+            authors.add(new Author(authorDTO.getId(),authorDTO.getName(),authorDTO.getCountry(),authorDTO.getAge()));
+        });
         return authors;
     }
 

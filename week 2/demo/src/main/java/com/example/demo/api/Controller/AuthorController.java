@@ -40,11 +40,11 @@ public class AuthorController {
         authorService.addAuthor(author);
     }
 
-//    @GetMapping
-//    public List<Author> getAllAuthors() {
-//        //JWTGenerator.validateToken(request.getHeader("authorization"));
-//        return authorService.selectAllAuthors();
-//    }
+    @GetMapping
+    public List<Author> getAllAuthors() {
+        //JWTGenerator.validateToken(request.getHeader("authorization"));
+        return authorService.selectAllAuthors();
+    }
 //
 //    // @RequestParam
 //

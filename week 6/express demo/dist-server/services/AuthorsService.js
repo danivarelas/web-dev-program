@@ -5,26 +5,41 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _AuthorsDAO = _interopRequireDefault(require("../daos/AuthorsDAO"));
-
-var _AuthorDTO = _interopRequireDefault(require("../dtos/AuthorDTO"));
+var _authors = _interopRequireDefault(require("../models/authors"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function AuthorsService() {
-  var authorsDAO = new _AuthorsDAO["default"]();
+var createAuthor = function createAuthor(author) {
+  _authors["default"].create(author);
+};
 
-  this.save = function (author) {
-    var uuidv1 = require('uuid/v1');
+var getAll = function getAll(cb) {
+  _authors["default"].find({}, cb);
+};
 
-    var authorDTO = new _AuthorDTO["default"](uuidv1(), author.name, author.country, author.age, author.books);
-    authorsDAO.save(authorDTO);
-  };
+var findById = function findById(id, cb) {
+  _authors["default"].findOne({
+    id: id
+  }, cb);
+};
 
-  this.selectAll = function () {
-    return authorsDAO.selectAll;
-  };
-}
+var updateById = function updateById(id, author, cb) {
+  _authors["default"].findOneAndUpdate({
+    id: id
+  }, author, cb);
+};
 
-var _default = AuthorsService;
+var deleteById = function deleteById(id) {
+  _authors["default"].deleteOne({
+    id: id
+  });
+};
+
+var _default = {
+  createAuthor: createAuthor,
+  getAll: getAll,
+  findById: findById,
+  updateById: updateById,
+  deleteById: deleteById
+};
 exports["default"] = _default;

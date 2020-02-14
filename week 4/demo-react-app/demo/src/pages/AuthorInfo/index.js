@@ -18,7 +18,8 @@ function AuthorInfo(props) {
         let unsubscribe = false;
         let source = axios.CancelToken.source();
         // Actualiza el título del documento usando la API del navegador
-        axios.get(`http://localhost:8081/api/v1/author/${authorId}`)
+        //axios.get(`http://localhost:8081/api/v1/author/${authorId}`)
+        axios.get(`http://localhost:3001/authors/${authorId}`)
             .then( res => {
                 if (!unsubscribe) {
                     setAuthor(res.data);
@@ -36,7 +37,7 @@ function AuthorInfo(props) {
             unsubscribe = true;
             source.cancel("Cancelling in cleanup");
         }
-    }, [authorId, author]);
+    }, [authorId]);
 
     const headers = ['Name', 'Remove'];
     return (

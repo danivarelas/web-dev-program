@@ -29,7 +29,8 @@ function AddAuthor(props) {
             age: authorAge
         };
         console.log(author);
-        axios.post(`http://localhost:8081/api/v1/author`, author)
+        //axios.post(`http://localhost:8081/api/v1/author`, author)
+        axios.post(`http://localhost:3001/authors`, author)
         .then(res => {
             console.log(res);
             history.goBack();

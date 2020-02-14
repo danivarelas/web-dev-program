@@ -1,20 +1,29 @@
-import AuthorsDAO from '../daos/AuthorsDAO';
-import AuthorDTO from '../dtos/AuthorDTO';
+import authors from "../models/authors";
 
-function AuthorsService () {
+const createAuthor = author => {
+    authors.create(author);
+};
 
-    const authorsDAO = new AuthorsDAO();
+const getAll = cb => {
+    authors.find({}, cb);
+};
 
-    this.save = (author) => {
-        const uuidv1 = require('uuid/v1');
-        var authorDTO = new AuthorDTO(uuidv1(), author.name, author.country, author.age, author.books);
-        authorsDAO.save(authorDTO);
-    }
+const findById = (id, cb) => {
+    authors.findOne({ id }, cb);
+};
 
-    this.selectAll = () => {
-        return authorsDAO.selectAll;
-    }
+const updateById = (id, author, cb) => {
+    authors.findOneAndUpdate({ id }, author, cb);
+};
 
-}
+const deleteById = id => {
+    authors.deleteOne({ id });
+};
 
-export default AuthorsService;
+export default {
+    createAuthor,
+    getAll,
+    findById,
+    updateById,
+    deleteById
+};

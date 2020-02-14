@@ -8,19 +8,14 @@ function TableBooks(props) {
     const {headers, author, emptyMessage} = props;
 
     const handleRemove = (bookId) => {
-
-        console.log(bookId);
-        const bookRemove = {
-            id: bookId
-        };
         
         let newBooks = author.books.filter(book => {
-            //console.log(book.id + ' != ' + bookRemove.id)
-            return book.id !== bookRemove.id;
+            console.log(book._id + ' != ' + bookId)
+            return book._id !== bookId;
         });
         author.books = newBooks;
         console.log(newBooks);
-        Axios.put(`http://localhost:8081/api/v1/author/${author.id}`, author)
+        Axios.put(`http://localhost:3001/authors/${author._id}`, author)
         .then(res => {
             console.log(res);
         });
@@ -34,10 +29,11 @@ function TableBooks(props) {
                 </thead>
                 <tbody className="text-center">
                     {author.books.map((book) => {
+                        console.log(author.books)
                         return (
                             <tr>
                                 <td className="align-middle"><Link to={`/book/${book.id}`}>{book.name}</Link></td>
-                                <td><button className="btn btn-secondary" onClick={() => handleRemove(book.id)}><i className="fas fa-trash"></i></button></td>
+                                <td><button className="btn btn-secondary" onClick={() => handleRemove(book._id)}><i className="fas fa-trash"></i></button></td>
                             </tr>
                         );}
                     )}

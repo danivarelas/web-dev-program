@@ -55,8 +55,8 @@ public class UserController {
         User dbUser = this.getUserByUsername(user.getUsername());
         if (dbUser != null) {
             if (user.getPassword().equals(dbUser.getPassword())) {
-                String jwt = JWTProvider.createJWT(dbUser.getId()+"", dbUser.getUsername(), dbUser.getRole(), "Logged in",
-                        600000);
+                String jwt = JWTProvider.createJWT(dbUser.getId()+"", dbUser.getName(), "Logged in",
+                        6000);
                 return new ResponseEntity<>(jwt, HttpStatus.OK);
             }
             return new ResponseEntity<>("Incorrect password", HttpStatus.BAD_REQUEST);

@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
 import { useCookies } from 'react-cookie';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import sha256 from 'crypto-js/sha256';
+import Base64 from 'crypto-js/enc-base64';
 
-const Login = (props) => {
+const Login = () => {
 
-    const { history } = props;
+    const history = useHistory();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [cookies, setCookie] = useCookies(['JWT']);
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         const user = {
             username: username,
             password: password
@@ -22,7 +25,7 @@ const Login = (props) => {
             }
         }).then(res => {
             setCookie('JWT', res.data, { path: '/' });
-            return <Redirect to="/"></Redirect>
+            history.push("/");
         }).catch(e => {
             console.log(e);
             if (Axios.isCancel(e)) {
@@ -38,11 +41,13 @@ const Login = (props) => {
     }
 
     const handlePassword = event => {
-        setPassword(event.target.value);
+        const hash = Base64.stringify(sha256(event.target.value));
+        setPassword(hash);
     }
 
     return (
         <div className="container">
+            <h1>Login to PowerBank</h1>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Username</label>
@@ -53,7 +58,7 @@ const Login = (props) => {
                     <input className="form-control" type="password" required onChange={handlePassword}></input>
                 </div>
                 <div>
-                    <button className="btn btn-success" type="submit">Login</button>
+                    <button className="btn btn-success" type="submit" >Login</button>
                 </div>
             </form>
             <p>Don't have an account? <Link to="/register">Register here</Link>.</p>

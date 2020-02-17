@@ -1,0 +1,88 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100%;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+#sidebar {
+    /* don't forget to add all the previously mentioned styles here too */
+    background: #ccc;
+    color: #626262;
+    transition: all 0.3s;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #cccccc;
+    border-bottom: 1px solid #626262;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #626262;
+}
+
+#sidebar ul p {
+    color: #626262;
+    padding: 1em;
+}
+
+#sidebar ul li a {
+    padding: 1em;
+    font-size: 1.1em;
+    display: block;
+    color: #626262;
+}
+#sidebar ul li a:hover {
+    color: #333333;
+    background: #fff;
+    text-decoration: none;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #cccccc;
+}
+ul ul a {
+    font-size: 0.9em;
+    padding-left: 2em;
+    background: #eeeeee;
+}
+
+@media (max-width: 991px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 992px) {
+    #sidebar, #sidebar.active {
+        margin-left: 0;
+    }
+}

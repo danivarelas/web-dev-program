@@ -1,0 +1,38 @@
+CREATE TABLE IF NOT EXISTS user(
+	id int auto_increment PRIMARY KEY NOT NULL,
+    name varchar(50) NOT NULL,
+    lastname varchar(50) NOT NULL,
+    email varchar(50) NOT NULL,
+    username varchar(50) NOT NULL,
+    password varchar(255) NOT NULL,
+    role varchar(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS account(
+	id int auto_increment PRIMARY KEY NOT NULL,
+    account_number varchar(20) NOT NULL unique,
+    balance int(100) NOT NULL,
+    currency varchar(3) NOT NULL,
+    user_id int,
+    foreign key(user_id) references user(id)
+);
+
+CREATE TABLE IF NOT EXISTS credit_card(
+	id int auto_increment PRIMARY KEY NOT NULL,
+    card_number varchar(10) NOT NULL unique,
+    card_limit varchar(255) NOT NULL,
+    currency varchar(3) NOT NULL,
+    balance varchar(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS transfer(
+	id int auto_increment PRIMARY KEY NOT NULL,
+    transfer_number varchar(10) NOT NULL unique,
+    transfer_description varchar(255) NOT NULL,
+    amount varchar(255) NOT NULL,
+    currency varchar(3) NOT NULL,
+    source_account int,
+    target_account int,
+    foreign key(source_account) references account(id),
+    foreign key(target_account) references account(id)
+);

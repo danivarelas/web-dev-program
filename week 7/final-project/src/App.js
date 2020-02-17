@@ -1,22 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.scss';
 import Login from './pages/Login/Login';
-import { withCookies } from 'react-cookie';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { withCookies, useCookies } from 'react-cookie';
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Register from './pages/Register/Register';
 import Home from './pages/Home/Home';
-import Users from './pages/Users/Users';
-import Navbar from './components/Navbar/Navbar';
+import validate from './utils/JWTParser';
 
 function App() {
+    
+    const [cookies] = useCookies(['JWT']);
+
+    const [redirect, setRedirect] = useState("");
+
+    useEffect(() => {
+        if (validate(cookies.JWT)) {
+            setRedirect("/home");
+        } else {
+            setRedirect("/login");
+        }
+    }, [redirect, cookies]);
+
     return (
         <Router>
             <Switch>
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
-                <Route path="/users" component={Users} />
-                <Route path="/" component={Home} />
+                <Route path="/home" component={Home} />
+                <Redirect from="/" to={redirect} />
             </Switch>
         </Router>
     );

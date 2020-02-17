@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import sha256 from 'crypto-js/sha256';
+import Base64 from 'crypto-js/enc-base64';
 
-const Register = (props) => {
+const Register = () => {
 
-    const { history } = props;
+    const history = useHistory();
 
     const [name, setName] = useState("");
     const [lastname, setLastname] = useState("");
@@ -12,7 +15,8 @@ const Register = (props) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         if (password === confirmPassword) {
             const user = {
                 name,
@@ -21,17 +25,18 @@ const Register = (props) => {
                 username,
                 password
             }
+            console.log(user)
             Axios.post(`http://localhost:8081/api/v1/user`, user)
-                .then(res => {
-                    history.goBack();
-                }).catch(e => {
-                    console.log(e);
-                    if (Axios.isCancel(e)) {
-                        alert(`request cancelled:${e.message}`);
-                    } else {
-                        alert("another error happened:" + e.message);
-                    }
-                });
+            .then(res => {
+                history.push("/");
+            }).catch(e => {
+                console.log(e);
+                if (Axios.isCancel(e)) {
+                    alert(`request cancelled:${e.message}`);
+                } else {
+                    alert("another error happened:" + e.message);
+                }
+            });
         }
 
     }
@@ -53,15 +58,18 @@ const Register = (props) => {
     }
 
     const handlePassword = event => {
-        setPassword(event.target.value);
+        const hash = Base64.stringify(sha256(event.target.value));
+        setPassword(hash);
     }
 
     const handleConfirmPassword = event => {
-        setConfirmPassword(event.target.value);
+        const hash = Base64.stringify(sha256(event.target.value));
+        setConfirmPassword(hash);
     }
 
     return (
         <div className="container">
+            <h1>Create a PowerBank account</h1>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Name</label>
@@ -88,7 +96,7 @@ const Register = (props) => {
                     <input className="form-control" type="password" required onChange={handleConfirmPassword}></input>
                 </div>
                 <div>
-                    <button className="btn btn-success" type="submit">Submit</button>
+                    <button className="btn btn-success" type="submit">Register</button>
                 </div>
             </form>
         </div>

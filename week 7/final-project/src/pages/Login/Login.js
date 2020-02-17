@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
+import { useCookies } from 'react-cookie';
+import { Link, Redirect } from 'react-router-dom';
 
-const Login = () => {
+const Login = (props) => {
+
+    const { history } = props;
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [cookies, setCookie] = useCookies(['JWT']);
 
     const handleSubmit = () => {
-        console.log(username);
-        console.log(password);
         const user = {
             username: username,
             password: password
         }
-        Axios.post(`http://localhost:8081/api/v1/login`, user)
-        .then(res => {
-            alert(res.data);
-            //history.goBack();
-        }).catch( e=> {
+        Axios.post(`http://localhost:8081/api/v1/login`, user, {
+            headers: {
+                JWT: cookies.JWT,
+            }
+        }).then(res => {
+            setCookie('JWT', res.data, { path: '/' });
+            return <Redirect to="/"></Redirect>
+        }).catch(e => {
             console.log(e);
             if (Axios.isCancel(e)) {
                 alert(`request cancelled:${e.message}`);
@@ -47,9 +53,10 @@ const Login = () => {
                     <input className="form-control" type="password" required onChange={handlePassword}></input>
                 </div>
                 <div>
-                    <button className="btn btn-success" type="submit">Submit</button>
+                    <button className="btn btn-success" type="submit">Login</button>
                 </div>
             </form>
+            <p>Don't have an account? <Link to="/register">Register here</Link>.</p>
         </div>
     );
 }

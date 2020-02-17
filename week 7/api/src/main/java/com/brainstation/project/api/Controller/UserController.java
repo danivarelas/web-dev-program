@@ -1,5 +1,6 @@
 package com.brainstation.project.api.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,8 +37,12 @@ public class UserController {
     }
 
     @GetMapping("api/v1/user")
-    public List<User> getAllUsers() {
-        return userService.selectAllUsers();
+    public ResponseEntity<List<User>> getAllUsers() {
+        if (JWTProvider.validateToken(request.getHeader("JWT"))) {
+            return new ResponseEntity<>(new ArrayList<>() , HttpStatus.UNAUTHORIZED);
+        } else {
+            return new ResponseEntity<>(userService.selectAllUsers() , HttpStatus.OK);
+        }
     }
 
     @GetMapping(path = "api/v1/user/{username}")

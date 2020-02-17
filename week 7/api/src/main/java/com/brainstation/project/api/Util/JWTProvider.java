@@ -16,7 +16,7 @@ public class JWTProvider {
         JwtBuilder builder;
         try {
             builder = Jwts.builder().setId(id).setSubject(subject).setIssuedAt(now).claim("username", username)
-                    .claim("admin", role).signWith(SignatureAlgorithm.HS256, "secret".getBytes("UTF-8"));
+                    .claim("role", role).signWith(SignatureAlgorithm.HS256, "secret".getBytes("UTF-8"));
             if (ttlMillis >= 0) {
                 long expMillis = nowMillis + ttlMillis;
                 Date exp = new Date(expMillis);
@@ -42,7 +42,10 @@ public class JWTProvider {
 
     public static boolean validateToken(String jwt) {
         Claims claims = decodeJWT(jwt);
-        return true;
+        if (claims != null) {
+            return true;
+        }
+        return false;
     }
 
 }

@@ -30,6 +30,8 @@ const Login = () => {
             console.log(e);
             if (Axios.isCancel(e)) {
                 alert(`request cancelled:${e.message}`);
+            } else if (e.response.status === 400){
+                alert(`bad request:${e.message}`);
             } else {
                 alert("another error happened:" + e.message);
             }

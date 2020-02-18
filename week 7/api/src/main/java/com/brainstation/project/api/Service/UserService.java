@@ -12,37 +12,43 @@ import java.util.List;
 @Service
 public class UserService implements IUserService {
 
-    private final UserDAO userDao;
+    private final UserDAO userDAO;
 
-    public UserService(UserDAO userDao) {
-        this.userDao = userDao;
+    public UserService(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     public User insertUser(User user) {
-        UserDTO userDto = userDao.save( new UserDTO(user));
-        return new User(userDto);
+        UserDTO userDTO = userDAO.save( new UserDTO(user));
+        return new User(userDTO);
     }
 
     public List<User> selectAllUsers() {
-        List<UserDTO> usersDto = userDao.findAll();
+        List<UserDTO> usersDTO = userDAO.findAll();
         List<User> users = new ArrayList<>();
-        usersDto.forEach(userDTO -> {
+        usersDTO.forEach(userDTO -> {
             users.add(new User(userDTO));
         });
         return users;
     }
 
     public User selectUserByUsername(String username) {
-        UserDTO userDto = userDao.findByUsername(username);
-        return new User(userDto);
+        UserDTO userDTO = userDAO.findByUsername(username);
+        return new User(userDTO);
+    }
+
+    public User updateUser(String username, User user) {
+        UserDTO userDTO = userDAO.findByUsername(username);
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPhoneNumber(user.getPhoneNumber());
+        userDTO.setCountryCode(user.getCountryCode());
+        userDTO.setUsername(user.getUsername());
+        userDTO = userDAO.save(userDTO);
+        return new User(userDTO);
     }
 
     /*public int deleteUser(String username) {
         return userDao.deleteUser(username);
-    }
-
-    public int updateUser(String username, User user) {
-        return userDao.updateUser(username, user);
     }*/
 
 }

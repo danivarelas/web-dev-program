@@ -6,11 +6,16 @@ public class User {
 
     private long id;
     private String name;
-    private String lastname;
+    private String lastName;
     private String email;
     private String username;
     private String password;
-    private String role;
+    private int countryCode;
+    private int phoneNumber;
+
+    public User() {
+        super();
+    }
 
     public User(String email, String username, String password) {
         this.email = email;
@@ -18,14 +23,15 @@ public class User {
         this.password = password;
     }
 
-    public User(UserDTO userDto) {
-        this.id = userDto.getId();
-        this.name = userDto.getName();
-        this.lastname = userDto.getLastname();
-        this.email = userDto.getEmail();
-        this.username = userDto.getUsername();
-        this.password = userDto.getPassword();
-        this.role = userDto.getRole();
+    public User(UserDTO userDTO) {
+        this.id = userDTO.getId();
+        this.name = userDTO.getName();
+        this.lastName = userDTO.getLastName();
+        this.email = userDTO.getEmail();
+        this.username = userDTO.getUsername();
+        this.password = userDTO.getPassword();
+        this.countryCode = userDTO.getCountryCode();
+        this.phoneNumber = userDTO.getPhoneNumber();
     }
 
     public long getId() {
@@ -68,19 +74,27 @@ public class User {
         this.name = name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getRole() {
-        return role;
+    public int getCountryCode() {
+        return countryCode;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setCountryCode(int countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

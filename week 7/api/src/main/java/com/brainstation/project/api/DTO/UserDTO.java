@@ -3,19 +3,25 @@ package com.brainstation.project.api.DTO;
 import com.brainstation.project.api.Model.User;
 
 import javax.persistence.*;
+import java.util.List;
 
-@Entity(name = "user")
+@Entity
+@Table(name = "user")
 public class UserDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String lastname;
+    private String lastName;
     private String email;
     private String username;
     private String password;
-    private String role;
+    private int countryCode;
+    private int phoneNumber;
+    
+    @OneToMany(mappedBy = "userDTO")
+    private List<AccountDTO> accounts;
 
     public UserDTO() {
         super();
@@ -29,11 +35,12 @@ public class UserDTO {
 
     public UserDTO(User user) {
         this.name = user.getName();
-        this.lastname = user.getLastname();
+        this.lastName = user.getLastName();
         this.email = user.getEmail();
         this.username = user.getUsername();
         this.password = user.getPassword();
-        this.role = user.getRole();
+        this.countryCode = user.getCountryCode();
+        this.phoneNumber = user.getPhoneNumber();
     }
 
     public Long getId() {
@@ -52,20 +59,12 @@ public class UserDTO {
         this.name = name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -90,5 +89,21 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(int country_code) {
+        this.countryCode = country_code;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phone_number) {
+        this.phoneNumber = phone_number;
     }
 }

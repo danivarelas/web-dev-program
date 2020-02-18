@@ -9,9 +9,11 @@ const Register = () => {
     const history = useHistory();
 
     const [name, setName] = useState("");
-    const [lastname, setLastname] = useState("");
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
+    const [countryCode, setCountryCode] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -20,23 +22,23 @@ const Register = () => {
         if (password === confirmPassword) {
             const user = {
                 name,
-                lastname,
+                lastName,
                 email,
                 username,
                 password
             }
             console.log(user)
             Axios.post(`http://localhost:8081/api/v1/user`, user)
-            .then(res => {
-                history.push("/");
-            }).catch(e => {
-                console.log(e);
-                if (Axios.isCancel(e)) {
-                    alert(`request cancelled:${e.message}`);
-                } else {
-                    alert("another error happened:" + e.message);
-                }
-            });
+                .then(res => {
+                    history.push("/");
+                }).catch(e => {
+                    console.log(e);
+                    if (Axios.isCancel(e)) {
+                        alert(`request cancelled:${e.message}`);
+                    } else {
+                        alert("another error happened:" + e.message);
+                    }
+                });
         }
 
     }
@@ -46,7 +48,7 @@ const Register = () => {
     }
 
     const handleLastname = event => {
-        setLastname(event.target.value);
+        setLastName(event.target.value);
     }
 
     const handleEmail = event => {
@@ -71,13 +73,15 @@ const Register = () => {
         <div className="container">
             <h1>Create a PowerBank account</h1>
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label>Name</label>
-                    <input className="form-control" type="text" required onChange={handleName}></input>
-                </div>
-                <div className="form-group">
-                    <label>Last Name</label>
-                    <input className="form-control" type="text" required onChange={handleLastname}></input>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Name</label>
+                        <input className="form-control" type="text" required onChange={handleName}></input>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Last Name</label>
+                        <input className="form-control" type="text" required onChange={handleLastname}></input>
+                    </div>
                 </div>
                 <div className="form-group">
                     <label>Email</label>

@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 @Service
 public interface IUserService {
 
-    public User insertUser(User user);
+    User insertUser(User user);
 
-    public List<User> selectAllUsers();
+    List<User> selectAllUsers();
 
-    public User selectUserByUsername(String username);
+    User selectUserByUsername(String username);
 
-    /*public int deleteUser(String username);
+    User updateUser(String username, User user);
 
-    public int updateUser(String username, User user);*/
+    /*int deleteUser(String username);*/
 
 }

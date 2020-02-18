@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "http://localhost:3000", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RestController
 public class UserController {
 
@@ -32,16 +32,15 @@ public class UserController {
 
     @PostMapping("api/v1/user")
     public void addUser(@RequestBody User user) {
-        user.setRole("admin");
         userService.insertUser(user);
     }
 
     @GetMapping("api/v1/user")
     public ResponseEntity<List<User>> getAllUsers() {
         if (JWTProvider.validateToken(request.getHeader("JWT"))) {
-            return new ResponseEntity<>(new ArrayList<>() , HttpStatus.UNAUTHORIZED);
-        } else {
             return new ResponseEntity<>(userService.selectAllUsers() , HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ArrayList<>() , HttpStatus.UNAUTHORIZED);
         }
     }
 
@@ -55,8 +54,7 @@ public class UserController {
         User dbUser = this.getUserByUsername(user.getUsername());
         if (dbUser != null) {
             if (user.getPassword().equals(dbUser.getPassword())) {
-                String jwt = JWTProvider.createJWT(dbUser.getId()+"", dbUser.getName(), "Logged in",
-                        6000);
+                String jwt = JWTProvider.createJWT(dbUser.getId()+"", dbUser.getName(), "Logged in", 900000);
                 return new ResponseEntity<>(jwt, HttpStatus.OK);
             }
             return new ResponseEntity<>("Incorrect password", HttpStatus.BAD_REQUEST);
@@ -64,13 +62,15 @@ public class UserController {
         return new ResponseEntity<>("Incorrect username", HttpStatus.BAD_REQUEST);
     }
 
+    @PutMapping("api/v1/user/{username}")
+    public void updateUser(@PathVariable("username") String username, @RequestBody User user) {
+        userService.updateUser(username, user);
+    }
+
     /*@DeleteMapping(path = "{username}")
     public void deleteUser(@PathVariable("username") String username) {
         userService.deleteUser(username);
-    }
-
-    @PutMapping(path = "{username}")
-    public void updateUser(@PathVariable("username") String username, @Valid @NonNull @RequestBody User user) {
-        userService.updateUser(username, user);
     }*/
+
+
 }

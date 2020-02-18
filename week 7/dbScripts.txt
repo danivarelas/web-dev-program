@@ -1,36 +1,53 @@
+use project;
+
 CREATE TABLE IF NOT EXISTS user(
-	id int auto_increment PRIMARY KEY NOT NULL,
-    name varchar(50) NOT NULL,
-    lastname varchar(50) NOT NULL,
-    email varchar(50) NOT NULL,
-    username varchar(50) NOT NULL,
-    password varchar(255) NOT NULL,
-    role varchar(50) NOT NULL
+	id int auto_increment PRIMARY KEY not null,
+    name varchar(50) not null,
+    last_name varchar(50) not null,
+    email varchar(50) not null unique,
+    username varchar(50) not null unique,
+    country_code int not null,
+    phone_number int not null,
+    password varchar(255) not null
 );
 
 CREATE TABLE IF NOT EXISTS account(
-	id int auto_increment PRIMARY KEY NOT NULL,
-    account_number varchar(20) NOT NULL unique,
-    balance int(100) NOT NULL,
+	id int auto_increment PRIMARY KEY not null,
+    account_number varchar(20) not null unique,
+    balance varchar(255) NOT NULL,
     currency varchar(3) NOT NULL,
     user_id int,
     foreign key(user_id) references user(id)
 );
 
 CREATE TABLE IF NOT EXISTS credit_card(
-	id int auto_increment PRIMARY KEY NOT NULL,
-    card_number varchar(10) NOT NULL unique,
-    card_limit varchar(255) NOT NULL,
-    currency varchar(3) NOT NULL,
-    balance varchar(255) NOT NULL
+	id int auto_increment PRIMARY KEY not null,
+    card_number varchar(10) not null unique,
+    card_limit varchar(255) not null,
+    currency varchar(3) not null,
+    balance varchar(255) not null,
+    payment_date date not null,
+    user_id int,
+    foreign key(user_id) references user(id)
+);
+
+CREATE TABLE IF NOT EXISTS loan(
+	id int auto_increment PRIMARY KEY not null,
+    loan_number varchar(10) not null unique,
+    amount varchar(255) not null,
+    currency varchar(3) not null,
+    interest_rate decimal(4,2) not null,
+    loan_due_date date not null,
+    user_id int,
+    foreign key(user_id) references user(id)
 );
 
 CREATE TABLE IF NOT EXISTS transfer(
-	id int auto_increment PRIMARY KEY NOT NULL,
-    transfer_number varchar(10) NOT NULL unique,
-    transfer_description varchar(255) NOT NULL,
-    amount varchar(255) NOT NULL,
-    currency varchar(3) NOT NULL,
+	id int auto_increment PRIMARY KEY not null,
+    transfer_number varchar(10) not null unique,
+    transfer_description varchar(255) not null,
+    amount varchar(255) not null,
+    transfer_date date not null,
     source_account int,
     target_account int,
     foreign key(source_account) references account(id),

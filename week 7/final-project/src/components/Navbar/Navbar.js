@@ -21,7 +21,7 @@ const Navbar = () => {
         removeCookie('JWT', { path: '/' });
         history.push("/login");
     }
-    
+
     const toggleSidebar = () => {
         if ("active" === active) {
             setActive("");
@@ -31,19 +31,49 @@ const Navbar = () => {
     }
 
     return (
-        <div className="page-container">
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <button className="navbar-toggler mr-4" type="button" onClick={toggleSidebar}>
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <Link className="navbar-brand" to="/">PowerBank</Link>
-                <div className=" ml-auto">
-                    <Link class="nav-item mr-4" type="button" data-toggle="modal" data-target="#logoutModal">Logout</Link>
+
+        <div class="wrapper">
+            <nav className={active + " bg-secondary"} id="sidebar">
+                <div class="sidebar-header bg-dark">
+                    <button type="button" id="sidebarCollapse" className="btn btn-outline-danger float-right" onClick={toggleSidebar}>
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <h3>Hello, {user}</h3>
                 </div>
-                
+                <ul class="list-unstyled components">
+                    <li><a href="#">Summary</a></li>
+                    <li><a href="#">Credit cards</a></li>
+                    <li>
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payments</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li><a href="#">View payments</a></li>
+                            <li><a href="#">Pay services</a></li>
+                            <li><a href="#">Pay cards</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Transfers</a></li>
+                    <li><a href="#">Profile</a></li>
+                </ul>
             </nav>
 
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalTitle" aria-hidden="true">
+
+            <div id="content">
+                <nav className="navbar navbar-dark bg-dark">
+                    <div class="container-fluid">
+                        <button type="button" id="sidebarCollapse" className="btn btn-outline-secondary mr-4" onClick={toggleSidebar}>
+                            <i class="fas fa-align-left"></i>
+                        </button>
+                        <Link className="navbar-brand" to="/">PowerBank</Link>
+                        <div className=" ml-auto">
+                            <Link class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#logoutModal">Logout</Link>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="overlay"></div>
+
+            <div class="modal fade" id="logoutModal" tabIndex="-1" role="dialog" aria-labelledby="logoutModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -56,37 +86,16 @@ const Navbar = () => {
                             Are you sure you want to logout?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={handleLogout}>Logout</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={handleLogout}>Logout</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="wrapper">
-                <nav className={active} id="sidebar">
-                    <div class="sidebar-header">
-                        <h3>Hello, {user}</h3>
-                    </div>
-                    <ul class="list-unstyled components">
-                        <li><a href="#">Summary</a></li>
-                        <li><a href="#">Credit cards</a></li>
-                        <li>
-                            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payments</a>
-                            <ul class="collapse list-unstyled" id="homeSubmenu">
-                                <li><a href="#">View payments</a></li>
-                                <li><a href="#">Pay services</a></li>
-                                <li><a href="#">Pay cards</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Transfers</a></li>
-                        <li><a href="#">Profile</a></li>
-                    </ul>
-                </nav>
-
-            </div>
         </div>
+
     );
 }
 
 export default Navbar;
+

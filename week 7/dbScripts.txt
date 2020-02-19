@@ -53,3 +53,9 @@ CREATE TABLE IF NOT EXISTS transfer(
     foreign key(source_account) references account(id),
     foreign key(target_account) references account(id)
 );
+
+select * from user;
+select * from account;
+
+insert into account
+values (1,'1234567890', '0.00', 'USD', 1);

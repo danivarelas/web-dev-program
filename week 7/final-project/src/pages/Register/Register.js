@@ -3,10 +3,13 @@ import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import sha256 from 'crypto-js/sha256';
 import Base64 from 'crypto-js/enc-base64';
+import { useCookies } from 'react-cookie';
 
 const Register = () => {
 
     const history = useHistory();
+
+    const [cookies, setCookie] = useCookies(['JWT']);
 
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -17,6 +20,9 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    const [invalidUsername, setInvalidUsername] = useState(false);
+    const [invalidEmail, setInvalidEmail] = useState(false);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
@@ -25,12 +31,32 @@ const Register = () => {
                 lastName,
                 email,
                 username,
-                password
+                password,
+                countryCode,
+                phoneNumber
             }
-            console.log(user)
-            Axios.post(`http://localhost:8081/api/v1/user`, user)
+            let existingUsername;
+            let existingEmail;
+            Axios.get(`http://localhost:8081/api/v1/user/byUsername/${username}`, {
+                headers: {
+                    JWT: cookies.JWT,
+                }
+            }).then(res => {
+                existingUsername = res.data;
+            })
+            Axios.get(`http://localhost:8081/api/v1/user/byEmail/${email}`, {
+                headers: {
+                    JWT: cookies.JWT,
+                }
+            }).then(res => {
+                existingEmail = res.data;
+            })
+            if(existingUsername || existingEmail) {
+
+            } else {
+                Axios.post(`http://localhost:8081/api/v1/user`, user)
                 .then(res => {
-                    history.push("/");
+                    history.push("/login");
                 }).catch(e => {
                     console.log(e);
                     if (Axios.isCancel(e)) {
@@ -39,6 +65,9 @@ const Register = () => {
                         alert("another error happened:" + e.message);
                     }
                 });
+            }
+
+            
         }
 
     }

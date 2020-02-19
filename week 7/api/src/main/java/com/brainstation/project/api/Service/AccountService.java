@@ -36,6 +36,15 @@ public class AccountService {
         return new Account(accountDTO);
     }
 
+//    public List<Account> selectAccountByUserId(long userId) {
+//        List<AccountDTO> accountsDTO = accountDAO.findAllByUserId(userId);
+//        List<Account> accounts = new ArrayList<>();
+//        accountsDTO.forEach(accountDTO -> {
+//            accounts.add(new Account(accountDTO));
+//        });
+//        return accounts;
+//    }
+
     public Account updateAccount(String accountNumber, Account account) {
         AccountDTO accountDTO = accountDAO.findByAccountNumber(accountNumber);
         accountDTO.setBalance(account.getBalance());

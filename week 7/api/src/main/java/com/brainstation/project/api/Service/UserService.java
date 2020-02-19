@@ -37,6 +37,11 @@ public class UserService implements IUserService {
         return new User(userDTO);
     }
 
+    public User selectUserByEmail(String email) {
+        UserDTO userDTO = userDAO.findByEmail(email);
+        return new User(userDTO);
+    }
+
     public User updateUser(String username, User user) {
         UserDTO userDTO = userDAO.findByUsername(username);
         userDTO.setEmail(user.getEmail());

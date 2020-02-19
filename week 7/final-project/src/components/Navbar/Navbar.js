@@ -31,47 +31,18 @@ const Navbar = () => {
     }
 
     return (
-
-        <div class="wrapper">
-            <nav className={active + " bg-secondary"} id="sidebar">
-                <div class="sidebar-header bg-dark">
-                    <button type="button" id="sidebarCollapse" className="btn btn-outline-danger float-right" onClick={toggleSidebar}>
-                        <i class="fas fa-times"></i>
+        <div>
+            <nav className="navbar navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" className="btn btn-outline-secondary mr-4" onClick={toggleSidebar}>
+                        <i class="fas fa-align-left"></i>
                     </button>
-                    <h3>Hello, {user}</h3>
-                </div>
-                <ul class="list-unstyled components">
-                    <li><a href="#">Summary</a></li>
-                    <li><a href="#">Credit cards</a></li>
-                    <li>
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payments</a>
-                        <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li><a href="#">View payments</a></li>
-                            <li><a href="#">Pay services</a></li>
-                            <li><a href="#">Pay cards</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Transfers</a></li>
-                    <li><a href="#">Profile</a></li>
-                </ul>
-            </nav>
-
-
-            <div id="content">
-                <nav className="navbar navbar-dark bg-dark">
-                    <div class="container-fluid">
-                        <button type="button" id="sidebarCollapse" className="btn btn-outline-secondary mr-4" onClick={toggleSidebar}>
-                            <i class="fas fa-align-left"></i>
-                        </button>
-                        <Link className="navbar-brand" to="/">PowerBank</Link>
-                        <div className=" ml-auto">
-                            <Link class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#logoutModal">Logout</Link>
-                        </div>
+                    <Link className="navbar-brand" to="/">PowerBank</Link>
+                    <div className=" ml-auto">
+                        <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#logoutModal">Logout</button>
                     </div>
-                </nav>
-            </div>
-
-            <div class="overlay"></div>
+                </div>
+            </nav>
 
             <div class="modal fade" id="logoutModal" tabIndex="-1" role="dialog" aria-labelledby="logoutModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">

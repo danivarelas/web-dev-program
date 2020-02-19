@@ -18,6 +18,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:3000", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@RequestMapping("/api/v1/user")
 @RestController
 public class UserController {
 
@@ -30,12 +31,12 @@ public class UserController {
         this.request = request;
     }
 
-    @PostMapping("api/v1/user")
+    @PostMapping
     public void addUser(@RequestBody User user) {
         userService.insertUser(user);
     }
 
-    @GetMapping("api/v1/user")
+    @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         if (JWTProvider.validateToken(request.getHeader("JWT"))) {
             return new ResponseEntity<>(userService.selectAllUsers() , HttpStatus.OK);
@@ -44,30 +45,30 @@ public class UserController {
         }
     }
 
-    @GetMapping(path = "api/v1/user/{username}")
-    public User getUserByUsername(@PathVariable("username") String username) {
-        return userService.selectUserByUsername(username);
-    }
-
-    @PostMapping("api/v1/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        User dbUser = this.getUserByUsername(user.getUsername());
-        if (dbUser != null) {
-            if (user.getPassword().equals(dbUser.getPassword())) {
-                String jwt = JWTProvider.createJWT(dbUser.getId()+"", dbUser.getName(), "Logged in", 900000);
-                return new ResponseEntity<>(jwt, HttpStatus.OK);
-            }
-            return new ResponseEntity<>("Incorrect password", HttpStatus.BAD_REQUEST);
+    @GetMapping("byUsername/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable(name = "username") String username) {
+        if (JWTProvider.validateToken(request.getHeader("JWT"))) {
+            return new ResponseEntity<>(userService.selectUserByUsername(username) , HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null , HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<>("Incorrect username", HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping("api/v1/user/{username}")
+    @GetMapping("byEmail/{email}")
+    public ResponseEntity<User> getUserByEmail(@PathVariable(name = "email") String email) {
+        if (JWTProvider.validateToken(request.getHeader("JWT"))) {
+            return new ResponseEntity<>(userService.selectUserByEmail(email) , HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null , HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @PutMapping("{username}")
     public void updateUser(@PathVariable("username") String username, @RequestBody User user) {
         userService.updateUser(username, user);
     }
 
-    /*@DeleteMapping(path = "{username}")
+    /*@DeleteMapping("{username}")
     public void deleteUser(@PathVariable("username") String username) {
         userService.deleteUser(username);
     }*/

@@ -15,6 +15,8 @@ public interface IUserService {
 
     User selectUserByUsername(String username);
 
+    User selectUserByEmail(String email);
+
     User updateUser(String username, User user);
 
     /*int deleteUser(String username);*/

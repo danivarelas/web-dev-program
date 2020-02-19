@@ -11,7 +11,7 @@ const Login = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [invalidLogin, setInalidLogin] = useState(false);
+    const [invalidLogin, setInvalidLogin] = useState(false);
 
     const [cookies, setCookie] = useCookies(['JWT']);
 
@@ -19,7 +19,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setInalidLogin(false);
+        setInvalidLogin(false);
         const user = {
             username: username,
             password: password
@@ -32,7 +32,7 @@ const Login = () => {
             setCookie('JWT', res.data, { path: '/' });
             history.push("/");
         }).catch(e => {
-            setInalidLogin(true);
+            setInvalidLogin(true);
             console.log(e);
             if (Axios.isCancel(e)) {
                 //alert(`request cancelled:${e.message}`);

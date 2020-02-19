@@ -20,8 +20,8 @@ public class UserDTO {
     private int countryCode;
     private int phoneNumber;
     
-    @OneToMany(mappedBy = "userDTO")
-    private List<AccountDTO> accounts;
+//    @OneToMany(mappedBy = "userDTO")
+//    private List<AccountDTO> accounts;
 
     public UserDTO() {
         super();

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import sha256 from 'crypto-js/sha256';
 import Base64 from 'crypto-js/enc-base64';
 import { useCookies } from 'react-cookie';
+import './Register.scss'
 
 const Register = () => {
 
@@ -20,12 +21,18 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    const [existingUsername, setExistingUsername] = useState("");
+    const [existingEmail, setExistingEmail] = useState("");
     const [invalidUsername, setInvalidUsername] = useState(false);
     const [invalidEmail, setInvalidEmail] = useState(false);
+    const [invalidPassword, setInvalidPassword] = useState(false);
 
-    const handleSubmit = (e) => {
+    useEffect(() => {}, [invalidUsername, invalidEmail, invalidPassword]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
+            setInvalidPassword(false);
             const user = {
                 name,
                 lastName,
@@ -35,24 +42,13 @@ const Register = () => {
                 countryCode,
                 phoneNumber
             }
-            let existingUsername;
-            let existingEmail;
-            Axios.get(`http://localhost:8081/api/v1/user/byUsername/${username}`, {
-                headers: {
-                    JWT: cookies.JWT,
-                }
-            }).then(res => {
-                existingUsername = res.data;
-            })
-            Axios.get(`http://localhost:8081/api/v1/user/byEmail/${email}`, {
-                headers: {
-                    JWT: cookies.JWT,
-                }
-            }).then(res => {
-                existingEmail = res.data;
-            })
-            if(existingUsername || existingEmail) {
 
+            await checkUsername();
+            await checkEmail();
+            
+            if(existingUsername || existingEmail) {
+                existingUsername ? setInvalidUsername(true) : setInvalidUsername(false);
+                existingEmail ? setInvalidEmail(true) : setInvalidEmail(false);
             } else {
                 Axios.post(`http://localhost:8081/api/v1/user`, user)
                 .then(res => {
@@ -66,11 +62,36 @@ const Register = () => {
                     }
                 });
             }
-
-            
+        } else {
+            setInvalidPassword(true);
         }
-
     }
+
+    const checkUsername = async () => {
+        let res = await Axios.get(`http://localhost:8081/api/v1/user/byUsername/${username}`, {
+            headers: {
+                JWT: cookies.JWT,
+            }
+        }).catch(e => {
+            setExistingUsername("");
+        });
+        if (res) {
+            setExistingUsername(res.data);
+        }
+    };
+
+    const checkEmail = async () => {
+        let res = await Axios.get(`http://localhost:8081/api/v1/user/byEmail/${email}`, {
+            headers: {
+                JWT: cookies.JWT,
+            }
+        }).catch(e => {
+            setExistingEmail("");
+        });
+        if (res) {
+            setExistingEmail(res.data);
+        }
+    };
 
     const handleName = event => { setName(event.target.value); }
 
@@ -85,13 +106,33 @@ const Register = () => {
     const handlePhone = event => { setPhoneNumber(event.target.value); }
 
     const handlePassword = event => {
-        const hash = Base64.stringify(sha256(event.target.value));
-        setPassword(hash);
+        if (event.target.value === "") {
+            console.log(event.target.value)
+            setInvalidPassword(false);
+        } else {
+            let hash = Base64.stringify(sha256(event.target.value));
+            setPassword(hash);
+            if (password !== confirmPassword) {
+                setInvalidPassword(true);
+            } else {
+                setInvalidPassword(false);
+            }
+        }
     }
 
     const handleConfirmPassword = event => {
-        const hash = Base64.stringify(sha256(event.target.value));
-        setConfirmPassword(hash);
+        if (event.target.value === "") {
+            console.log(event.target.value)
+            setInvalidPassword(false);
+        } else {
+            let hash = Base64.stringify(sha256(event.target.value));
+            setConfirmPassword(hash);
+            if (password !== confirmPassword) {
+                setInvalidPassword(true);
+            } else {
+                setInvalidPassword(false);
+            }
+        }
     }
 
     const handleCancel = () => { history.push("/login"); }
@@ -100,12 +141,12 @@ const Register = () => {
         <div className="container">
             <h1>Create a PowerBank account</h1>
             <form onSubmit={handleSubmit}>
-                <div class="form-row">
-                    <div class="form-group col-sm-6">
+                <div className="form-row">
+                    <div className="form-group col-sm-6">
                         <label>Name</label>
                         <input className="form-control" type="text" required onChange={handleName} placeholder="John" />
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div className="form-group col-sm-6">
                         <label>Last Name</label>
                         <input className="form-control" type="text" required onChange={handleLastname} placeholder="Doe" />
                     </div>
@@ -113,25 +154,31 @@ const Register = () => {
                 <div className="form-group">
                     <label>Username</label>
                     <input className="form-control" type="text" required onChange={handleUsername} placeholder="jdoe" />
+                    {invalidUsername &&
+                        <div className="invalid-entry">Username is already taken.</div>
+                    }
                 </div>
                 <div className="form-group">
                     <label>Email</label>
                     <input className="form-control" type="email" required onChange={handleEmail} placeholder="jdoe@email.com" />
+                    {invalidEmail &&
+                        <div className="invalid-entry">Email is already taken.</div>
+                    }
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-sm-3">
+                <div className="form-row">
+                    <div className="form-group col-sm-3">
                         <label>Country Code</label>
-                        <input type="text" class="form-control" required onChange={handleCode} placeholder="+506" />
+                        <input type="text" className="form-control" required onChange={handleCode} placeholder="+506" />
                     </div>
-                    <div class="form-group col-sm-9">
+                    <div className="form-group col-sm-9">
                         <label>Phone Number</label>
-                        <input type="text" class="form-control" required onChange={handlePhone} placeholder="88888888" />
+                        <input type="text" className="form-control" required onChange={handlePhone} placeholder="88888888" />
                     </div>
                 </div>
                 <div className="form-group">
                     <label>Password</label>
                     <input className="form-control" type="password" required onChange={handlePassword}></input>
-                    <small id="passwordHelpBlock" class="form-text text-muted">
+                    <small id="passwordHelpBlock" className="form-text text-muted">
                         Your password must be minimum 8 characters long and contain at least one uppercase letter,
                         one lowercase letter and one number. It must not contain spaces or special characters.
                     </small>
@@ -139,6 +186,9 @@ const Register = () => {
                 <div className="form-group">
                     <label> Confirm Password</label>
                     <input className="form-control" type="password" required onChange={handleConfirmPassword}></input>
+                    {invalidPassword &&
+                        <div className="invalid-entry">Passwords don't match.</div>
+                    }
                 </div>
                 <div className="form-group">
                     <button className="btn btn-success" type="submit">Register</button>

@@ -3,8 +3,7 @@ import jwt from 'jsonwebtoken';
 const validate = (token) => {
     try {
         var decoded = jwt.verify(token, 'secret', { algorithms: ['HS256'] });
-        console.log(decoded);
-        return decoded.name;
+        return {name: decoded.name, username: decoded.username};
     } catch (err) {
         return null;
     }

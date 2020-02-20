@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import Navbar from '../../components/Navbar/Navbar';
 import './Home.scss';
-import Sidebar from '../../components/Sidebar/Sidebar';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
 
 const Home = () => {
 
     const history = useHistory();
 
-    const [cookies, setCookie, removeCookie] = useCookies(['JWT']);
+    const [cookies, removeCookie] = useCookies(['JWT']);
 
     if (!validate(cookies.JWT)) {
         removeCookie('JWT', { path: '/' });
@@ -18,8 +17,7 @@ const Home = () => {
     }
 
     return(
-        <div class="wrapper">
-            <Sidebar/>
+        <div className="wrapper">
             <div id="content">
                 <Navbar/>
 

@@ -47,20 +47,12 @@ public class UserController {
 
     @GetMapping("byUsername/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable(name = "username") String username) {
-        if (JWTProvider.validateToken(request.getHeader("JWT"))) {
-            return new ResponseEntity<>(userService.selectUserByUsername(username) , HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null , HttpStatus.UNAUTHORIZED);
-        }
+        return new ResponseEntity<>(userService.selectUserByUsername(username) , HttpStatus.OK);
     }
 
     @GetMapping("byEmail/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable(name = "email") String email) {
-        if (JWTProvider.validateToken(request.getHeader("JWT"))) {
-            return new ResponseEntity<>(userService.selectUserByEmail(email) , HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null , HttpStatus.UNAUTHORIZED);
-        }
+        return new ResponseEntity<>(userService.selectUserByEmail(email) , HttpStatus.OK);
     }
 
     @PutMapping("{username}")

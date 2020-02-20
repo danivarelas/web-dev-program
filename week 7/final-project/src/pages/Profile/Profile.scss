@@ -1,0 +1,30 @@
+.block-section {
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    padding: 2em;
+
+    .block-section-header {
+        margin-bottom: 2em;
+        
+        .block-section-header-text {
+            padding: 0.5em 0;
+            border-bottom: 0.1em solid rgb(39, 145, 194);
+        }
+
+        .block-section-header-edit {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    .label-group {
+
+        .label-title {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .label-description {
+            font-size: 1.2em;
+        }
+    }
+}

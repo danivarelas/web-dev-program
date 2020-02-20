@@ -43,23 +43,18 @@ const Register = () => {
                 phoneNumber
             }
 
-            await checkUsername();
-            await checkEmail();
+            const userUsername = await checkUsername();
+            const userEmail = await checkEmail();
             
-            if(existingUsername || existingEmail) {
-                existingUsername ? setInvalidUsername(true) : setInvalidUsername(false);
-                existingEmail ? setInvalidEmail(true) : setInvalidEmail(false);
+            if(userUsername.data.username || userEmail.data.email) {
+                userUsername.data.username ? setInvalidUsername(true) : setInvalidUsername(false);
+                userEmail.data.email ? setInvalidEmail(true) : setInvalidEmail(false);
             } else {
                 Axios.post(`http://localhost:8081/api/v1/user`, user)
                 .then(res => {
                     history.push("/login");
                 }).catch(e => {
                     console.log(e);
-                    if (Axios.isCancel(e)) {
-                        alert(`request cancelled:${e.message}`);
-                    } else {
-                        alert("another error happened:" + e.message);
-                    }
                 });
             }
         } else {
@@ -72,12 +67,8 @@ const Register = () => {
             headers: {
                 JWT: cookies.JWT,
             }
-        }).catch(e => {
-            setExistingUsername("");
-        });
-        if (res) {
-            setExistingUsername(res.data);
-        }
+        })
+        return res;
     };
 
     const checkEmail = async () => {
@@ -85,12 +76,8 @@ const Register = () => {
             headers: {
                 JWT: cookies.JWT,
             }
-        }).catch(e => {
-            setExistingEmail("");
-        });
-        if (res) {
-            setExistingEmail(res.data);
-        }
+        })
+        return res;
     };
 
     const handleName = event => { setName(event.target.value); }
@@ -107,31 +94,31 @@ const Register = () => {
 
     const handlePassword = event => {
         if (event.target.value === "") {
-            console.log(event.target.value)
             setInvalidPassword(false);
+            setPassword("");
         } else {
             let hash = Base64.stringify(sha256(event.target.value));
-            setPassword(hash);
-            if (password !== confirmPassword) {
+            if (hash !== confirmPassword) {
                 setInvalidPassword(true);
             } else {
                 setInvalidPassword(false);
             }
+            setPassword(hash);
         }
     }
 
     const handleConfirmPassword = event => {
         if (event.target.value === "") {
-            console.log(event.target.value)
             setInvalidPassword(false);
+            setConfirmPassword("");
         } else {
             let hash = Base64.stringify(sha256(event.target.value));
-            setConfirmPassword(hash);
-            if (password !== confirmPassword) {
+            if (hash !== password) {
                 setInvalidPassword(true);
             } else {
                 setInvalidPassword(false);
             }
+            setConfirmPassword(hash);
         }
     }
 

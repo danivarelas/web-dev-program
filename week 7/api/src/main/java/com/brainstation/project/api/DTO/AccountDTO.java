@@ -15,9 +15,7 @@ public class AccountDTO {
     private String accountNumber;
     private BigDecimal balance;
     private String currency;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserDTO userDTO;
+    private Long userId;
 
     public AccountDTO(){
         super();
@@ -61,11 +59,11 @@ public class AccountDTO {
         this.currency = currency;
     }
 
-    public UserDTO getUserDTO() {
-        return userDTO;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserDTO(UserDTO userDTO) {
-        this.userDTO = userDTO;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

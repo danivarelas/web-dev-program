@@ -1,8 +1,10 @@
 package com.brainstation.project.api.DTO;
 
+import com.brainstation.project.api.Model.Account;
 import com.brainstation.project.api.Model.User;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,9 +21,6 @@ public class UserDTO {
     private String password;
     private int countryCode;
     private int phoneNumber;
-    
-//    @OneToMany(mappedBy = "userDTO")
-//    private List<AccountDTO> accounts;
 
     public UserDTO() {
         super();
@@ -34,13 +33,15 @@ public class UserDTO {
     }
 
     public UserDTO(User user) {
-        this.name = user.getName();
-        this.lastName = user.getLastName();
-        this.email = user.getEmail();
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.countryCode = user.getCountryCode();
-        this.phoneNumber = user.getPhoneNumber();
+        if (user != null) {
+            this.name = user.getName();
+            this.lastName = user.getLastName();
+            this.email = user.getEmail();
+            this.username = user.getUsername();
+            this.password = user.getPassword();
+            this.countryCode = user.getCountryCode();
+            this.phoneNumber = user.getPhoneNumber();
+        }
     }
 
     public Long getId() {

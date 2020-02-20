@@ -2,6 +2,6 @@ package com.brainstation.project.api.Service;
 
 import org.springframework.stereotype.Service;
 
-@Service
-public interface ICreditCardService {
+@Service("CreditCardServiceImp")
+public class CreditCardServiceImp {
 }

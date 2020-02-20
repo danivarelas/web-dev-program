@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:3000", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-@RequestMapping("/api/v1/creditCard")
+@RequestMapping("/api/v1/payment")
 @RestController
-public class CreditCardController {
+public class PaymentController {
 }

@@ -1,7 +1,6 @@
 package com.brainstation.project.api.Model;
 
 import com.brainstation.project.api.DTO.AccountDTO;
-import com.brainstation.project.api.DTO.UserDTO;
 
 import java.math.BigDecimal;
 

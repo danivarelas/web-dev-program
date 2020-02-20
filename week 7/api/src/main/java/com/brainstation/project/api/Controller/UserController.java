@@ -2,19 +2,16 @@ package com.brainstation.project.api.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
-import com.brainstation.project.ProjectApplication;
 import com.brainstation.project.api.Model.User;
+import com.brainstation.project.api.Service.AccountService;
 import com.brainstation.project.api.Service.UserService;
 import com.brainstation.project.api.Util.JWTProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:3000", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
@@ -23,11 +20,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final AccountService accountService;
     private HttpServletRequest request;
 
     @Autowired
-    public UserController(UserService userService, HttpServletRequest request) {
+    public UserController(UserService userService, AccountService accountService, HttpServletRequest request) {
         this.userService = userService;
+        this.accountService = accountService;
         this.request = request;
     }
 

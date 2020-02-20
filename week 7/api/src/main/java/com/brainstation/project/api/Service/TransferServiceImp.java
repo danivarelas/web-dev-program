@@ -2,6 +2,6 @@ package com.brainstation.project.api.Service;
 
 import org.springframework.stereotype.Service;
 
-@Service
-public interface ITransferService {
+@Service("TransferServiceImp")
+public class TransferServiceImp {
 }

@@ -2,6 +2,8 @@ package com.brainstation.project.api.Model;
 
 import com.brainstation.project.api.DTO.UserDTO;
 
+import java.util.List;
+
 public class User {
 
     private long id;
@@ -12,6 +14,7 @@ public class User {
     private String password;
     private int countryCode;
     private int phoneNumber;
+    private List<Account> accounts;
 
     public User() {
         super();
@@ -24,14 +27,16 @@ public class User {
     }
 
     public User(UserDTO userDTO) {
-        this.id = userDTO.getId();
-        this.name = userDTO.getName();
-        this.lastName = userDTO.getLastName();
-        this.email = userDTO.getEmail();
-        this.username = userDTO.getUsername();
-        this.password = userDTO.getPassword();
-        this.countryCode = userDTO.getCountryCode();
-        this.phoneNumber = userDTO.getPhoneNumber();
+        if(userDTO != null) {
+            this.id = userDTO.getId();
+            this.name = userDTO.getName();
+            this.lastName = userDTO.getLastName();
+            this.email = userDTO.getEmail();
+            this.username = userDTO.getUsername();
+            this.password = userDTO.getPassword();
+            this.countryCode = userDTO.getCountryCode();
+            this.phoneNumber = userDTO.getPhoneNumber();
+        }
     }
 
     public long getId() {
@@ -96,5 +101,13 @@ public class User {
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }

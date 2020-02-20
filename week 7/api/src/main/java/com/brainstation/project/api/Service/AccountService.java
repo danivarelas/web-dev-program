@@ -1,55 +1,22 @@
 package com.brainstation.project.api.Service;
 
-import com.brainstation.project.api.DAO.AccountDAO;
-import com.brainstation.project.api.DTO.AccountDTO;
 import com.brainstation.project.api.Model.Account;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AccountService {
+public interface AccountService {
 
-    private final AccountDAO accountDAO;
+    Account insertAccount(Account account);
 
-    public AccountService(AccountDAO accountDAO) {
-        this.accountDAO = accountDAO;
-    }
+    List<Account> selectAllAccounts();
 
-    public Account insertAccount(Account account) {
-        AccountDTO accountDTO = accountDAO.save( new AccountDTO(account));
-        return new Account(accountDTO);
-    }
+    Account selectAccountByAccountNumber(String accountNumber);
 
-    public List<Account> selectAllAccounts() {
-        List<AccountDTO> accountsDTO = accountDAO.findAll();
-        List<Account> accounts = new ArrayList<>();
-        accountsDTO.forEach(accountDTO -> {
-            accounts.add(new Account(accountDTO));
-        });
-        return accounts;
-    }
+    List<Account> selectAllAccountsByUserId(long userId);
 
-    public Account selectAccountByAccountNumber(String accountNumber) {
-        AccountDTO accountDTO = accountDAO.findByAccountNumber(accountNumber);
-        return new Account(accountDTO);
-    }
+    Account updateAccount(String accountNumber, Account account);
 
-//    public List<Account> selectAccountByUserId(long userId) {
-//        List<AccountDTO> accountsDTO = accountDAO.findAllByUserId(userId);
-//        List<Account> accounts = new ArrayList<>();
-//        accountsDTO.forEach(accountDTO -> {
-//            accounts.add(new Account(accountDTO));
-//        });
-//        return accounts;
-//    }
-
-    public Account updateAccount(String accountNumber, Account account) {
-        AccountDTO accountDTO = accountDAO.findByAccountNumber(accountNumber);
-        accountDTO.setBalance(account.getBalance());
-        accountDTO = accountDAO.save(accountDTO);
-        return new Account(accountDTO);
-    }
-
+    //Account deleteAccount(String accountNumber);
 }

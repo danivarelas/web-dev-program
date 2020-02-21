@@ -26,12 +26,12 @@ public class CreditCardDTO {
 
     public CreditCardDTO(CreditCard creditCard) {
         if (creditCard != null) {
-            this.id = creditCard.getId();
             this.cardNumber = creditCard.getCardNumber();
             this.cardLimit = creditCard.getCardLimit();
             this.currency = creditCard.getCurrency();
             this.balance = creditCard.getBalance();
             this.paymentDate = creditCard.getPaymentDate();
+            this.userId = creditCard.getUserId();
         }
     }
 

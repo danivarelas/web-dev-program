@@ -26,11 +26,12 @@ public class TransferDTO {
 
     public TransferDTO(Transfer transfer) {
         if (transfer != null) {
-            this.id = transfer.getId();
             this.transferNumber = transfer.getTransferNumber();
             this.transferDescription = transfer.getTransferDescription();
             this.amount = transfer.getAmount();
             this.transferDate = transfer.getTransferDate();
+            this.sourceAccountId = transfer.getSourceAccountId();
+            this.targetAccountId = transfer.getTargetAccountId();
         }
     }
 

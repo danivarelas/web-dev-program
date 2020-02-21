@@ -18,14 +18,14 @@ public class UserServiceImp implements UserService {
     }
 
     public User insertUser(User user) {
-        UserDTO userDTO = userDAO.save( new UserDTO(user));
+        UserDTO userDTO = userDAO.save(new UserDTO(user));
         return new User(userDTO);
     }
 
     public List<User> selectAllUsers() {
-        List<UserDTO> usersDTO = userDAO.findAll();
+        List<UserDTO> userDTOS = userDAO.findAll();
         List<User> users = new ArrayList<>();
-        usersDTO.forEach(userDTO -> {
+        userDTOS.forEach(userDTO -> {
             users.add(new User(userDTO));
         });
         return users;
@@ -41,8 +41,9 @@ public class UserServiceImp implements UserService {
         return new User(userDTO);
     }
 
-    public User updateUser(String username, User user) {
-        UserDTO userDTO = userDAO.findByUsername(username);
+    public User updateUser(long id, User user) {
+        UserDTO userDTO = userDAO.findById(id).get();
+        userDTO.setUsername(user.getUsername());
         userDTO.setName(user.getName());
         userDTO.setLastName(user.getLastName());
         userDTO.setEmail(user.getEmail());

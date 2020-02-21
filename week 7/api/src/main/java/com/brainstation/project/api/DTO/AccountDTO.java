@@ -22,9 +22,12 @@ public class AccountDTO {
     }
 
     public AccountDTO(Account account) {
-        this.accountNumber = account.getAccountNumber();
-        this.balance = account.getBalance();
-        this.currency = account.getCurrency();
+        if (account != null) {
+            this.accountNumber = account.getAccountNumber();
+            this.balance = account.getBalance();
+            this.currency = account.getCurrency();
+            this.userId = account.getUserId();
+        }
     }
 
     public Long getId() {

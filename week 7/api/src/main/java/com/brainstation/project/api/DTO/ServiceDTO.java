@@ -12,7 +12,7 @@ public class ServiceDTO {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String serviceName;
-    private ServiceTypeDTO serviceTypeId;
+    private Long serviceTypeId;
 
     public ServiceDTO() {
         super();
@@ -20,8 +20,8 @@ public class ServiceDTO {
 
     public ServiceDTO(Service service) {
         if (service != null) {
-            this.id = service.getId();
             this.serviceName = service.getServiceName();
+            this.serviceTypeId = service.getServiceTypeId();
         }
     }
 
@@ -41,11 +41,11 @@ public class ServiceDTO {
         this.serviceName = serviceName;
     }
 
-    public ServiceTypeDTO getServiceTypeId() {
+    public Long getServiceTypeId() {
         return serviceTypeId;
     }
 
-    public void setServiceTypeId(ServiceTypeDTO serviceTypeId) {
+    public void setServiceTypeId(Long serviceTypeId) {
         this.serviceTypeId = serviceTypeId;
     }
 }

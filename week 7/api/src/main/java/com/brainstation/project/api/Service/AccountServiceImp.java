@@ -45,8 +45,8 @@ public class AccountServiceImp implements AccountService {
         return accounts;
     }
 
-    public Account updateAccount(String accountNumber, Account account) {
-        AccountDTO accountDTO = accountDAO.findByAccountNumber(accountNumber);
+    public Account updateAccount(long id, Account account) {
+        AccountDTO accountDTO = accountDAO.findById(id).get();
         accountDTO.setBalance(account.getBalance());
         accountDTO = accountDAO.save(accountDTO);
         return new Account(accountDTO);

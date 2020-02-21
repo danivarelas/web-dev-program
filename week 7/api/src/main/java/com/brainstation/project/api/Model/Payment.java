@@ -10,6 +10,8 @@ public class Payment {
     private String paymentNumber;
     private String paymentDescription;
     private BigDecimal amount;
+    private long userId;
+    private long accountId;
 
     public Payment() {
         super();
@@ -21,6 +23,8 @@ public class Payment {
             this.paymentNumber = paymentDTO.getPaymentNumber();
             this.paymentDescription = paymentDTO.getPaymentDescription();
             this.amount = paymentDTO.getAmount();
+            this.userId = paymentDTO.getUserId();
+            this.accountId = paymentDTO.getAccountId();
         }
     }
 
@@ -54,5 +58,21 @@ public class Payment {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
     }
 }

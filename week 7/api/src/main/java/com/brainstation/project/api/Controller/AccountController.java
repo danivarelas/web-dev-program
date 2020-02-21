@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
@@ -52,9 +53,9 @@ public class AccountController {
         return accountService.selectAccountByAccountNumber(accountNumber);
     }
 
-    @PutMapping("{accountNumber}")
-    public void updateUser(@PathVariable("accountNumber") String accountNumber, @RequestBody Account user) {
-        accountService.updateAccount(accountNumber, user);
+    @PutMapping("{id}")
+    public void updateUser(@PathVariable("id") long id, @RequestBody Account account, BigDecimal amount) {
+        accountService.updateAccount(id, account);
     }
 
 }

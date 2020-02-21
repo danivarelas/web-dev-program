@@ -16,7 +16,7 @@ public interface AccountService {
 
     List<Account> selectAllAccountsByUserId(long userId);
 
-    Account updateAccount(String accountNumber, Account account);
+    Account updateAccount(long id, Account account);
 
     //Account deleteAccount(String accountNumber);
 }

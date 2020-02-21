@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface PaymentService {
 
-    Payment insertPayment(Payment account);
+    Payment insertPayment(Payment payment);
 
     List<Payment> selectAllPayments();
 
@@ -16,7 +16,7 @@ public interface PaymentService {
 
     List<Payment> selectAllPaymentsByUserId(long userId);
 
-    Payment updatePayment(String paymentNumber, Payment account);
+    Payment updatePayment(long id, Payment payment);
 
     //Payment deletePayment(String paymentNumber);
 }

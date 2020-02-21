@@ -21,8 +21,6 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const [existingUsername, setExistingUsername] = useState("");
-    const [existingEmail, setExistingEmail] = useState("");
     const [invalidUsername, setInvalidUsername] = useState(false);
     const [invalidEmail, setInvalidEmail] = useState(false);
     const [invalidPassword, setInvalidPassword] = useState(false);

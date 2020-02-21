@@ -54,9 +54,9 @@ public class UserController {
         return new ResponseEntity<>(userService.selectUserByEmail(email) , HttpStatus.OK);
     }
 
-    @PutMapping("{username}")
-    public void updateUser(@PathVariable("username") String username, @RequestBody User user) {
-        userService.updateUser(username, user);
+    @PutMapping("{id}")
+    public void updateUser(@PathVariable("id") long id, @RequestBody User user) {
+        userService.updateUser(id, user);
     }
 
     /*@DeleteMapping("{username}")

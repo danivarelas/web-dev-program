@@ -12,7 +12,7 @@ public interface AccountDAO extends JpaRepository<AccountDTO, Long> {
 
     AccountDTO findByAccountNumber(String accountNumber);
 
-    @Query("SELECT a FROM AccountDTO a WHERE a.user.id = ?1")
+    @Query("SELECT a FROM AccountDTO a WHERE a.userId = ?1")
     List<AccountDTO> findAccountsByUserId(long userId);
 
 }

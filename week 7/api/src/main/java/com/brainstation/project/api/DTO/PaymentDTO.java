@@ -24,10 +24,11 @@ public class PaymentDTO {
 
     public PaymentDTO(Payment payment) {
         if (payment != null) {
-            this.id = payment.getId();
             this.paymentNumber = payment.getPaymentNumber();
             this.paymentDescription = payment.getPaymentDescription();
             this.amount = payment.getAmount();
+            this.userId = payment.getUserId();
+            this.accountId = payment.getAccountId();
         }
     }
 

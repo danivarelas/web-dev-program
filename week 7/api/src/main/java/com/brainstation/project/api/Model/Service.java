@@ -6,6 +6,7 @@ public class Service {
 
     private long id;
     private String serviceName;
+    private long serviceTypeId;
 
     public Service() {
         super();
@@ -15,6 +16,7 @@ public class Service {
         if (serviceDTO != null) {
             this.id = serviceDTO.getId();
             this.serviceName = serviceDTO.getServiceName();
+            this.serviceTypeId = serviceDTO.getServiceTypeId();
         }
     }
 
@@ -32,5 +34,13 @@ public class Service {
 
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
+    }
+
+    public long getServiceTypeId() {
+        return serviceTypeId;
+    }
+
+    public void setServiceTypeId(long serviceTypeId) {
+        this.serviceTypeId = serviceTypeId;
     }
 }

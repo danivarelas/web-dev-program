@@ -19,7 +19,6 @@ public class ServiceTypeDTO {
 
     public ServiceTypeDTO(ServiceType serviceType) {
         if (serviceType != null) {
-            this.id = serviceType.getId();
             this.serviceTypeName = serviceType.getServiceTypeName();
         }
     }

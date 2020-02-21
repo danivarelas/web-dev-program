@@ -10,15 +10,20 @@ public class Account {
     private String accountNumber;
     private BigDecimal balance;
     private String currency;
+    private long userId;
 
     public Account() {
         super();
     }
 
     public Account(AccountDTO accountDTO) {
-        this.accountNumber = accountDTO.getAccountNumber();
-        this.balance = accountDTO.getBalance();
-        this.currency = accountDTO.getCurrency();
+        if (accountDTO != null) {
+            this.id = accountDTO.getId();
+            this.accountNumber = accountDTO.getAccountNumber();
+            this.balance = accountDTO.getBalance();
+            this.currency = accountDTO.getCurrency();
+            this.userId = accountDTO.getUserId();
+        }
     }
 
     public long getId() {
@@ -31,10 +36,6 @@ public class Account {
 
     public String getAccountNumber() {
         return accountNumber;
-    }
-
-    public void setAccount_number(String accountNumber) {
-        this.accountNumber = accountNumber;
     }
 
     public BigDecimal getBalance() {
@@ -51,5 +52,17 @@ public class Account {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

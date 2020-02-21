@@ -16,7 +16,7 @@ public interface TransferService {
 
     List<Transfer> selectAllTransfersByUserId(long userId);
 
-    Transfer updateTransfer(String transferNumber, Transfer transfer);
+    Transfer updateTransfer(long id, Transfer transfer);
 
     //Transfer deleteTransfer(String transferNumber);
 }

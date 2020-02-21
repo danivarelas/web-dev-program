@@ -16,7 +16,7 @@ public interface CreditCardService {
 
     List<CreditCard> selectAllCreditCardsByUserId(long userId);
 
-    CreditCard updateCreditCard(String cardNumber, CreditCard creditCard);
+    CreditCard updateCreditCard(long id, CreditCard creditCard);
 
     //CreditCard deleteCreditCard(String cardNumber);
 }

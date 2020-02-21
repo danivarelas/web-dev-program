@@ -17,7 +17,7 @@ public interface UserService {
 
     User selectUserByEmail(String email);
 
-    User updateUser(String username, User user);
+    User updateUser(long id, User user);
 
     /*int deleteUser(String username);*/
 

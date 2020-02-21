@@ -13,6 +13,7 @@ public class CreditCard {
     private String currency;
     private BigDecimal balance;
     private Date paymentDate;
+    private long userId;
 
     public CreditCard() {
         super();
@@ -26,6 +27,7 @@ public class CreditCard {
             this.currency = creditCardDTO.getCurrency();
             this.balance = creditCardDTO.getBalance();
             this.paymentDate = creditCardDTO.getPaymentDate();
+            this.userId = creditCardDTO.getUserId();
         }
     }
 
@@ -75,5 +77,13 @@ public class CreditCard {
 
     public void setPaymentDate(Date paymentDate) {
         this.paymentDate = paymentDate;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

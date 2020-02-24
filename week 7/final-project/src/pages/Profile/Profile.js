@@ -17,27 +17,29 @@ const Profile = () => {
     const [countryCode, setCountryCode] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
 
-    const [cookies, setCookies] = useCookies(['JWT']);
+    const [cookies] = useCookies(['JWT']);
 
     if (!validate(cookies.JWT)) {
         history.push("/login");
     }
 
     useEffect(() => {
-        let claims = validate(cookies.JWT)
-        setUsername(claims.username);
-        Axios.get(`http://localhost:8081/api/v1/user/byUsername/${claims.username}`, {
-            headers: {JWT: cookies.JWT}
-        }).then(res => {
-            const { data } = res;
-            setName(data.name);
-            setLastName(data.lastName);
-            setEmail(data.email);
-            setCountryCode(data.countryCode);
-            setPhoneNumber(data.phoneNumber);
-        }).catch(e => {
+        const claims = validate(cookies.JWT)
+        if (claims) {
+            setUsername(claims.username);
+            Axios.get(`http://localhost:8081/api/v1/user/byUsername/${claims.username}`, {
+                headers: { JWT: cookies.JWT }
+            }).then(res => {
+                const { data } = res;
+                setName(data.name);
+                setLastName(data.lastName);
+                setEmail(data.email);
+                setCountryCode(data.countryCode);
+                setPhoneNumber(data.phoneNumber);
+            }).catch(e => {
 
-        });
+            });
+        }
     }, [username, cookies]);
 
     return (
@@ -46,11 +48,6 @@ const Profile = () => {
                 <Navbar />
                 <div className="block-section container">
                     <div className="block-section-header">
-                    <div className="block-section-header-edit">
-                            <button type="button" id="sidebarCollapse" className="btn btn-outline-secondary">
-                                <i className="fas fa-pen"></i>
-                            </button>
-                        </div>
                         <h3 className="block-section-header-text">Personal Information</h3>
                     </div>
                     <div>

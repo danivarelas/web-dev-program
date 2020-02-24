@@ -5,13 +5,14 @@ import { withCookies, useCookies } from 'react-cookie';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Register from './pages/Register/Register';
 import Home from './pages/Home/Home';
-import Accounts from './pages/Accounts/Accounts';
 import CreditCards from './pages/CreditCards/CreditCards';
 import Payments from './pages/Payments/Payments';
 import Transfers from './pages/Transfers/Transfers';
 import Profile from './pages/Profile/Profile';
 import validate from './utils/JWTParser';
 import NewTransfer from './pages/NewTransfer/NewTransfer';
+import OpenAccount from './pages/OpenAccount/OpenAccount';
+import AccountsInfo from './pages/AccountsInfo/AccountsInfo';
 
 function App() {
 
@@ -33,8 +34,8 @@ function App() {
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="/home" component={Home} />
-                <Route path="/accounts/openAccount" component={Accounts} />
-                <Route path="/accounts" component={Accounts} />
+                <Route path="/accounts/openAccount" component={OpenAccount} />
+                <Route path="/accounts/:accountId" component={AccountsInfo} />
                 <Route path="/creditCards/requestCard" component={CreditCards} />
                 <Route path="/creditCards" component={CreditCards} />
                 <Route path="/payments/services" component={Payments} />

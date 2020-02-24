@@ -8,7 +8,7 @@ public class Account {
 
     private long id;
     private String accountNumber;
-    private BigDecimal balance;
+    private String balance;
     private String currency;
     private long userId;
 
@@ -20,7 +20,7 @@ public class Account {
         if (accountDTO != null) {
             this.id = accountDTO.getId();
             this.accountNumber = accountDTO.getAccountNumber();
-            this.balance = accountDTO.getBalance();
+            this.balance = accountDTO.getBalance().toString();
             this.currency = accountDTO.getCurrency();
             this.userId = accountDTO.getUserId();
         }
@@ -38,11 +38,11 @@ public class Account {
         return accountNumber;
     }
 
-    public BigDecimal getBalance() {
+    public String getBalance() {
         return balance;
     }
 
-    public void setBalance(BigDecimal balance) {
+    public void setBalance(String balance) {
         this.balance = balance;
     }
 

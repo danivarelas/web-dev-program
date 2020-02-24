@@ -67,11 +67,11 @@
 #sidebar ul.components {
     padding: 1em 0;
     border-bottom: 1px solid rgba(121, 123, 128, 1);
-}
 
-#sidebar ul p {
-    color: #fff;
-    padding: 10px;
+    .sidebar-link {
+        color: white;
+        text-decoration: none;
+    }
 }
 
 #sidebar ul li a {
@@ -79,6 +79,8 @@
     font-size: 1.1em;
     font-weight: bold;
     display: block;
+    text-decoration: none;
+    color: white;
 }
 
 #sidebar ul li a:hover {

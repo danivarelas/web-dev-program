@@ -49,17 +49,17 @@ const Navbar = () => {
                 </div>
             </div>
             <ul className="list-unstyled components">
-                <li><Link to="/home">Summary</Link></li>
+                <li className="sidebar-link"><Link to="/home">Summary</Link></li>
                 <li>
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Payments</a>
                     <ul className="collapse list-unstyled" id="homeSubmenu">
-                        <li><Link to="/payments">View Payments</Link></li>
-                        <li><Link to="/payments/services">Pay Services</Link></li>
-                        <li><Link to="/payments/credit-cards">Pay Credit Cards</Link></li>
+                        <li className="sidebar-link"><Link to="/payments">View Payments</Link></li>
+                        <li className="sidebar-link"><Link to="/payments/services">Pay Services</Link></li>
+                        <li className="sidebar-link"><Link to="/payments/credit-cards">Pay Credit Cards</Link></li>
                     </ul>
                 </li>
-                <li><Link to="/transfers">Transfers</Link></li>
-                <li><Link to="/profile">Profile</Link></li>
+                <li className="sidebar-link"><Link to="/transfers/newTransfer">Transfer money</Link></li>
+                <li className="sidebar-link"><Link to="/profile">Profile</Link></li>
             </ul>
         </nav>
             <nav className="navbar navbar-light bg-white">

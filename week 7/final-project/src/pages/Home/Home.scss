@@ -24,4 +24,17 @@
         justify-content: center;
         margin: 1.5em 0;
     }
+
+    .exchange-rates {
+        margin: 2em 0;
+
+        .exchange-rates-title {
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+
+        p {
+            margin: 0;
+        }
+    }
 }

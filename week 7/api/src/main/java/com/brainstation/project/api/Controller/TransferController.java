@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
@@ -29,12 +31,28 @@ public class TransferController {
     }
 
     @PostMapping
-    public void addTransfer(@RequestBody Transfer transfer) {
+    public void addTransfer(@RequestBody Transfer transfer, @RequestParam(name = "buy") String buy, @RequestParam(name = "sell") String sell) {
         Account sourceAccount = accountService.selectAccountById(transfer.getSourceAccountId());
         Account targetAccount = accountService.selectAccountById(transfer.getTargetAccountId());
-        if(sourceAccount.getBalance().compareTo(transfer.getAmount()) == 1) {
-            sourceAccount.setBalance(sourceAccount.getBalance().subtract(transfer.getAmount()));
-            targetAccount.setBalance(targetAccount.getBalance().add(transfer.getAmount()));
+        BigDecimal sourceBalance = new BigDecimal(sourceAccount.getBalance());
+        BigDecimal targetBalance = new BigDecimal(targetAccount.getBalance());
+        BigDecimal buyRate = new BigDecimal(buy);
+        BigDecimal sellRate = new BigDecimal(sell);
+        if(sourceBalance.compareTo(transfer.getAmount()) == 1) {
+            if (sourceAccount.getCurrency().equals("CRC") && targetAccount.getCurrency().equals("USD")) {
+                BigDecimal newAmount = new BigDecimal(transfer.getAmount().toString());
+                newAmount = newAmount.divide(sellRate, 2 , RoundingMode.HALF_EVEN);
+                sourceAccount.setBalance(sourceBalance.subtract(transfer.getAmount()).toString());
+                targetAccount.setBalance(targetBalance.add(newAmount).toString());
+            } else if (sourceAccount.getCurrency().equals("USD") && targetAccount.getCurrency().equals("CRC")) {
+                BigDecimal newAmount = new BigDecimal(transfer.getAmount().toString());
+                newAmount = newAmount.multiply(buyRate);
+                sourceAccount.setBalance(sourceBalance.subtract(transfer.getAmount()).toString());
+                targetAccount.setBalance(targetBalance.add(newAmount).toString());
+            } else {
+                sourceAccount.setBalance(sourceBalance.subtract(transfer.getAmount()).toString());
+                targetAccount.setBalance(targetBalance.add(transfer.getAmount()).toString());
+            }
             accountService.updateAccount(sourceAccount.getId(), sourceAccount);
             accountService.updateAccount(targetAccount.getId(), targetAccount);
         }

@@ -24,7 +24,7 @@ public class AccountDTO {
     public AccountDTO(Account account) {
         if (account != null) {
             this.accountNumber = account.getAccountNumber();
-            this.balance = account.getBalance();
+            this.balance = new BigDecimal(account.getBalance());
             this.currency = account.getCurrency();
             this.userId = account.getUserId();
         }

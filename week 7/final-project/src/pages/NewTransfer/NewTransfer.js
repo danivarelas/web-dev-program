@@ -5,6 +5,7 @@ import validate from '../../utils/JWTParser';
 import Navbar from '../../components/Navbar/Navbar';
 import Axios from 'axios';
 import './NewTransfer.scss';
+import { format } from 'date-fns';
 
 const NewTransfer = () => {
 
@@ -14,6 +15,7 @@ const NewTransfer = () => {
     const [amount, setAmount] = useState("");
     const [sourceAccountNumber, setSourceAccountNumber] = useState();
     const [targetAccountNumber, setTargetAccountNumber] = useState("");
+    const [exchangeRates, setExchangeRates] = useState({});
 
     const [accounts, setAccounts] = useState([]);
     const [invalidAmount, setInvalidAmount] = useState(false);
@@ -27,16 +29,25 @@ const NewTransfer = () => {
     }
 
     useEffect(() => {
-        let claims = validate(cookies.JWT);
-        Axios.get(`http://localhost:8081/api/v1/account/byUserId/${claims.id}`, {
-            headers: { JWT: cookies.JWT }
-        }).then(res => {
-            const { data } = res;
-            setAccounts(data);
-            setSourceAccountNumber(data[0].accountNumber)
-        }).catch(e => {
+        const claims = validate(cookies.JWT);
+        if (claims) {
+            Axios.get(`http://localhost:8081/api/v1/account/byUserId/${claims.id}`, {
+                headers: { JWT: cookies.JWT }
+            }).then(res => {
+                const { data } = res;
+                setAccounts(data);
+                setSourceAccountNumber(data[0].accountNumber)
+            }).catch(e => {
 
-        });
+            });
+            let dateToday = new Date();
+            dateToday = format(dateToday, "dd/MM/yyyy");
+            Axios.get(`https://tipodecambio.paginasweb.cr/api/${dateToday}`)
+            .then(res => {
+                const { data } = res;
+                setExchangeRates(data);
+            });
+        }
     }, [invalidAmount, invalidAccount, cookies]);
 
     const handleSubmit = async (e) => {
@@ -53,25 +64,26 @@ const NewTransfer = () => {
             } else {
                 const sourceAccountId = await checkAccount(sourceAccountNumber);
                 const targetAccountId = await checkAccount(targetAccountNumber);
-                //console.log(sourceAccountId)
-                //console.log(targetAccountId)
+                
                 const transfer = {
-                    transferNumber: ((Math.random() * 10000000) + 1),
+                    transferNumber: Math.floor((Math.random() * 100000000) + 1000000000),
                     transferDescription: description,
                     amount: amount,
                     transferDate: new Date(),
                     sourceAccountId: sourceAccountId.id,
                     targetAccountId: targetAccountId.id
                 }
-                console.log(transfer)
-                /*Axios.post(`http://localhost:8081/api/v1/transfer`, transfer, {
+
+                const {compra, venta} = exchangeRates;
+                
+                Axios.post(`http://localhost:8081/api/v1/transfer?buy=${compra}&sell=${venta}`, transfer, {
                     headers: {JWT: cookies.JWT}
                 })
                     .then(res => {
                         history.goBack();
                     }).catch(e => {
                         console.log(e);
-                    });*/
+                    });
             }
         } else {
             setInvalidAccount(false);
@@ -82,9 +94,7 @@ const NewTransfer = () => {
     const checkAmount = async () => {
         if (amount > 0) {
             let res = await Axios.get(`http://localhost:8081/api/v1/account/${sourceAccountNumber}`, {
-                headers: {
-                    JWT: cookies.JWT,
-                }
+                headers: { JWT: cookies.JWT}
             })
             const { data } = res;
             console.log(data)
@@ -157,7 +167,7 @@ const NewTransfer = () => {
                         </div>
                         <div className="form-group">
                             <label>Amount</label>
-                            <input className="form-control" type="number" required onChange={handleAmount} />
+                            <input className="form-control" type="number" required step="0.01" onChange={handleAmount} />
                             {invalidAmount &&
                                 <div className="invalid-entry">You have insufficient funds.</div>
                             }
@@ -174,7 +184,7 @@ const NewTransfer = () => {
                         </div>
                         <button type="cancel" className="btn btn-danger" onClick={handleCancel}>Cancel</button>
                         <button type="submit" className="btn btn-success">Transfer</button>
-                        
+
                     </form>
                 </div>
             </div>

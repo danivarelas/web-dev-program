@@ -29,7 +29,7 @@ const Accounts = (props) => {
         <div className="block-section container">
             <div className="block-section-header">
                 <div className="block-section-header-edit">
-                    <Link>Open account</Link>
+                    <Link to="/accounts/openAccount">Open account</Link>
                 </div>
 
                 <h3 className="block-section-header-text">Accounts</h3>
@@ -50,7 +50,7 @@ const Accounts = (props) => {
                             return <tr>
                                 <td>{account.accountNumber}</td>
                                 <td>{account.balance + " " + account.currency}</td>
-                                <td> <Link><i className="fas fa-eye"></i></Link></td>
+                                <td> <Link to={`/accounts/${account.id}`}><i className="fas fa-eye"></i></Link></td>
                             </tr>
                         })}
                     </tbody>

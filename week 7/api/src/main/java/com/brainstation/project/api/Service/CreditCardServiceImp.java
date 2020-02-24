@@ -51,6 +51,9 @@ public class CreditCardServiceImp implements CreditCardService {
 
     @Override
     public CreditCard updateCreditCard(long id, CreditCard creditCard) {
-        return null;
+        CreditCardDTO creditCardDTO = new CreditCardDTO(creditCard);
+        creditCardDTO.setId(id);
+        creditCardDTO = creditCardDAO.save(creditCardDTO);
+        return new CreditCard(creditCardDTO);
     }
 }

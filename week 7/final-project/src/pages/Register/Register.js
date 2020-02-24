@@ -10,7 +10,7 @@ const Register = () => {
 
     const history = useHistory();
 
-    const [cookies, setCookie] = useCookies(['JWT']);
+    const [cookies] = useCookies(['JWT']);
 
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -62,18 +62,14 @@ const Register = () => {
 
     const checkUsername = async () => {
         let res = await Axios.get(`http://localhost:8081/api/v1/user/byUsername/${username}`, {
-            headers: {
-                JWT: cookies.JWT,
-            }
+            headers: {JWT: cookies.JWT}
         })
         return res;
     };
 
     const checkEmail = async () => {
         let res = await Axios.get(`http://localhost:8081/api/v1/user/byEmail/${email}`, {
-            headers: {
-                JWT: cookies.JWT,
-            }
+            headers: {JWT: cookies.JWT}
         })
         return res;
     };
@@ -153,11 +149,11 @@ const Register = () => {
                 <div className="form-row">
                     <div className="form-group col-sm-3">
                         <label>Country Code</label>
-                        <input type="text" className="form-control" required onChange={handleCode} placeholder="+506" />
+                        <input type="number" className="form-control" required onChange={handleCode} placeholder="506" />
                     </div>
                     <div className="form-group col-sm-9">
                         <label>Phone Number</label>
-                        <input type="text" className="form-control" required onChange={handlePhone} placeholder="88888888" />
+                        <input type="number" className="form-control" required onChange={handlePhone} placeholder="88888888" />
                     </div>
                 </div>
                 <div className="form-group">

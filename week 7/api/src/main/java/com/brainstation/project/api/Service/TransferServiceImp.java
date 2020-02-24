@@ -5,6 +5,7 @@ import com.brainstation.project.api.DTO.TransferDTO;
 import com.brainstation.project.api.Model.Transfer;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +41,8 @@ public class TransferServiceImp implements TransferService {
     }
 
     @Override
-    public List<Transfer> selectAllTransfersByUserId(long userId) {
-        List<TransferDTO> transferDTOS = transferDAO.findTransfersByUserId(userId);
+    public List<Transfer> selectAllTransfersByAccountId(long accountId) {
+        List<TransferDTO> transferDTOS = transferDAO.findTransfersByAccountId(accountId);
         List<Transfer> transfers = new ArrayList<>();
         transferDTOS.forEach(transfer -> {
             transfers.add(new Transfer(transfer));

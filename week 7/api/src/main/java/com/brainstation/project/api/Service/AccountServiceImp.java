@@ -31,6 +31,11 @@ public class AccountServiceImp implements AccountService {
         return accounts;
     }
 
+    public Account selectAccountById(long id) {
+        AccountDTO accountDTO = accountDAO.findById(id).get();
+        return new Account(accountDTO);
+    }
+
     public Account selectAccountByAccountNumber(String accountNumber) {
         AccountDTO accountDTO = accountDAO.findByAccountNumber(accountNumber);
         return new Account(accountDTO);
@@ -46,8 +51,8 @@ public class AccountServiceImp implements AccountService {
     }
 
     public Account updateAccount(long id, Account account) {
-        AccountDTO accountDTO = accountDAO.findById(id).get();
-        accountDTO.setBalance(account.getBalance());
+        AccountDTO accountDTO = new AccountDTO(account);
+        accountDTO.setId(id);
         accountDTO = accountDAO.save(accountDTO);
         return new Account(accountDTO);
     }

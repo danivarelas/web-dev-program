@@ -20,13 +20,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
-    private final AccountService accountService;
     private HttpServletRequest request;
 
     @Autowired
     public UserController(UserService userService, AccountService accountService, HttpServletRequest request) {
         this.userService = userService;
-        this.accountService = accountService;
         this.request = request;
     }
 

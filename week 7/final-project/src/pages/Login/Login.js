@@ -25,20 +25,12 @@ const Login = () => {
             password: password
         }
         Axios.post(`http://localhost:8081/api/v1/login`, user, {
-            headers: {
-                JWT: cookies.JWT,
-            }
+            headers: {JWT: cookies.JWT}
         }).then(res => {
             setCookie('JWT', res.data, { path: '/' });
             history.push("/");
         }).catch(e => {
             setInvalidLogin(true);
-            console.log(e);
-            if (Axios.isCancel(e)) {
-                //alert(`request cancelled:${e.message}`);
-            } else {
-                //alert("another error happened:" + e.message);
-            }
         });
     }
 

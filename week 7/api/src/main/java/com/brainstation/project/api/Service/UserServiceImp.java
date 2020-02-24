@@ -42,14 +42,8 @@ public class UserServiceImp implements UserService {
     }
 
     public User updateUser(long id, User user) {
-        UserDTO userDTO = userDAO.findById(id).get();
-        userDTO.setUsername(user.getUsername());
-        userDTO.setName(user.getName());
-        userDTO.setLastName(user.getLastName());
-        userDTO.setEmail(user.getEmail());
-        userDTO.setPhoneNumber(user.getPhoneNumber());
-        userDTO.setCountryCode(user.getCountryCode());
-        userDTO.setUsername(user.getUsername());
+        UserDTO userDTO = new UserDTO(user);
+        userDTO.setId(id);
         userDTO = userDAO.save(userDTO);
         return new User(userDTO);
     }

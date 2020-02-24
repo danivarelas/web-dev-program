@@ -54,7 +54,7 @@ public class AccountController {
     }
 
     @PutMapping("{id}")
-    public void updateUser(@PathVariable("id") long id, @RequestBody Account account, BigDecimal amount) {
+    public void updateUser(@PathVariable("id") long id, @RequestBody Account account) {
         accountService.updateAccount(id, account);
     }
 

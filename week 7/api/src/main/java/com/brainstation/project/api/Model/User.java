@@ -14,7 +14,6 @@ public class User {
     private String password;
     private int countryCode;
     private int phoneNumber;
-    private List<Account> accounts;
 
     public User() {
         super();
@@ -103,11 +102,4 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
 }

@@ -12,6 +12,8 @@ public interface AccountService {
 
     List<Account> selectAllAccounts();
 
+    Account selectAccountById(long id);
+
     Account selectAccountByAccountNumber(String accountNumber);
 
     List<Account> selectAllAccountsByUserId(long userId);

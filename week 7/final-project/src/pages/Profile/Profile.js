@@ -27,9 +27,7 @@ const Profile = () => {
         let claims = validate(cookies.JWT)
         setUsername(claims.username);
         Axios.get(`http://localhost:8081/api/v1/user/byUsername/${claims.username}`, {
-            headers: {
-                JWT: cookies.JWT,
-            }
+            headers: {JWT: cookies.JWT}
         }).then(res => {
             const { data } = res;
             setName(data.name);
@@ -41,8 +39,6 @@ const Profile = () => {
 
         });
     }, [username, cookies]);
-
-
 
     return (
         <div className="wrapper">
@@ -59,26 +55,25 @@ const Profile = () => {
                     </div>
                     <div>
                         <div className="label-group row">
-                            <label className="label-title col-sm-2">Name:</label>
-                            <label className="label-description col-sm-2">{name}</label>
+                            <label className="label-title col-md-2">Name:</label>
+                            <label className="label-description col-md-2">{name}</label>
                         </div>
                         <div className="label-group row">
-                            <label className="label-title col-sm-2">Last Name:</label>
-                            <label className="label-description col-sm-2">{lastName}</label>
+                            <label className="label-title col-md-2">Last Name:</label>
+                            <label className="label-description col-md-2">{lastName}</label>
                         </div>
                         <div className="label-group row">
-                            <label className="label-title col-sm-2">Username:</label>
-                            <label className="label-description col-sm-2">{username}</label>
+                            <label className="label-title col-md-2">Username:</label>
+                            <label className="label-description col-md-2">{username}</label>
                         </div>
                         <div className="label-group row">
-                            <label className="label-title col-sm-2">Email:</label>
-                            <label className="label-description col-sm-2">{email}</label>
+                            <label className="label-title col-md-2">Email:</label>
+                            <label className="label-description col-md-2">{email}</label>
                         </div>
                         <div className="label-group row">
-                            <label className="label-title col-sm-2">Phone Number:</label>
-                            <label className="label-description col-sm-2">{"+" + countryCode + " " + phoneNumber}</label>
+                            <label className="label-title col-md-2">Phone Number:</label>
+                            <label className="label-description col-md-2">{"+" + countryCode + " " + phoneNumber}</label>
                         </div>
-
                     </div>
                 </div>
             </div>

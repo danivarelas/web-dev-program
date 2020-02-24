@@ -13,9 +13,13 @@ const Navbar = () => {
 
     const [cookies, removeCookie] = useCookies(['JWT']);
 
+    
+
     useEffect(() => {
         let claims = validate(cookies.JWT)
-        setUser(claims.name);
+        if(claims){
+            setUser(claims.name);
+        }
     }, [user, cookies]);
 
     const handleLogout = () => {
@@ -46,8 +50,6 @@ const Navbar = () => {
             </div>
             <ul className="list-unstyled components">
                 <li><Link to="/home">Summary</Link></li>
-                <li><Link to="/accounts">Accounts</Link></li>
-                <li><Link to="/credit-cards">Credit Cards</Link></li>
                 <li>
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Payments</a>
                     <ul className="collapse list-unstyled" id="homeSubmenu">
@@ -60,7 +62,6 @@ const Navbar = () => {
                 <li><Link to="/profile">Profile</Link></li>
             </ul>
         </nav>
-
             <nav className="navbar navbar-light bg-white">
                 <div className="container-fluid">
                     <button type="button" id="sidebarCollapse" className="btn btn-outline-secondary mr-4" onClick={toggleSidebar}>

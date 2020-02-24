@@ -11,6 +11,7 @@ import Payments from './pages/Payments/Payments';
 import Transfers from './pages/Transfers/Transfers';
 import Profile from './pages/Profile/Profile';
 import validate from './utils/JWTParser';
+import NewTransfer from './pages/NewTransfer/NewTransfer';
 
 function App() {
 
@@ -32,11 +33,14 @@ function App() {
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="/home" component={Home} />
+                <Route path="/accounts/openAccount" component={Accounts} />
                 <Route path="/accounts" component={Accounts} />
-                <Route path="/credit-cards" component={CreditCards} />
+                <Route path="/creditCards/requestCard" component={CreditCards} />
+                <Route path="/creditCards" component={CreditCards} />
                 <Route path="/payments/services" component={Payments} />
-                <Route path="/payments/credit-cards" component={Payments} />
+                <Route path="/payments/creditCards" component={Payments} />
                 <Route path="/payments" component={Payments} />
+                <Route path="/transfers/newTransfer" component={NewTransfer} />
                 <Route path="/transfers" component={Transfers} />
                 <Route path="/profile" component={Profile} />
                 <Redirect exact from="/" to={redirect} />

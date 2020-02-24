@@ -1,6 +1,8 @@
 package com.brainstation.project.api.Controller;
 
+import com.brainstation.project.api.Model.Account;
 import com.brainstation.project.api.Model.Transfer;
+import com.brainstation.project.api.Service.AccountService;
 import com.brainstation.project.api.Service.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,16 +18,26 @@ import java.util.List;
 public class TransferController {
 
     private final TransferService transferService;
+    private final AccountService accountService;
     private HttpServletRequest request;
 
     @Autowired
-    public TransferController(TransferService transferService, HttpServletRequest request) {
+    public TransferController(TransferService transferService, AccountService accountService, HttpServletRequest request) {
         this.transferService = transferService;
+        this.accountService = accountService;
         this.request = request;
     }
 
     @PostMapping
     public void addTransfer(@RequestBody Transfer transfer) {
+        Account sourceAccount = accountService.selectAccountById(transfer.getSourceAccountId());
+        Account targetAccount = accountService.selectAccountById(transfer.getTargetAccountId());
+        if(sourceAccount.getBalance().compareTo(transfer.getAmount()) == 1) {
+            sourceAccount.setBalance(sourceAccount.getBalance().subtract(transfer.getAmount()));
+            targetAccount.setBalance(targetAccount.getBalance().add(transfer.getAmount()));
+            accountService.updateAccount(sourceAccount.getId(), sourceAccount);
+            accountService.updateAccount(targetAccount.getId(), targetAccount);
+        }
         transferService.insertTransfer(transfer);
     }
 
@@ -38,10 +50,10 @@ public class TransferController {
         //}
     }
 
-    @GetMapping("byUserId/{userId}")
-    public ResponseEntity<List<Transfer>> getAllTransfersByUserId(@PathVariable("userId") long userId) {
+    @GetMapping("byAccountId/{accountId}")
+    public ResponseEntity<List<Transfer>> getAllTransfersByAccountId(@PathVariable("accountId") long accountId) {
         //if (JWTProvider.validateToken(request.getHeader("JWT"))) {
-        return new ResponseEntity<>(transferService.selectAllTransfersByUserId(userId) , HttpStatus.OK);
+        return new ResponseEntity<>(transferService.selectAllTransfersByAccountId(accountId) , HttpStatus.OK);
         //} else {
         //    return new ResponseEntity<>(new ArrayList<>() , HttpStatus.UNAUTHORIZED);
         //}

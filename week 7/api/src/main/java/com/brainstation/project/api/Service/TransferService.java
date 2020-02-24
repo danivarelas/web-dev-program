@@ -14,7 +14,7 @@ public interface TransferService {
 
     Transfer selectTransferByTransferNumber(String transferNumber);
 
-    List<Transfer> selectAllTransfersByUserId(long userId);
+    List<Transfer> selectAllTransfersByAccountId(long userId);
 
     Transfer updateTransfer(long id, Transfer transfer);
 

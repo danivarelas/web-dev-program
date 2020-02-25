@@ -13,6 +13,7 @@ public class AccountDTO {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String accountNumber;
+    private String description;
     private BigDecimal balance;
     private String currency;
     private Long userId;
@@ -24,6 +25,7 @@ public class AccountDTO {
     public AccountDTO(Account account) {
         if (account != null) {
             this.accountNumber = account.getAccountNumber();
+            this.description = account.getDescription();
             this.balance = new BigDecimal(account.getBalance());
             this.currency = account.getCurrency();
             this.userId = account.getUserId();
@@ -44,6 +46,14 @@ public class AccountDTO {
 
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public BigDecimal getBalance() {

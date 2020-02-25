@@ -31,32 +31,38 @@ public class TransferController {
     }
 
     @PostMapping
-    public void addTransfer(@RequestBody Transfer transfer, @RequestParam(name = "buy") String buy, @RequestParam(name = "sell") String sell) {
+    public ResponseEntity<Transfer> addTransfer(@RequestBody Transfer transfer, @RequestParam(name = "buy") String buy, @RequestParam(name = "sell") String sell) {
         Account sourceAccount = accountService.selectAccountById(transfer.getSourceAccountId());
         Account targetAccount = accountService.selectAccountById(transfer.getTargetAccountId());
         BigDecimal sourceBalance = new BigDecimal(sourceAccount.getBalance());
         BigDecimal targetBalance = new BigDecimal(targetAccount.getBalance());
         BigDecimal buyRate = new BigDecimal(buy);
         BigDecimal sellRate = new BigDecimal(sell);
-        if(sourceBalance.compareTo(transfer.getAmount()) == 1) {
+        if(sourceBalance.compareTo(transfer.getAmount()) >= 0) {
             if (sourceAccount.getCurrency().equals("CRC") && targetAccount.getCurrency().equals("USD")) {
                 BigDecimal newAmount = new BigDecimal(transfer.getAmount().toString());
                 newAmount = newAmount.divide(sellRate, 2 , RoundingMode.HALF_EVEN);
                 sourceAccount.setBalance(sourceBalance.subtract(transfer.getAmount()).toString());
+                transfer.setTargetAmount(newAmount);
                 targetAccount.setBalance(targetBalance.add(newAmount).toString());
             } else if (sourceAccount.getCurrency().equals("USD") && targetAccount.getCurrency().equals("CRC")) {
                 BigDecimal newAmount = new BigDecimal(transfer.getAmount().toString());
                 newAmount = newAmount.multiply(buyRate);
                 sourceAccount.setBalance(sourceBalance.subtract(transfer.getAmount()).toString());
+                transfer.setTargetAmount(newAmount);
                 targetAccount.setBalance(targetBalance.add(newAmount).toString());
             } else {
+                transfer.setTargetAmount(transfer.getAmount());
                 sourceAccount.setBalance(sourceBalance.subtract(transfer.getAmount()).toString());
                 targetAccount.setBalance(targetBalance.add(transfer.getAmount()).toString());
             }
             accountService.updateAccount(sourceAccount.getId(), sourceAccount);
             accountService.updateAccount(targetAccount.getId(), targetAccount);
+            return new ResponseEntity<>(transferService.insertTransfer(transfer), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new Transfer(), HttpStatus.BAD_REQUEST);
         }
-        transferService.insertTransfer(transfer);
+
     }
 
     @GetMapping

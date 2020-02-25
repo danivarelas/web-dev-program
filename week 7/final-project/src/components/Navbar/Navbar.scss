@@ -24,13 +24,13 @@
     min-width: 300px;
     max-width: 300px;
     height: 100vh;
-    background: rgba(121, 123, 128, 1);
+    background: lightgrey;
     position: fixed;
     top: 0;
     left: 0;
     /* top layer */
     z-index: 9999;
-    color: #fff;
+    color: rgb(122, 122, 122);
     transition: all 0.3s;
 }
 
@@ -66,10 +66,9 @@
 
 #sidebar ul.components {
     padding: 1em 0;
-    border-bottom: 1px solid rgba(121, 123, 128, 1);
+    border-bottom: 1px solid lightgrey;
 
     .sidebar-link {
-        color: white;
         text-decoration: none;
     }
 }
@@ -80,7 +79,7 @@
     font-weight: bold;
     display: block;
     text-decoration: none;
-    color: white;
+    color: rgb(122, 122, 122);
 }
 
 #sidebar ul li a:hover {
@@ -101,5 +100,5 @@ a[data-toggle="collapse"] {
 }
 
 ul ul a {
-    background: rgba(106, 108, 112, 0.9);
+    background: rgb(199, 199, 199);
 }

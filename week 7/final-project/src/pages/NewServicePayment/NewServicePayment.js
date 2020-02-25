@@ -4,24 +4,20 @@ import { useHistory } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
 import Navbar from '../../components/Navbar/Navbar';
 import Axios from 'axios';
-import './NewTransfer.scss';
-import { format } from 'date-fns';
 
-const NewTransfer = () => {
+const NewServicePayment = () => {
 
     const history = useHistory();
 
     const [description, setDescription] = useState("");
     const [amount, setAmount] = useState("");
-    const [sourceAccountNumber, setSourceAccountNumber] = useState("");
-    const [targetAccountNumber, setTargetAccountNumber] = useState("");
-    const [exchangeRates, setExchangeRates] = useState({});
+    const [accountNumber, setAccountNumber] = useState("");
+    const [serviceId, setServiceId] = useState("");
 
     const [accounts, setAccounts] = useState([]);
+    const [services, setServices] = useState([]);
     const [invalidAmount, setInvalidAmount] = useState(false);
     const [insufficientFunds, setInsufficientFunds] = useState(false);
-    const [sameAccountt, setSameAccount] = useState(false);
-    const [invalidAccount, setInvalidAccount] = useState(false);
 
     const [cookies] = useCookies(['JWT']);
 
@@ -37,59 +33,56 @@ const NewTransfer = () => {
             }).then(res => {
                 const { data } = res;
                 setAccounts(data);
-                setSourceAccountNumber(data[0].accountNumber)
+                setAccountNumber(data[0].accountNumber);
             }).catch(e => {
 
             });
-            let dateToday = new Date();
-            dateToday = format(dateToday, "dd/MM/yyyy");
-            Axios.get(`https://tipodecambio.paginasweb.cr/api/${dateToday}`)
-                .then(res => {
-                    const { data } = res;
-                    setExchangeRates(data);
-                });
+            Axios.get(`http://localhost:8081/api/v1/service`, {
+                headers: { JWT: cookies.JWT }
+            }).then(res => {
+                const { data } = res;
+                console.log(data)
+                setServices(data);
+                setServiceId(data[0].id);
+            }).catch(e => {
+
+            });
         }
     }, [cookies]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (sourceAccountNumber !== targetAccountNumber) {
-            setSameAccount(false);
-            setInsufficientFunds(false);
+        setInsufficientFunds(false);
 
-            const validAmount = checkAmount();
-            const validAccount = await checkAccount(targetAccountNumber);
+        const claims = validate(cookies.JWT);
+        const validAmount = checkAmount();
 
-            if (!validAmount || !validAccount) {
-                validAmount ? setInvalidAmount(false) : setInvalidAmount(true);
-                validAccount ? setInvalidAccount(false) : setInvalidAccount(true);
-            } else {
-                const sourceAccount = await checkAccount(sourceAccountNumber);
-                const targetAccount = await checkAccount(targetAccountNumber);
-
-                const transfer = {
-                    transferNumber: Math.floor((Math.random() * 100000000) + 1000000000),
-                    transferDescription: description,
-                    amount: amount,
-                    transferDate: new Date(),
-                    sourceAccountId: sourceAccount.id,
-                    targetAccountId: targetAccount.id
-                }
-
-                const { compra, venta } = exchangeRates;
-
-                Axios.post(`http://localhost:8081/api/v1/transfer?buy=${compra}&sell=${venta}`, transfer, {
-                    headers: { JWT: cookies.JWT }
-                }).then(res => {
-                    history.goBack();
-                }).catch(e => {
-                    console.log(e);
-                    setInsufficientFunds(true);
-                });
-            }
+        if (!validAmount) {
+            validAmount ? setInvalidAmount(false) : setInvalidAmount(true);
         } else {
-            setInvalidAccount(false);
-            setSameAccount(true);
+            const account = await checkAccount(accountNumber);
+
+            const payment = {
+                paymentNumber: Math.floor((Math.random() * 100000000) + 1000000000),
+                paymentDescription: description,
+                amount: amount,
+                currency: account.currency,
+                paymentDate: new Date(),
+                userId: claims.id,
+                accountId: account.id,
+                serviceId: serviceId
+            }
+
+            console.log(payment)
+
+            Axios.post(`http://localhost:8081/api/v1/payment`, payment, {
+                headers: { JWT: cookies.JWT }
+            }).then(res => {
+                history.goBack();
+            }).catch(e => {
+                console.log(e);
+                setInsufficientFunds(true);
+            });
         }
     }
 
@@ -112,8 +105,12 @@ const NewTransfer = () => {
 
     const handleCancel = () => { history.goBack(); }
 
-    const handleSourceAccount = event => {
-        setSourceAccountNumber(event.target.value);
+    const handleAccount = event => {
+        setAccountNumber(event.target.value);
+    };
+
+    const handleService = event => {
+        setServiceId(event.target.value);
     };
 
     const handleDescription = event => {
@@ -124,22 +121,18 @@ const NewTransfer = () => {
         setAmount(event.target.value);
     };
 
-    const handleTargetAccount = event => {
-        setTargetAccountNumber(event.target.value);
-    };
-
     return (
         <div className="wrapper">
             <div id="content">
                 <Navbar />
                 <div className="block-section container">
                     <div className="block-section-header">
-                        <h3 className="block-section-header-text">New Transfer</h3>
+                        <h3 className="block-section-header-text">Pay Services</h3>
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label>Source Account</label>
-                            <select className="form-control" id="source-account" onChange={handleSourceAccount}>
+                            <select className="form-control" id="source-account" onChange={handleAccount}>
                                 {accounts.map((account, index) => {
                                     if (index === 0) {
                                         return <option key={account.id} value={account.accountNumber} selected>
@@ -152,7 +145,18 @@ const NewTransfer = () => {
                                     }
                                 })}
                             </select>
-
+                        </div>
+                        <div className="form-group">
+                            <label>Service</label>
+                            <select className="form-control" id="service" onChange={handleService}>
+                                {services.map((service, index) => {
+                                    if (index === 0) {
+                                        return <option key={service.id} value={service.id} selected>{service.serviceName}</option>;
+                                    } else {
+                                        return <option key={service.id} value={service.id}>{service.serviceName}</option>;
+                                    }
+                                })}
+                            </select>
                         </div>
                         <div className="form-group">
                             <label>Description</label>
@@ -171,18 +175,9 @@ const NewTransfer = () => {
                                 <div className="invalid-entry">You have insufficient funds.</div>
                             }
                         </div>
-                        <div className="form-group">
-                            <label>Target Account</label>
-                            <input className="form-control" type="text" required onChange={handleTargetAccount} />
-                            {invalidAccount &&
-                                <div className="invalid-entry">This account doesn't exist.</div>
-                            }
-                            {sameAccountt &&
-                                <div className="invalid-entry">You can't transfer funds to the same account.</div>
-                            }
-                        </div>
+
                         <button type="cancel" className="btn btn-danger" onClick={handleCancel}>Cancel</button>
-                        <button type="submit" className="btn btn-success">Transfer</button>
+                        <button type="submit" className="btn btn-success">Pay</button>
 
                     </form>
                 </div>
@@ -191,4 +186,4 @@ const NewTransfer = () => {
     );
 }
 
-export default NewTransfer;
+export default NewServicePayment;

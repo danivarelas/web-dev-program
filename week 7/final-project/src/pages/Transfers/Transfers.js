@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
 import Axios from 'axios';
-import { format, parse, parseISO } from 'date-fns';
 import TransfersList from '../../components/TransfersList/TransfersList';
 
 const Transfers = (props) => {

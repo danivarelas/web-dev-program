@@ -29,6 +29,7 @@ const OpenAccount = () => {
         if (claims) {
             const account = {
             accountNumber: Math.floor((Math.random() * 100000000) + 1000000000),
+            description: description,
             balance: "0.00",
             currency: currency,
             userId: claims.id

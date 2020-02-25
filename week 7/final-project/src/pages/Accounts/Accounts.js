@@ -29,7 +29,7 @@ const Accounts = (props) => {
         <div className="block-section container">
             <div className="block-section-header">
                 <div className="block-section-header-edit">
-                    <Link to="/accounts/openAccount">Open account</Link>
+                    <Link to="/accounts/openAccount" className="btn btn-outline-secondary">Open account</Link>
                 </div>
 
                 <h3 className="block-section-header-text">Accounts</h3>
@@ -50,7 +50,7 @@ const Accounts = (props) => {
                             return <tr>
                                 <td>{account.accountNumber}</td>
                                 <td>{account.balance + " " + account.currency}</td>
-                                <td><Link to={{ pathname: '/accounts/accountsInfo', state: { account: account }}}>
+                                <td><Link to={{ pathname: '/accounts/accountsInfo', state: { account }}}>
                                     <i className="fas fa-eye"></i></Link>
                                 </td>
                             </tr>

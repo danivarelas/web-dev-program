@@ -39,7 +39,7 @@ const Navbar = () => {
             <div className="sidebar-header">
                 <div className="header-btn-close">
                     <button type="button" id="sidebarCollapse" className="btn btn-outline-danger" onClick={toggleSidebar}>
-                        <i className="fas fa-times"></i>
+                        Close <i className="fas fa-times"></i>
                     </button>
                 </div>
                 <div className="header-title">
@@ -52,8 +52,8 @@ const Navbar = () => {
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Payments</a>
                     <ul className="collapse list-unstyled" id="homeSubmenu">
                         <li className="sidebar-link"><Link to="/payments">View Payments</Link></li>
-                        <li className="sidebar-link"><Link to="/payments/services">Pay Services</Link></li>
-                        <li className="sidebar-link"><Link to="/payments/credit-cards">Pay Credit Cards</Link></li>
+                        <li className="sidebar-link"><Link to="/payments/payServices">Pay Services</Link></li>
+                        <li className="sidebar-link"><Link to="/payments/creditCards">Pay Credit Cards</Link></li>
                     </ul>
                 </li>
                 <li className="sidebar-link"><Link to="/transfers/newTransfer">Transfer money</Link></li>
@@ -67,7 +67,9 @@ const Navbar = () => {
                     </button>
                     <Link className="navbar-brand" to="/">PowerBank</Link>
                     <div className=" ml-auto">
-                        <button className="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#logoutModal">Logout</button>
+                        <button className="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#logoutModal">
+                            Logout <i class="fas fa-sign-out-alt"></i>
+                        </button>
                     </div>
                 </div>
             </nav>
@@ -85,8 +87,8 @@ const Navbar = () => {
                             Are you sure you want to logout?
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={handleLogout}>Logout</button>
+                            <button type="button" className="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
+                            <button type="button" className="btn btn-outline-secondary" data-dismiss="modal" onClick={handleLogout}>Logout</button>
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie';
 import { Link, useHistory } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
 import { format, parseISO } from 'date-fns';
+import './TransfersList.scss';
 
 const TransfersList = (props) => {
 
@@ -30,13 +31,12 @@ const TransfersList = (props) => {
         <div className="block-section container">
             <div className="block-section-header">
                 {isOutgoing && <div className="block-section-header-edit">
-                    <Link to="/transfers/newTransfer">New Transfer</Link>
+                    <Link to="/transfers/newTransfer" className="btn btn-outline-secondary">New Transfer</Link>
                 </div>}
                 <h3 className="block-section-header-text">{title}</h3>
             </div>
             {!showTransfers && <p>{emptyMessage}</p>}
             {showTransfers && <div>
-                <h4>Outgoing transfers</h4>
                 <div className="table-responsive-md">
                     <table className="table">
                         <thead>
@@ -53,7 +53,8 @@ const TransfersList = (props) => {
                                     <td>{transfer.transferNumber}</td>
                                     <td>{transfer.transferDescription}</td>
                                     <td>{format(parseISO(transfer.transferDate), 'dd/MM/yyyy')}</td>
-                                    <td>{`${transfer.amount} ${account.currency}`}</td>
+                                    {isOutgoing && <td className="outgoing-amount">{`${transfer.amount} ${account.currency}`}</td>}
+                                    {!isOutgoing && <td className="incoming-amount">{`${transfer.targetAmount} ${account.currency}`}</td>}
                                 </tr>
                             })}
                         </tbody>

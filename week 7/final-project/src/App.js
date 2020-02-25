@@ -13,6 +13,7 @@ import validate from './utils/JWTParser';
 import NewTransfer from './pages/NewTransfer/NewTransfer';
 import OpenAccount from './pages/OpenAccount/OpenAccount';
 import AccountsInfo from './pages/AccountsInfo/AccountsInfo';
+import NewServicePayment from './pages/NewServicePayment/NewServicePayment';
 
 function App() {
 
@@ -38,7 +39,7 @@ function App() {
                 <Route path="/accounts/accountsInfo" component={AccountsInfo} />
                 <Route path="/creditCards/requestCard" component={CreditCards} />
                 <Route path="/creditCards" component={CreditCards} />
-                <Route path="/payments/services" component={Payments} />
+                <Route path="/payments/payServices" component={NewServicePayment} />
                 <Route path="/payments/creditCards" component={Payments} />
                 <Route path="/payments" component={Payments} />
                 <Route path="/transfers/newTransfer" component={NewTransfer} />

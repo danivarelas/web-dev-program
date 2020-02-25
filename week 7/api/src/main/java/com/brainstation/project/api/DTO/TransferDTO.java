@@ -16,6 +16,7 @@ public class TransferDTO {
     private String transferNumber;
     private String transferDescription;
     private BigDecimal amount;
+    private BigDecimal targetAmount;
     private Date transferDate;
     private Long sourceAccountId;
     private Long targetAccountId;
@@ -29,6 +30,7 @@ public class TransferDTO {
             this.transferNumber = transfer.getTransferNumber();
             this.transferDescription = transfer.getTransferDescription();
             this.amount = transfer.getAmount();
+            this.targetAmount = transfer.getTargetAmount();
             this.transferDate = transfer.getTransferDate();
             this.sourceAccountId = transfer.getSourceAccountId();
             this.targetAccountId = transfer.getTargetAccountId();
@@ -65,6 +67,14 @@ public class TransferDTO {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public BigDecimal getTargetAmount() {
+        return targetAmount;
+    }
+
+    public void setTargetAmount(BigDecimal targetAmount) {
+        this.targetAmount = targetAmount;
     }
 
     public Date getTransferDate() {

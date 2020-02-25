@@ -1,6 +1,9 @@
 package com.brainstation.project.api.Controller;
 
+import com.brainstation.project.api.Model.Account;
 import com.brainstation.project.api.Model.Payment;
+import com.brainstation.project.api.Model.Transfer;
+import com.brainstation.project.api.Service.AccountService;
 import com.brainstation.project.api.Service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
@@ -16,17 +21,27 @@ import java.util.List;
 public class PaymentController {
 
     private final PaymentService paymentService;
+    private final AccountService accountService;
     private HttpServletRequest request;
 
     @Autowired
-    public PaymentController(PaymentService paymentService, HttpServletRequest request) {
+    public PaymentController(PaymentService paymentService, AccountService accountService, HttpServletRequest request) {
         this.paymentService = paymentService;
+        this.accountService = accountService;
         this.request = request;
     }
 
     @PostMapping
-    public void addPayment(@RequestBody Payment payment) {
-        paymentService.insertPayment(payment);
+    public ResponseEntity<Payment> addPayment(@RequestBody Payment payment) {
+        Account account = accountService.selectAccountById(payment.getAccountId());
+        BigDecimal balance = new BigDecimal(account.getBalance());
+        if(balance.compareTo(payment.getAmount()) >= 0) {
+            account.setBalance(balance.subtract(payment.getAmount()).toString());
+            accountService.updateAccount(account.getId(), account);
+            return new ResponseEntity<>(paymentService.insertPayment(payment), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new Payment(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping

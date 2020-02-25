@@ -77,4 +77,13 @@ public class TransferController {
         //}
     }
 
+    @GetMapping("byTargetAccountId/{accountId}")
+    public ResponseEntity<List<Transfer>> getAllTransfersByTargetAccountId(@PathVariable("accountId") long accountId) {
+        //if (JWTProvider.validateToken(request.getHeader("JWT"))) {
+        return new ResponseEntity<>(transferService.selectAllTransfersByTargetAccountId(accountId) , HttpStatus.OK);
+        //} else {
+        //    return new ResponseEntity<>(new ArrayList<>() , HttpStatus.UNAUTHORIZED);
+        //}
+    }
+
 }

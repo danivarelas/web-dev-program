@@ -14,4 +14,7 @@ public interface TransferDAO extends JpaRepository<TransferDTO, Long> {
 
     @Query("SELECT t FROM TransferDTO t WHERE t.sourceAccountId = ?1")
     List<TransferDTO> findTransfersByAccountId(long sourceAccountId);
+
+    @Query("SELECT t FROM TransferDTO t WHERE t.targetAccountId = ?1")
+    List<TransferDTO> findTransfersByTargetAccountId(long targetAccountId);
 }

@@ -8,6 +8,7 @@ import Axios from 'axios';
 import Accounts from '../Accounts/Accounts';
 import CreditCards from '../CreditCards/CreditCards';
 import { format } from 'date-fns';
+import emailjs from 'emailjs-com';
 
 const Home = () => {
 
@@ -25,12 +26,14 @@ const Home = () => {
     }
 
     useEffect(() => {
+        //emailjs.send('gmail', 'template_8HJ8XF0v', {}, 'user_ykN9aw27EcEhXClqMft4o');
         const claims = validate(cookies.JWT);
         if (claims) {
             Axios.get(`http://localhost:8081/api/v1/account/byUserId/${claims.id}`, {
                 headers: { JWT: cookies.JWT }
             }).then(res => {
                 const { data } = res;
+                console.log(data)
                 setAccounts(data);
             }).catch(e => {
 

@@ -3,15 +3,17 @@ import { useCookies } from 'react-cookie';
 import { Link, useHistory } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
 import Axios from 'axios';
-import { format } from 'date-fns';
+import { format, parse, parseISO } from 'date-fns';
+import TransfersList from '../../components/TransfersList/TransfersList';
 
 const Transfers = (props) => {
 
     const history = useHistory();
 
-    const {accountId} = props;
+    const { account } = props;
 
-    const [transfers, setTransfers] = useState([]);
+    const [transfersOut, setTransfersOut] = useState([]);
+    const [transfersIn, setTransfersIn] = useState([]);
 
     const [cookies] = useCookies(['JWT']);
 
@@ -22,47 +24,30 @@ const Transfers = (props) => {
     useEffect(() => {
         const claims = validate(cookies.JWT);
         if (claims) {
-            Axios.get(`http://localhost:8081/api/v1/transfer/byAccountId/${accountId}`, {
+            Axios.get(`http://localhost:8081/api/v1/transfer/byAccountId/${account.id}`, {
                 headers: { JWT: cookies.JWT }
             }).then(res => {
-                setTransfers(res.data)
+                console.log(res.data)
+                setTransfersOut(res.data);
+            }).catch(e => {
+            });
+            Axios.get(`http://localhost:8081/api/v1/transfer/byTargetAccountId/${account.id}`, {
+                headers: { JWT: cookies.JWT }
+            }).then(res => {
+                console.log(res.data)
+                setTransfersIn(res.data);
             }).catch(e => {
             });
         }
-    }, [accountId, cookies]);
+    }, [account, cookies]);
 
     return (
-        <div className="block-section container">
-            <div className="block-section-header">
-                <div className="block-section-header-edit">
-                    <Link to="/transfers/newTransfer">New Transfer</Link>
-                </div>
-                <h3 className="block-section-header-text">Transfers</h3>
-            </div>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>Number</th>
-                        <th>Description</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {transfers.map(transfer => {
-                        return <tr>
-                            <td>{transfer.transferNumber}</td>
-                            <td>{transfer.transferDescription}</td>
-                            <td>{transfer.transferDate}</td>
-                            <td>{transfer.amount}</td>
-                        </tr>
-                    })}
-                </tbody>
-            </table>
+        <div>
+            <TransfersList transfers={transfersOut} account={account} title={"Outgoing transfers"} emptyMessage={"You haven't performed any transactions."} isOutgoing={true}/>
+            <TransfersList transfers={transfersIn} account={account} title={"Incoming transfers"} emptyMessage={"You haven't received any transactions."} isOutgoing={false}/>
         </div>
     );
 
 }
 
 export default Transfers;
-

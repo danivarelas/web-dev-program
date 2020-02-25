@@ -13,8 +13,6 @@ const Navbar = () => {
 
     const [cookies, removeCookie] = useCookies(['JWT']);
 
-    
-
     useEffect(() => {
         let claims = validate(cookies.JWT)
         if(claims){

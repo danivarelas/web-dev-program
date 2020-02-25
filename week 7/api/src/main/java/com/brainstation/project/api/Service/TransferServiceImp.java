@@ -51,6 +51,16 @@ public class TransferServiceImp implements TransferService {
     }
 
     @Override
+    public List<Transfer> selectAllTransfersByTargetAccountId(long accountId) {
+        List<TransferDTO> transferDTOS = transferDAO.findTransfersByTargetAccountId(accountId);
+        List<Transfer> transfers = new ArrayList<>();
+        transferDTOS.forEach(transfer -> {
+            transfers.add(new Transfer(transfer));
+        });
+        return transfers;
+    }
+
+    @Override
     public Transfer updateTransfer(long id, Transfer transfer) {
         return null;
     }

@@ -34,7 +34,7 @@ const Accounts = (props) => {
 
                 <h3 className="block-section-header-text">Accounts</h3>
             </div>
-            {!showAccounts && <p>You don't have any credit cards to your name.</p>}
+            {!showAccounts && <p>You don't have any open accounts to your name.</p>}
             {showAccounts && <div>
                 <p>This is the list of accounts linked to your profile.</p>
                 <table className="table">
@@ -50,7 +50,9 @@ const Accounts = (props) => {
                             return <tr>
                                 <td>{account.accountNumber}</td>
                                 <td>{account.balance + " " + account.currency}</td>
-                                <td> <Link to={`/accounts/${account.id}`}><i className="fas fa-eye"></i></Link></td>
+                                <td><Link to={{ pathname: '/accounts/accountsInfo', state: { account: account }}}>
+                                    <i className="fas fa-eye"></i></Link>
+                                </td>
                             </tr>
                         })}
                     </tbody>

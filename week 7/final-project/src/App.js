@@ -35,7 +35,7 @@ function App() {
                 <Route path="/register" component={Register} />
                 <Route path="/home" component={Home} />
                 <Route path="/accounts/openAccount" component={OpenAccount} />
-                <Route path="/accounts/:accountId" component={AccountsInfo} />
+                <Route path="/accounts/accountsInfo" component={AccountsInfo} />
                 <Route path="/creditCards/requestCard" component={CreditCards} />
                 <Route path="/creditCards" component={CreditCards} />
                 <Route path="/payments/services" component={Payments} />

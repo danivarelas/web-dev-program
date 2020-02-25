@@ -11,6 +11,7 @@
     "crypto-js": "^4.0.0",
     "date-fns": "^2.9.0",
     "easy-soap-request": "^3.2.0",
+    "emailjs-com": "^2.4.1",
     "jsonwebtoken": "^8.5.1",
     "node-sass": "^4.13.1",
     "react": "^16.12.0",

@@ -13,8 +13,7 @@ const AccountsInfo = (props) => {
     const [accounts, setAccounts] = useState([]);
     const [cards, setCards] = useState([]);
 
-    const accountId = props.match.params.accountId;
-    console.log(accountId)
+    const { account } = props.location.state;
 
     const [cookies, removeCookie] = useCookies(['JWT']);
 
@@ -36,7 +35,7 @@ const AccountsInfo = (props) => {
                 <div >
                     <h2 className="page-title">Account Information</h2>
                 </div>
-                <Transfers accountId={accountId} />
+                <Transfers account={account} />
             </div>
         </div>
     );

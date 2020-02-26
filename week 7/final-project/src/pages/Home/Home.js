@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import Navbar from '../../components/Navbar/Navbar';
 import './Home.scss';
 import { useHistory } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
 import Axios from 'axios';
 import Accounts from '../Accounts/Accounts';
-import CreditCards from '../CreditCards/CreditCards';
 import { format } from 'date-fns';
-import emailjs from 'emailjs-com';
 
 const Home = () => {
 
@@ -18,19 +15,16 @@ const Home = () => {
     const [cards, setCards] = useState([]);
     const [exchangeRates, setExchangeRates] = useState({});
 
-    const [cookies, removeCookie] = useCookies(['JWT']);
-
-    if (!validate(cookies.JWT)) {
-        removeCookie('JWT', { path: '/' });
+    if (!validate(sessionStorage.getItem('JWT'))) {
         history.push("/login");
     }
 
     useEffect(() => {
-        //emailjs.send('gmail', 'template_8HJ8XF0v', {}, 'user_ykN9aw27EcEhXClqMft4o');
-        const claims = validate(cookies.JWT);
+        const token = sessionStorage.getItem('JWT');
+        const claims = validate(token);
         if (claims) {
             Axios.get(`http://localhost:8081/api/v1/account/byUserId/${claims.id}`, {
-                headers: { JWT: cookies.JWT }
+                headers: { JWT: token }
             }).then(res => {
                 const { data } = res;
                 console.log(data)
@@ -39,7 +33,7 @@ const Home = () => {
 
             });
             Axios.get(`http://localhost:8081/api/v1/creditCard/byUserId/${claims.id}`, {
-                headers: { JWT: cookies.JWT }
+                headers: { JWT: token }
             }).then(res => {
                 const { data } = res;
                 setCards(data);
@@ -54,7 +48,7 @@ const Home = () => {
                 setExchangeRates(data);
             });
         }
-    }, [cookies]);
+    }, []);
 
     return (
         <div className="wrapper">

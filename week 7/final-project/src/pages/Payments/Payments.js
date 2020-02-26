@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import { useHistory, Link } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
 import Navbar from '../../components/Navbar/Navbar';
@@ -15,17 +14,16 @@ const Payments = () => {
     const [services, setServices] = useState([]);
     const [serviceTypes, setServiceTypes] = useState([]);
 
-    const [cookies] = useCookies(['JWT']);
-
-    if (!validate(cookies.JWT)) {
+    if (!validate(sessionStorage.getItem('JWT'))) {
         history.push("/login");
     }
 
     useEffect(() => {
-        const claims = validate(cookies.JWT);
+        const token = sessionStorage.getItem('JWT');
+        const claims = validate(token);
         if (claims) {
             Axios.get(`http://localhost:8081/api/v1/payment/byUserId/${claims.id}`, {
-                headers: { JWT: cookies.JWT }
+                headers: { JWT: token }
             }).then(res => {
                 const { data } = res;
                 setPayments(data);
@@ -33,7 +31,7 @@ const Payments = () => {
 
             });
             Axios.get(`http://localhost:8081/api/v1/service`, {
-                headers: { JWT: cookies.JWT }
+                headers: { JWT: token }
             }).then(res => {
                 const { data } = res;
                 setServices(data);
@@ -41,7 +39,7 @@ const Payments = () => {
 
             });
             Axios.get(`http://localhost:8081/api/v1/serviceType`, {
-                headers: { JWT: cookies.JWT }
+                headers: { JWT: token }
             }).then(res => {
                 const { data } = res;
                 setServiceTypes(data);
@@ -49,7 +47,7 @@ const Payments = () => {
 
             });
         }
-    }, [cookies]);
+    }, []);
 
     return (
         <div class="wrapper">
@@ -67,12 +65,12 @@ const Payments = () => {
                     </div>
                     <div className="row">
                         <div className="col-lg-6 payment-chart">
-                            <h4>By Service Type</h4>
-                            <PaymentsChart chartId="chartByType" payments={payments} serviceTypes={serviceTypes} services={services} isBar={false}/>
+                            <h4>Spent in CRC</h4>
+                            <PaymentsChart chartId="totalCRC" payments={payments} serviceTypes={serviceTypes} services={services} isUSD={false}/>
                         </div>
                         <div className="col-lg-6 payment-chart">
-                            <h4>By Day</h4>
-                            <PaymentsChart chartId="chartByDate" payments={payments} serviceTypes={serviceTypes} services={services} isBar={true}/>
+                            <h4>Spent in USD</h4>
+                            <PaymentsChart chartId="totalUSD" payments={payments} serviceTypes={serviceTypes} services={services} isUSD={true}/>
                         </div>
                     </div>
 

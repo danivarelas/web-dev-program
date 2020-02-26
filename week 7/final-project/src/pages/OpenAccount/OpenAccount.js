@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import { useHistory } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
 import Navbar from '../../components/Navbar/Navbar';
@@ -12,20 +11,18 @@ const OpenAccount = () => {
 
     const [currency, setCurrency] = useState("CRC");
     const [description, setDescription] = useState("");
-    const [amount, setAmount] = useState("0.00");
 
-    const [cookies] = useCookies(['JWT']);
-
-    if (!validate(cookies.JWT)) {
+    if (!validate(sessionStorage.getItem('JWT'))) {
         history.push("/login");
     }
 
     useEffect(() => {
-    }, [cookies]);
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const claims = validate(cookies.JWT);
+        const token = sessionStorage.getItem('JWT');
+        const claims = validate(token);
         if (claims) {
             const account = {
             accountNumber: Math.floor((Math.random() * 100000000) + 1000000000),
@@ -36,7 +33,7 @@ const OpenAccount = () => {
         }
         console.log(account)
         Axios.post(`http://localhost:8081/api/v1/account`, account, {
-            headers: { JWT: cookies.JWT }
+            headers: { JWT: token }
         })
             .then(res => {
                 history.goBack();

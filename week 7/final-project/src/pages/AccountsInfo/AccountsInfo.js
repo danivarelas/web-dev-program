@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import Navbar from '../../components/Navbar/Navbar';
 import { useHistory } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
@@ -11,18 +10,15 @@ const AccountsInfo = (props) => {
 
     const { account } = props.location.state;
 
-    const [cookies, removeCookie] = useCookies(['JWT']);
-
-    if (!validate(cookies.JWT)) {
-        removeCookie('JWT', { path: '/' });
+    if (!validate(sessionStorage.getItem('JWT'))) {
         history.push("/login");
     }
 
     useEffect(() => {
-        const claims = validate(cookies.JWT);
+        const claims = validate(sessionStorage.getItem('JWT'));
         if (claims) {
         }
-    }, [cookies]);
+    }, []);
 
     return (
         <div className="wrapper">

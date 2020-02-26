@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import { Link, useHistory } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
 import './Navbar.scss';
@@ -11,17 +10,15 @@ const Navbar = () => {
     const [active, setActive] = useState("");
     const [user, setUser] = useState("");
 
-    const [cookies, removeCookie] = useCookies(['JWT']);
-
     useEffect(() => {
-        let claims = validate(cookies.JWT)
+        let claims = validate(sessionStorage.getItem('JWT'));
         if(claims){
             setUser(claims.name);
         }
-    }, [user, cookies]);
+    }, [user]);
 
     const handleLogout = () => {
-        removeCookie('JWT', { path: '/' });
+        sessionStorage.setItem('JWT', '');
         history.push("/login");
     }
 
@@ -38,7 +35,7 @@ const Navbar = () => {
             <nav className={active} id="sidebar">
             <div className="sidebar-header">
                 <div className="header-btn-close">
-                    <button type="button" id="sidebarCollapse" className="btn btn-outline-danger" onClick={toggleSidebar}>
+                    <button type="button" id="sidebarCollapse" className="btn btn-outline-secondary" onClick={toggleSidebar}>
                         Close <i className="fas fa-times"></i>
                     </button>
                 </div>

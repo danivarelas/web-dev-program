@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import { useHistory } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
 import Axios from 'axios';
@@ -14,31 +13,30 @@ const Transfers = (props) => {
     const [transfersOut, setTransfersOut] = useState([]);
     const [transfersIn, setTransfersIn] = useState([]);
 
-    const [cookies] = useCookies(['JWT']);
-
-    if (!validate(cookies.JWT)) {
+    if (!validate(sessionStorage.getItem('JWT'))) {
         history.push("/login");
     }
 
     useEffect(() => {
-        const claims = validate(cookies.JWT);
+        const token = sessionStorage.getItem('JWT');
+        const claims = validate(token);
         if (claims) {
             Axios.get(`http://localhost:8081/api/v1/transfer/byAccountId/${account.id}`, {
-                headers: { JWT: cookies.JWT }
+                headers: { JWT: token }
             }).then(res => {
                 console.log(res.data)
                 setTransfersOut(res.data);
             }).catch(e => {
             });
             Axios.get(`http://localhost:8081/api/v1/transfer/byTargetAccountId/${account.id}`, {
-                headers: { JWT: cookies.JWT }
+                headers: { JWT: token }
             }).then(res => {
                 console.log(res.data)
                 setTransfersIn(res.data);
             }).catch(e => {
             });
         }
-    }, [account, cookies]);
+    }, [account]);
 
     return (
         <div>

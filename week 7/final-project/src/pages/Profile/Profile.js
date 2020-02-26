@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
-import { Link, Switch, Route, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
 import Navbar from '../../components/Navbar/Navbar';
 import Axios from 'axios';
@@ -17,18 +16,17 @@ const Profile = () => {
     const [countryCode, setCountryCode] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
 
-    const [cookies] = useCookies(['JWT']);
-
-    if (!validate(cookies.JWT)) {
+    if (!validate(sessionStorage.getItem('JWT'))) {
         history.push("/login");
     }
 
     useEffect(() => {
-        const claims = validate(cookies.JWT)
+        const token = sessionStorage.getItem('JWT');
+        const claims = validate(token);
         if (claims) {
             setUsername(claims.username);
             Axios.get(`http://localhost:8081/api/v1/user/byUsername/${claims.username}`, {
-                headers: { JWT: cookies.JWT }
+                headers: { JWT: token }
             }).then(res => {
                 const { data } = res;
                 setName(data.name);
@@ -40,7 +38,7 @@ const Profile = () => {
 
             });
         }
-    }, [username, cookies]);
+    }, [username]);
 
     return (
         <div className="wrapper">

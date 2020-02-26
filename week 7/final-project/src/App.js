@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
 import Login from './pages/Login/Login';
-import { withCookies, useCookies } from 'react-cookie';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Register from './pages/Register/Register';
 import Home from './pages/Home/Home';
@@ -17,17 +16,15 @@ import NewServicePayment from './pages/NewServicePayment/NewServicePayment';
 
 function App() {
 
-    const [cookies] = useCookies(['JWT']);
-
     const [redirect, setRedirect] = useState("");
 
     useEffect(() => {
-        if (validate(cookies.JWT)) {
+        if (validate(sessionStorage.getItem('JWT'))) {
             setRedirect("/home");
         } else {
             setRedirect("/login");
         }
-    }, [redirect, cookies]);
+    }, [redirect]);
 
     return (
         <Router>
@@ -51,4 +48,4 @@ function App() {
     );
 }
 
-export default withCookies(App);
+export default App;

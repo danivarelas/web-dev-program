@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
 import { Link, useHistory } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
 import { format, parseISO } from 'date-fns';
@@ -13,9 +12,7 @@ const TransfersList = (props) => {
 
     const [showTransfers, setShowTransfers] = useState(false);
 
-    const [cookies] = useCookies(['JWT']);
-
-    if (!validate(cookies.JWT)) {
+    if (!validate(sessionStorage.getItem('JWT'))) {
         history.push("/login");
     }
 
@@ -25,7 +22,7 @@ const TransfersList = (props) => {
         } else {
             setShowTransfers(false);
         }
-    }, [transfers, cookies]);
+    }, [transfers]);
 
     return (
         <div className="block-section container">

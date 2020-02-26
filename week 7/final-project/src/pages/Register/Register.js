@@ -3,14 +3,12 @@ import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import sha256 from 'crypto-js/sha256';
 import Base64 from 'crypto-js/enc-base64';
-import { useCookies } from 'react-cookie';
 import './Register.scss'
+import emailjs from 'emailjs-com';
 
 const Register = () => {
 
     const history = useHistory();
-
-    const [cookies] = useCookies(['JWT']);
 
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -50,6 +48,14 @@ const Register = () => {
             } else {
                 Axios.post(`http://localhost:8081/api/v1/user`, user)
                 .then(res => {
+                    let templateParams = {
+                        subject: 'Welcome to PowerBank',
+                        email: 'daniel.varela.serrano@gmail.com',
+                        name: 'Daniel',
+                        from: 'PowerBank',
+                        message: 'Your account has been created successfully.'
+                    };
+                    emailjs.send('gmail', 'template_8HJ8XF0v', templateParams, 'user_ykN9aw27EcEhXClqMft4o');
                     history.push("/login");
                 }).catch(e => {
                     console.log(e);
@@ -61,16 +67,12 @@ const Register = () => {
     }
 
     const checkUsername = async () => {
-        let res = await Axios.get(`http://localhost:8081/api/v1/user/byUsername/${username}`, {
-            headers: {JWT: cookies.JWT}
-        })
+        let res = await Axios.get(`http://localhost:8081/api/v1/user/byUsername/${username}`);
         return res;
     };
 
     const checkEmail = async () => {
-        let res = await Axios.get(`http://localhost:8081/api/v1/user/byEmail/${email}`, {
-            headers: {JWT: cookies.JWT}
-        })
+        let res = await Axios.get(`http://localhost:8081/api/v1/user/byEmail/${email}`);
         return res;
     };
 

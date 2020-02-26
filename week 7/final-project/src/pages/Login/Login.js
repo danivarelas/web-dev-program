@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { useCookies } from 'react-cookie';
 import { Link, useHistory } from 'react-router-dom';
 import sha256 from 'crypto-js/sha256';
 import Base64 from 'crypto-js/enc-base64';
@@ -13,8 +12,6 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [invalidLogin, setInvalidLogin] = useState(false);
 
-    const [cookies, setCookie] = useCookies(['JWT']);
-
     useEffect(() => {}, [invalidLogin]);
 
     const handleSubmit = (e) => {
@@ -24,11 +21,10 @@ const Login = () => {
             username: username,
             password: password
         }
-        Axios.post(`http://localhost:8081/api/v1/login`, user, {
-            headers: {JWT: cookies.JWT}
-        }).then(res => {
-            setCookie('JWT', res.data, { path: '/' });
-            history.push("/");
+        Axios.post(`http://localhost:8081/api/v1/login`, user)
+        .then(res => {
+            sessionStorage.setItem('JWT', res.data);
+            history.push("/home");
         }).catch(e => {
             setInvalidLogin(true);
         });

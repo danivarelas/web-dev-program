@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import { useHistory } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
 import Navbar from '../../components/Navbar/Navbar';
@@ -23,17 +22,16 @@ const NewTransfer = () => {
     const [sameAccountt, setSameAccount] = useState(false);
     const [invalidAccount, setInvalidAccount] = useState(false);
 
-    const [cookies] = useCookies(['JWT']);
-
-    if (!validate(cookies.JWT)) {
+    if (!validate(sessionStorage.getItem('JWT'))) {
         history.push("/login");
     }
 
     useEffect(() => {
-        const claims = validate(cookies.JWT);
+        const token = sessionStorage.getItem('JWT');
+        const claims = validate(token);
         if (claims) {
             Axios.get(`http://localhost:8081/api/v1/account/byUserId/${claims.id}`, {
-                headers: { JWT: cookies.JWT }
+                headers: { JWT: token }
             }).then(res => {
                 const { data } = res;
                 setAccounts(data);
@@ -49,9 +47,10 @@ const NewTransfer = () => {
                     setExchangeRates(data);
                 });
         }
-    }, [cookies]);
+    }, []);
 
     const handleSubmit = async (e) => {
+        const token = sessionStorage.getItem('JWT');
         e.preventDefault();
         if (sourceAccountNumber !== targetAccountNumber) {
             setSameAccount(false);
@@ -79,7 +78,7 @@ const NewTransfer = () => {
                 const { compra, venta } = exchangeRates;
 
                 Axios.post(`http://localhost:8081/api/v1/transfer?buy=${compra}&sell=${venta}`, transfer, {
-                    headers: { JWT: cookies.JWT }
+                    headers: { JWT: token }
                 }).then(res => {
                     history.goBack();
                 }).catch(e => {
@@ -103,9 +102,7 @@ const NewTransfer = () => {
 
     const checkAccount = async (number) => {
         let res = await Axios.get(`http://localhost:8081/api/v1/account/${number}`, {
-            headers: {
-                JWT: cookies.JWT,
-            }
+            headers: { JWT: sessionStorage.getItem('JWT') }
         })
         return res.data.accountNumber ? res.data : null;
     };

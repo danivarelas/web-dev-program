@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import { useHistory } from 'react-router-dom';
 import validate from '../../utils/JWTParser';
 import Navbar from '../../components/Navbar/Navbar';
 import Axios from 'axios';
+import emailjs from 'emailjs-com';
 
 const NewServicePayment = () => {
 
@@ -19,17 +19,16 @@ const NewServicePayment = () => {
     const [invalidAmount, setInvalidAmount] = useState(false);
     const [insufficientFunds, setInsufficientFunds] = useState(false);
 
-    const [cookies] = useCookies(['JWT']);
-
-    if (!validate(cookies.JWT)) {
+    if (!validate(sessionStorage.getItem('JWT'))) {
         history.push("/login");
     }
 
     useEffect(() => {
-        const claims = validate(cookies.JWT);
+        const token = sessionStorage.getItem('JWT');
+        const claims = validate(token);
         if (claims) {
             Axios.get(`http://localhost:8081/api/v1/account/byUserId/${claims.id}`, {
-                headers: { JWT: cookies.JWT }
+                headers: { JWT: token }
             }).then(res => {
                 const { data } = res;
                 setAccounts(data);
@@ -38,7 +37,7 @@ const NewServicePayment = () => {
 
             });
             Axios.get(`http://localhost:8081/api/v1/service`, {
-                headers: { JWT: cookies.JWT }
+                headers: { JWT: token }
             }).then(res => {
                 const { data } = res;
                 console.log(data)
@@ -48,13 +47,14 @@ const NewServicePayment = () => {
 
             });
         }
-    }, [cookies]);
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setInsufficientFunds(false);
 
-        const claims = validate(cookies.JWT);
+        const token = sessionStorage.getItem('JWT');
+        const claims = validate(token);
         const validAmount = checkAmount();
 
         if (!validAmount) {
@@ -76,8 +76,18 @@ const NewServicePayment = () => {
             console.log(payment)
 
             Axios.post(`http://localhost:8081/api/v1/payment`, payment, {
-                headers: { JWT: cookies.JWT }
+                headers: { JWT: token }
             }).then(res => {
+                const {data} = res;
+                const paidService = services.filter(service => service.id === data.serviceId)[0].serviceName;
+                let templateParams = {
+                    subject: `Service Payment: ${paidService}`,
+                    email: 'daniel.varela.serrano@gmail.com',
+                    name: 'Daniel',
+                    from: 'PowerBank',
+                    message: `You have successfully paid ${data.amount} ${data.currency} to the service: ${paidService}`
+                };
+                emailjs.send('gmail', 'template_8HJ8XF0v', templateParams, 'user_ykN9aw27EcEhXClqMft4o');
                 history.goBack();
             }).catch(e => {
                 console.log(e);
@@ -96,9 +106,7 @@ const NewServicePayment = () => {
 
     const checkAccount = async (number) => {
         let res = await Axios.get(`http://localhost:8081/api/v1/account/${number}`, {
-            headers: {
-                JWT: cookies.JWT,
-            }
+            headers: { JWT: sessionStorage.getItem('JWT') }
         })
         return res.data.accountNumber ? res.data : null;
     };

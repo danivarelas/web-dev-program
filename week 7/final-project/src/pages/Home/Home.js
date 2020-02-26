@@ -70,7 +70,7 @@ const Home = () => {
                 </div>
                 
                 <Accounts accounts={accounts} />
-                <CreditCards creditCards={cards} />
+                
             </div>
         </div>
     );

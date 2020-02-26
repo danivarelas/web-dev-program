@@ -53,24 +53,21 @@ const Navbar = () => {
                     <ul className="collapse list-unstyled" id="homeSubmenu">
                         <li className="sidebar-link"><Link to="/payments">View Payments</Link></li>
                         <li className="sidebar-link"><Link to="/payments/payServices">Pay Services</Link></li>
-                        <li className="sidebar-link"><Link to="/payments/creditCards">Pay Credit Cards</Link></li>
                     </ul>
                 </li>
                 <li className="sidebar-link"><Link to="/transfers/newTransfer">Transfer money</Link></li>
                 <li className="sidebar-link"><Link to="/profile">Profile</Link></li>
             </ul>
         </nav>
-            <nav className="navbar navbar-light bg-white">
-                <div className="container-fluid">
-                    <button type="button" id="sidebarCollapse" className="btn btn-outline-secondary mr-4" onClick={toggleSidebar}>
-                        <i className="fas fa-bars"></i>
+            <nav className="navbar sticky-top navbar-light bg-white">
+                <button type="button" id="sidebarCollapse" className="btn btn-outline-secondary mr-4" onClick={toggleSidebar}>
+                    <i className="fas fa-bars"></i>
+                </button>
+                <Link className="navbar-brand" to="/">PowerBank</Link>
+                <div className=" ml-auto">
+                    <button className="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#logoutModal">
+                        Logout <i className="fas fa-sign-out-alt"></i>
                     </button>
-                    <Link className="navbar-brand" to="/">PowerBank</Link>
-                    <div className=" ml-auto">
-                        <button className="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#logoutModal">
-                            Logout <i class="fas fa-sign-out-alt"></i>
-                        </button>
-                    </div>
                 </div>
             </nav>
 

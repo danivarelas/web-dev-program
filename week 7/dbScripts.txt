@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS user(
 CREATE TABLE IF NOT EXISTS account(
 	id int auto_increment PRIMARY KEY not null,
     account_number varchar(20) not null unique,
+    description varchar(255) not null,
     balance varchar(255) NOT NULL,
     currency varchar(3) NOT NULL,
     user_id int,
@@ -71,18 +72,43 @@ CREATE TABLE IF NOT EXISTS payment(
     payment_number varchar(20) not null unique,
     payment_description varchar(255) not null,
     amount varchar(255) not null,
+    currency varchar(3) not null,
+    payment_date date not null,
     user_id int,
     account_id int,
+    service_id int,
     foreign key(user_id) references user(id),
-    foreign key(account_id) references account(id)
+    foreign key(account_id) references account(id),
+    foreign key(service_id) references service(id)
 );
 
+select * from user;
 select * from account;
 delete from user where id=3;
 
-insert into account
-values (8,'1234567899', '0.00', 'USD', 1);
-
 drop table user, account, loan, transfer, credit_card;
-drop table loan, transfer, credit_card, service_type, service, payment;
-drop table transfer;
+drop table account, loan, transfer, credit_card, service_type, service, payment;
+drop table payment;
+
+
+INSERT INTO `project`.`service_type` (`id`, `service_type_name`) VALUES ('1', 'Phone');
+INSERT INTO `project`.`service_type` (`id`, `service_type_name`) VALUES ('2', 'Home');
+INSERT INTO `project`.`service_type` (`id`, `service_type_name`) VALUES ('3', 'Education');
+INSERT INTO `project`.`service_type` (`id`, `service_type_name`) VALUES ('4', 'Memberships');
+INSERT INTO `project`.`service_type` (`id`, `service_type_name`) VALUES ('5', 'Entertainment');
+INSERT INTO `project`.`service_type` (`id`, `service_type_name`) VALUES ('6', 'Other');
+
+
+INSERT INTO `project`.`service` (`id`, `service_name`, `service_type_id`) VALUES ('1', 'Recharge prepaid phone', '1');
+INSERT INTO `project`.`service` (`id`, `service_name`, `service_type_id`) VALUES ('2', 'Phone bill', '1');
+INSERT INTO `project`.`service` (`id`, `service_name`, `service_type_id`) VALUES ('3', 'Water service', '2');
+INSERT INTO `project`.`service` (`id`, `service_name`, `service_type_id`) VALUES ('4', 'Electricity service', '2');
+INSERT INTO `project`.`service` (`id`, `service_name`, `service_type_id`) VALUES ('5', 'Internet service', '2');
+INSERT INTO `project`.`service` (`id`, `service_name`, `service_type_id`) VALUES ('6', 'College tuition', '3');
+INSERT INTO `project`.`service` (`id`, `service_name`, `service_type_id`) VALUES ('7', 'Gym membership', '4');
+INSERT INTO `project`.`service` (`id`, `service_name`, `service_type_id`) VALUES ('8', 'Pool membership', '4');
+INSERT INTO `project`.`service` (`id`, `service_name`, `service_type_id`) VALUES ('9', 'Club membership', '4');
+INSERT INTO `project`.`service` (`id`, `service_name`, `service_type_id`) VALUES ('10', 'Netflix', '5');
+INSERT INTO `project`.`service` (`id`, `service_name`, `service_type_id`) VALUES ('11', 'Spotify', '5');
+INSERT INTO `project`.`service` (`id`, `service_name`, `service_type_id`) VALUES ('12', 'Amazon Prime', '5');
+INSERT INTO `project`.`service` (`id`, `service_name`, `service_type_id`) VALUES ('13', 'PlayStation Plus', '5');

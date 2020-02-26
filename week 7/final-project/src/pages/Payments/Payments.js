@@ -11,6 +11,7 @@ const Payments = () => {
 
     const history = useHistory();
 
+    const [payments, setPayments] = useState([]);
     const [services, setServices] = useState([]);
     const [serviceTypes, setServiceTypes] = useState([]);
 
@@ -21,29 +22,34 @@ const Payments = () => {
     }
 
     useEffect(() => {
-        Axios.get(`http://localhost:8081/api/v1/service`, {
-            headers: { JWT: cookies.JWT }
-        }).then(res => {
-            const { data } = res;
-            setServices(data);
-        }).catch(e => {
+        const claims = validate(cookies.JWT);
+        if (claims) {
+            Axios.get(`http://localhost:8081/api/v1/payment/byUserId/${claims.id}`, {
+                headers: { JWT: cookies.JWT }
+            }).then(res => {
+                const { data } = res;
+                setPayments(data);
+            }).catch(e => {
 
-        });
-        Axios.get(`http://localhost:8081/api/v1/serviceType`, {
-            headers: { JWT: cookies.JWT }
-        }).then(res => {
-            const { data } = res;
-            setServiceTypes(data);
-            
-        }).catch(e => {
+            });
+            Axios.get(`http://localhost:8081/api/v1/service`, {
+                headers: { JWT: cookies.JWT }
+            }).then(res => {
+                const { data } = res;
+                setServices(data);
+            }).catch(e => {
 
-        });
+            });
+            Axios.get(`http://localhost:8081/api/v1/serviceType`, {
+                headers: { JWT: cookies.JWT }
+            }).then(res => {
+                const { data } = res;
+                setServiceTypes(data);
+            }).catch(e => {
+
+            });
+        }
     }, [cookies]);
-
-    let values = [serviceTypes.length];
-    for (var i=0; i<serviceTypes.length; i++){
-        values[i] = serviceTypes.filter(type => type.id === i).length;
-    }
 
     return (
         <div class="wrapper">
@@ -62,11 +68,11 @@ const Payments = () => {
                     <div className="row">
                         <div className="col-lg-6 payment-chart">
                             <h4>By Service Type</h4>
-                            <PaymentsChart chartId="chartByType"/>
+                            <PaymentsChart chartId="chartByType" payments={payments} serviceTypes={serviceTypes} services={services} isBar={false}/>
                         </div>
                         <div className="col-lg-6 payment-chart">
                             <h4>By Day</h4>
-                            <PaymentsChart chartId="chartByDate"/>
+                            <PaymentsChart chartId="chartByDate" payments={payments} serviceTypes={serviceTypes} services={services} isBar={true}/>
                         </div>
                     </div>
 

@@ -44,7 +44,7 @@ const Profile = () => {
         <div className="wrapper">
             <div id="content">
                 <Navbar />
-                <div className="block-section container">
+                <div className="block-section container-fluid">
                     <div className="block-section-header">
                         <h3 className="block-section-header-text">Personal Information</h3>
                     </div>

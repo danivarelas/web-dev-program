@@ -23,7 +23,7 @@ const Accounts = (props) => {
     }, [accounts]);
 
     return (
-        <div className="block-section container">
+        <div className="block-section container-fluid">
             <div className="block-section-header">
                 <div className="block-section-header-edit">
                     <Link to="/accounts/openAccount" className="btn btn-outline-secondary">Open account</Link>

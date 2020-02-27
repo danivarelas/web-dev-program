@@ -5,6 +5,7 @@
 
 .wrapper {
     display: flex;
+    background-color: #eee;
     width: 100%;
     align-items: stretch;
 }
@@ -14,8 +15,9 @@
 ----------------------------------------------------- */
 
 #content {
+    padding: 1em 2em;
     width: 100%;
-    padding: 1em;
+    margin-left: 250px;
     min-height: 100vh;
     transition: all 0.3s;
 
@@ -38,5 +40,12 @@
         p {
             margin: 0;
         }
+    }
+}
+
+@media (max-width:899px) {
+    #content {
+        padding: 1em;
+        margin-left: 0;
     }
 }

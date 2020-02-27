@@ -12,7 +12,7 @@ const Navbar = () => {
 
     useEffect(() => {
         let claims = validate(sessionStorage.getItem('JWT'));
-        if(claims){
+        if (claims) {
             setUser(claims.name);
         }
     }, [user]);
@@ -33,34 +33,34 @@ const Navbar = () => {
     return (
         <div>
             <nav className={active} id="sidebar">
-            <div className="sidebar-header">
-                <div className="header-btn-close">
-                    <button type="button" id="sidebarCollapse" className="btn btn-outline-secondary" onClick={toggleSidebar}>
-                        Close <i className="fas fa-times"></i>
-                    </button>
+                <div className="sidebar-header">
+                    <div className="header-btn-close">
+                        <button type="button" id="sidebarCollapse" className="btn btn-outline-secondary" onClick={toggleSidebar}>
+                            Close <i className="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div className="header-title">
+                        <h3>Hello, {user}</h3>
+                    </div>
                 </div>
-                <div className="header-title">
-                    <h3>Hello, {user}</h3>
-                </div>
-            </div>
-            <ul className="list-unstyled components">
-                <li className="sidebar-link"><Link to="/home">Summary</Link></li>
-                <li>
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Payments</a>
-                    <ul className="collapse list-unstyled" id="homeSubmenu">
-                        <li className="sidebar-link"><Link to="/payments">View Payments</Link></li>
-                        <li className="sidebar-link"><Link to="/payments/payServices">Pay Services</Link></li>
-                    </ul>
-                </li>
-                <li className="sidebar-link"><Link to="/transfers/newTransfer">Transfer money</Link></li>
-                <li className="sidebar-link"><Link to="/profile">Profile</Link></li>
-            </ul>
-        </nav>
+                <ul className="list-unstyled components">
+                    <li className="sidebar-link"><Link to="/home">Summary</Link></li>
+                    <li>
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Payments</a>
+                        <ul className="collapse list-unstyled" id="homeSubmenu">
+                            <li className="sidebar-link"><Link to="/payments">View Payments</Link></li>
+                            <li className="sidebar-link"><Link to="/payments/payServices">Pay Services</Link></li>
+                        </ul>
+                    </li>
+                    <li className="sidebar-link"><Link to="/transfers/newTransfer">Transfer money</Link></li>
+                    <li className="sidebar-link"><Link to="/profile">Profile</Link></li>
+                </ul>
+            </nav>
             <nav className="navbar sticky-top navbar-light bg-white">
-                <button type="button" id="sidebarCollapse" className="btn btn-outline-secondary mr-4" onClick={toggleSidebar}>
+                <button type="button" className="btn btn-outline-secondary nav-btn-collapse" onClick={toggleSidebar}>
                     <i className="fas fa-bars"></i>
                 </button>
-                <Link className="navbar-brand" to="/">PowerBank</Link>
+                <Link className="navbar-brand" to="/home">PowerBank</Link>
                 <div className=" ml-auto">
                     <button className="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#logoutModal">
                         Logout <i className="fas fa-sign-out-alt"></i>

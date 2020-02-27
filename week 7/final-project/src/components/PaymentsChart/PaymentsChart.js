@@ -80,7 +80,7 @@ const PaymentsChart = (props) => {
     return (
         <ResponsiveContainer width="100%" height="85%">
             <PieChart >
-                <Pie data={chartCells} dataKey="value" nameKey="name" cx="50%" cy="60%" innerRadius={30} outerRadius={80} label>
+                <Pie data={chartCells} dataKey="value" nameKey="name" cx="50%" cy="55%" innerRadius={30} outerRadius={80} label>
                     <LabelList dataKey="value" />
                 </Pie>
                 <Legend iconSize={10} layout="horizontal" verticalAlign="top" />

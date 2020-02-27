@@ -56,7 +56,7 @@ const Payments = () => {
                 <div>
                     <h2 className="page-title">All Payments</h2>
                 </div>
-                <div className="block-section container">
+                <div className="block-section container-fluid">
                     <div className="block-section-header">
                         <div className="block-section-header-edit">
                             <Link to="/payments/payServices" className="btn btn-outline-secondary">Pay Services</Link>

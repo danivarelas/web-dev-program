@@ -54,7 +54,7 @@ const Home = () => {
         <div className="wrapper">
             <div id="content">
                 <Navbar />
-                <div className="container">
+                <div className="container-fluid">
                     <h2 className="page-title">Products Summary</h2>
                     <div className="exchange-rates">
                         <p className="exchange-rates-title">Exchange rates today</p>
